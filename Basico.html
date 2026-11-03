@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nivel básico | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        :root {
+            --bg-dark: #0b1120;        
+            --bg-light: #f8fafc;       
+            --bg-alt: #f1f5f9;         
+            --text-dark: #0f172a;      
+            --text-muted: #475569;     
+            --primary-navy: #172554;   
+            --accent-gold: #d97706;    
+            --accent-blue: #0284c7;
+            --accent-cyan: #0891b2;
+            --menu-bg: #171b36;        
+            --card-border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, h4, .font-fun {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* Animaciones CSS */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .anim-float { animation: floatSlow 4s ease-in-out infinite; }
+
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 0px 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.12);
+            background-color: #20ba5a;
+            color: #fff;
+        }
+
+        /* Hero banner con azul marino más oscuro */
+        .hero-banner {
+            position: relative;
+            min-height: 52vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0b1120 0%, #172554 100%);
+            color: #ffffff;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0; 
+            transition: opacity 1.2s ease-in-out; 
+        }
+        .hero-bg-slide.active { opacity: 0.55; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(11, 17, 32, 0.95) 0%, rgba(11, 17, 32, 0.85) 50%, rgba(11, 17, 32, 0.4) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 4; width: 100%; }
+        .hero-content-box { max-width: 720px; }
+        
+        .hero-content-box .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0b1120 0%, #1e3a8a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .hero-content-box h1 { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            line-height: 1.18; 
+            margin-bottom: 16px; 
+            color: #ffffff; 
+        }
+
+        .hero-content-box h1 span {
+            color: #38bdf8;
+        }
+
+        .hero-content-box p { 
+            font-size: 1rem; 
+            color: #e2e8f0; 
+            margin-bottom: 24px; 
+            line-height: 1.6; 
+        }
+
+        .btn-banner {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0096c7 0%, #0284c7 100%);
+            color: #ffffff !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+            border: 2px solid #ffffff;
+        }
+
+        .btn-banner:hover { 
+            transform: translateY(-2px); 
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        }
+
+        .carousel-dots-banner { position: absolute; bottom: 20px; right: 35px; display: flex; gap: 8px; z-index: 10; }
+        .dot-banner { width: 10px; height: 10px; background: rgba(255, 255, 255, 0.4); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: #38bdf8; width: 24px; border-radius: 8px; }
+
+        /* Secciones generales */
+        .seccion-blanca { background-color: #ffffff; padding: 70px 0; position: relative; }
+        .seccion-gris { background: #f1f5f9; padding: 70px 0; position: relative; }
+        .seccion-titulo { text-align: center; font-size: 2.2rem; color: var(--primary-navy); margin-bottom: 10px; font-weight: 700; }
+        .seccion-subtitulo { text-align: center; font-size: 0.98rem; color: var(--text-muted); max-width: 780px; margin: 0 auto 40px auto; line-height: 1.6; }
+
+        .title-badge {
+            display: inline-block;
+            background: #e2e8f0;
+            color: var(--primary-navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 5px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* Tarjeta principal knotion */
+        .knotion-highlight-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+            margin-bottom: 50px;
+        }
+
+        .knotion-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 320px;
+        }
+
+        .knotion-content {
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .knotion-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+        }
+
+        .knotion-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        /* Matemáticas y Lectura Inteligente en dos columnas */
+        .programas-dos-columnas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .programa-item-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--card-border);
+        }
+
+        .programa-item-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+        }
+
+        .brand-logo-container {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 10px;
+        }
+
+        .brand-logo-container img {
+            max-height: 40px;
+            max-width: 160px;
+            object-fit: contain;
+        }
+
+        .programa-item-card h4 { font-size: 1.25rem; color: var(--primary-navy); font-weight: 700; margin-bottom: 8px; }
+        .programa-item-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 16px; }
+
+        .bullet-list { list-style: none; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--card-border); }
+        .bullet-list li { font-size: 0.85rem; color: var(--text-dark); font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .bullet-list li i { color: var(--accent-blue); font-size: 0.85rem; }
+
+        /* Bloque destacado de Computación con imagen a la derecha */
+        .computacion-destacado-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            align-items: center;
+        }
+
+        .computacion-info {
+            padding: 35px;
+        }
+
+        .computacion-info h4 {
+            font-size: 1.5rem;
+            color: var(--primary-navy);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .computacion-info p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .computacion-media-right {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+        }
+
+        .computacion-media-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Sección de Inglés Richmond Full-Width (Borde a borde) */
+        .seccion-richmond-fullwidth {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            background: linear-gradient(135deg, rgba(11, 17, 32, 0.96) 0%, rgba(23, 37, 84, 0.92) 100%);
+            color: #ffffff;
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .richmond-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+        }
+
+        .richmond-container-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .richmond-header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 16px;
+        }
+
+        .richmond-logo-box img {
+            max-height: 45px;
+            object-fit: contain;
+        }
+
+        .richmond-hook {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .richmond-desc {
+            color: #e2e8f0;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            max-width: 850px;
+            margin-bottom: 30px;
+        }
+
+        .richmond-content-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .richmond-grid-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .richmond-mini-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 14px;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+        }
+
+        .richmond-mini-box h5 {
+            color: #ffffff;
+            font-size: 1.02rem;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .richmond-mini-box p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin: 0;
+            line-height: 1.45;
+        }
+
+        .richmond-photo-extranjeros {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            height: 240px;
+        }
+
+        .richmond-photo-extranjeros img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .richmond-photo-extranjeros .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(15, 23, 42, 0.85);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Estructura progresiva por grados */
+        .grados-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .grado-card {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 25px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .grado-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .grado-header {
+            border-right: 2px solid var(--bg-alt);
+            padding-right: 20px;
+        }
+
+        .grado-header h4 {
+            font-size: 1.4rem;
+            color: var(--primary-navy);
+            font-weight: 700;
+        }
+
+        .grado-header span {
+            font-size: 0.82rem;
+            color: var(--accent-gold);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .grado-body h5 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .grado-body p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+
+        .grado-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .grado-tag-item {
+            background: #f1f5f9;
+            color: var(--primary-navy);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+
+        /* Bloque destacado KN-U High */
+        .knu-block-card {
+            background: #ffffff;
+            border: 2px solid var(--accent-blue);
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.06);
+        }
+
+        .knu-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 15px;
+        }
+
+        .knu-title-area h3 {
+            font-size: 1.8rem;
+            color: var(--primary-navy);
+            font-weight: 700;
+        }
+
+        .knu-title-area span {
+            color: var(--accent-gold);
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .knu-logo-img {
+            max-height: 45px;
+            object-fit: contain;
+        }
+
+        .knu-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .knu-detail-box h5 {
+            font-size: 1.05rem;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .knu-detail-box p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* Perfil de egreso */
+        .perfil-destacado-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 35px;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+            border: 1px solid var(--card-border);
+        }
+
+        .perfil-galeria-mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; height: 100%; min-height: 300px; }
+        .mosaic-img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); }
+
+        .perfil-info-box h3 { font-size: 1.8rem; color: var(--primary-navy); font-weight: 700; margin-bottom: 12px; }
+        .perfil-info-box p.intro { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.55; }
+        .perfil-cards-list { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        .perfil-mini-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--card-border);
+        }
+
+        .perfil-mini-card h5 { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+        .perfil-mini-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; margin: 0; }
+
+        /* Galería de 3 fotografías */
+        .galeria-tres-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-top: 30px;
+        }
+
+        .foto-galeria-card {
+            position: relative;
+            height: 250px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .foto-galeria-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+
+        .foto-galeria-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .foto-galeria-card .caption-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.85) 100%);
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+
+        /* Navegación final */
+        .cta-final { background: linear-gradient(180deg, #fffbf5 0%, #f0f7ff 100%); color: #1e293b; padding: 70px 20px; text-align: center; position: relative; }
+        .cta-final h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; color: var(--primary-navy); }
+        .cta-final p { font-size: 0.98rem; color: var(--text-muted); margin-bottom: 35px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+        .submenu-btn-card {
+            background: #ffffff; 
+            border: 1px solid var(--card-border); 
+            border-radius: 16px; 
+            padding: 24px 18px;
+            text-decoration: none; 
+            color: var(--text-dark); 
+            transition: all 0.3s ease; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .submenu-btn-card i.main-icon { font-size: 2rem; color: var(--primary-navy); margin-bottom: 10px; }
+        .submenu-btn-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: var(--text-dark); }
+        .submenu-btn-card span { font-size: 0.82rem; color: var(--primary-navy); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+
+        .submenu-btn-card:hover {
+            background: #ffffff; 
+            border-color: var(--accent-blue); 
+            transform: translateY(-4px); 
+        }
+
+        /* Responsive adaptativo */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.1rem; }
+            .knotion-highlight-card, .programas-dos-columnas, .computacion-destacado-card, .richmond-content-grid, .richmond-grid-info, .knu-details-grid, .perfil-destacado-grid, .galeria-tres-grid { grid-template-columns: 1fr; gap: 20px; }
+            .grado-card { grid-template-columns: 1fr; }
+            .grado-header { border-right: none; border-bottom: 2px solid var(--bg-alt); padding-right: 0; padding-bottom: 10px; }
+            .perfil-cards-list { grid-template-columns: 1fr; }
+            .submenus-grid-fila { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 576px) {
+            .submenus-grid-fila { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header dinámico reutilizable -->
+    <mi-header pagina-activa="basicos"></mi-header>
+
+    <!-- Botón flotante único de WhatsApp -->
+    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20nivel%20de%20B%C3%A1sicos%20en%20el%20Colegio%20Americano%20Superior" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- 1. Hero banner básicos con carrusel -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes basico/banner1.jpg" class="hero-bg-slide active" alt="Estudiantes del Nivel Básico">
+                <img src="Imagenes basico/Smart A.jpg" class="hero-bg-slide" alt="Laboratorio de informática y tecnología">
+                <img src="Imagenes basico/vol.jpg" class="hero-bg-slide" alt="Lectura crítica y aprendizaje interactivo">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <span class="hero-tag"><i class="fas fa-book-bookmark" aria-hidden="true"></i> Nivel básico</span>
+                    <h1>Construyendo líderes <span>con carácter y visión</span></h1>
+                    <p>En el nivel básico impulsamos la continuidad escolar desde 1.º básico hasta la consolidación en 3.º básico, combinando orientación vocacional con el método Ikigai, contenido interactivo Knotion, matemática Pearson, Dreambox, Lectura Inteligente, computación avanzada e Inglés Richmond por niveles.</p>
+                    
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20agendar%20una%20visita%20para%20conocer%20el%20nivel%20de%20B%C3%A1sicos" 
+                       class="btn-banner" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <span>Más información</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 3"></button>
+            </div>
+        </section>
+
+        <!-- 2. Ecosistema digital Knotion con imagen específica -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div class="knotion-highlight-card">
+                    <div class="knotion-media">
+                        <img src="Imagenes basico/Smart A.jpg" alt="Estudiantes del Colegio Americano Superior interactuando con dispositivos digitales en el ecosistema Knotion">
+                    </div>
+                    <div class="knotion-content">
+                        <span class="title-badge">Tecnología e innovación</span>
+                        <h3>Ecosistema digital Knotion</h3>
+                        <p>En el Colegio Americano Superior aprovechamos el ecosistema tecnológico de Knotion para que nuestros docentes diseñen y generen contenidos educativos interactivos de alto impacto pedagógico.</p>
+                        <p>Los alumnos desarrollan competencias digitales clave mediante simuladores, secuencias interdisciplinarias y recursos multimedia que fortalecen la autonomía intelectual y el trabajo colaborativo.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Metodologías en 2 columnas (Matemática y Lectura) -->
+                <div style="text-align: center;">
+                    <span class="title-badge">Plataformas y herramientas</span>
+                    <h2 class="seccion-titulo">Recursos académicos de estándar internacional</h2>
+                    <p class="seccion-subtitulo">Integramos metodologías de prestigio internacional que dotan al estudiante de herramientas lógicas, analíticas e idiomáticas de vanguardia.</p>
+                </div>
+
+                <div class="programas-dos-columnas">
+                    <!-- Matemática Pearson y Dreambox -->
+                    <article class="programa-item-card">
+                        <div class="brand-logo-container">
+                            <img src="Imagenes Alianzas/DE-DreamBox-Logo_Pos.png" alt="Logotipo oficial de Dreambox y Pearson">
+                        </div>
+                        <h4>Matemáticas de alto nivel y Dreambox</h4>
+                        <p>Combinamos el rigor conceptual de los textos de Álgebra Pearson con el aprendizaje adaptativo digital en plataforma Dreambox Math para asegurar un dominio cuantitativo sólido.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Formación en álgebra, funciones y razonamiento lógico.</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Práctica adaptativa individualizada en plataforma Dreambox.</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Resolución analítica de problemas aplicados a las ciencias.</li>
+                        </ul>
+                    </article>
+
+                    <!-- Lectura Inteligente -->
+                    <article class="programa-item-card">
+                        <div class="brand-logo-container">
+                            <img src="Imagenes Alianzas/li.png" alt="Logotipo oficial de Lectura Inteligente">
+                        </div>
+                        <h4>Lectura inteligente y síntesis crítica</h4>
+                        <p>Programa enfocado en la velocidad lectora, la comprensión inferencial y el análisis crítico documental necesario para abordar textos de nivel universitario.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Incremento en la velocidad y fluidez de lectura.</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Análisis de estructura textual y síntesis de ideas.</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Redacción de ensayos y argumentación lógica.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Bloque de Computación con imagen a la derecha -->
+                <div class="computacion-destacado-card">
+                    <div class="computacion-info">
+                        <span class="title-badge">Tecnología aplicada</span>
+                        <h4>Computación y programación avanzada</h4>
+                        <p>Formación tecnológica integral donde los estudiantes aprenden el manejo de sistemas operativos, desarrollo de algoritmos de programación y uso profesional de software de productividad para resolución de problemas reales.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Lógica de programación y desarrollo de sistemas.</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Dominio avanzado en Microsoft Excel y procesamiento de datos.</li>
+                            <li><i class="fas fa-check" aria-hidden="true"></i> Elaboración de documentos profesionales en Microsoft Word.</li>
+                        </ul>
+                    </div>
+                    <div class="computacion-media-right">
+                        <img src="Imagenes basico/compu.jpg" alt="Salón de cómputo y sistemas del Colegio Americano Superior">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Sección Richmond de borde a borde (Full-Width) -->
+        <section class="seccion-richmond-fullwidth">
+            <img src="Imagenes basico/clase.jpg" alt="Textura de fondo para la sección Richmond" class="richmond-bg-image">
+            
+            <div class="container richmond-container-inner">
+                <div class="richmond-header-flex">
+                    <div class="richmond-logo-box">
+                        <img src="Imagenes Alianzas/richmond_logotipo.webp" alt="Logotipo oficial de Richmond Solution">
+                    </div>
+                    <span class="title-badge" style="background: rgba(255,255,255,0.15); color: #ffffff;">Programa bilingüe</span>
+                </div>
+
+                <div class="richmond-hook">
+                    ¿Está listo su hijo para dominar el inglés con estándar internacional?
+                </div>
+
+                <p class="richmond-desc">En el Colegio Americano Superior implementamos la metodología Richmond Solution organizando las clases de inglés por niveles de competencia. Al ingresar al nivel básico, cada estudiante realiza una evaluación de ubicación precisa para asignarle el grupo de aprendizaje que responda a su ritmo y habilidad real.</p>
+
+                <div class="richmond-content-grid">
+                    <div class="richmond-grid-info">
+                        <div class="richmond-mini-box">
+                            <h5>Evaluación de ubicación</h5>
+                            <p>Diagnóstico inicial para agrupar al estudiante según su dominio del idioma y optimizar su avance académico.</p>
+                        </div>
+                        <div class="richmond-mini-box">
+                            <h5>Ecosistema Richmond</h5>
+                            <p>Desarrollo equilibrado de la producción oral, escucha atenta, lectura crítica y redacción formal.</p>
+                        </div>
+                        <div class="richmond-mini-box">
+                            <h5>Certificación TOEFL</h5>
+                            <p>Evaluación estandarizada internacional en 3.º básico que valida objetivamente el nivel lingüístico alcanzado.</p>
+                        </div>
+                    </div>
+
+                    <!-- Fotografía de conversación con extranjeros -->
+                    <div class="richmond-photo-extranjeros">
+                        <img src="Imagenes basico/Conversasión.jpg" alt="Estudiantes del colegio en práctica conversacional con nativos extranjeros">
+                        <div class="photo-caption">Prácticas conversacionales directas con nativos extranjeros</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Estructura del programa integral desde 1ro básico hasta 3ro básico -->
+        <section class="seccion-gris">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="title-badge">Trayectoria académica</span>
+                    <h2 class="seccion-titulo">Programa integral del nivel básico</h2>
+                    <p class="seccion-subtitulo">Estructura curricular progresiva que prepara al estudiante desde la transición inicial hasta la orientación vocacional universitaria en 3.º básico.</p>
+                </div>
+
+                <div class="grados-timeline">
+                    <!-- 1.º Básico -->
+                    <div class="grado-card">
+                        <div class="grado-header">
+                            <span>Primer paso</span>
+                            <h4>1.º Básico</h4>
+                        </div>
+                        <div class="grado-body">
+                            <h5>Consolidación de competencias y hábitos de estudio</h5>
+                            <p>Adaptación a la educación secundaria mediante la transición hacia la abstracción matemática, comprensión de la metodología por proyectos en Knotion, lectura inteligente y formación tecnológica en sistemas.</p>
+                            <div class="grado-tags">
+                                <span class="grado-tag-item">Álgebra elemental</span>
+                                <span class="grado-tag-item">Lectura inteligente</span>
+                                <span class="grado-tag-item">Inglés por ubicación</span>
+                                <span class="grado-tag-item">Computación básica</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2.º Básico -->
+                    <div class="grado-card">
+                        <div class="grado-header">
+                            <span>Desarrollo analítico</span>
+                            <h4>2.º Básico</h4>
+                        </div>
+                        <div class="grado-body">
+                            <h5>Profundización científica e investigación</h5>
+                            <p>Desarrollo del pensamiento formal mediante el avance en álgebra de Pearson, práctica adaptativa en Dreambox, clases de química, lectura inteligente y dominio de herramientas de software avanzado.</p>
+                            <div class="grado-tags">
+                                <span class="grado-tag-item">Álgebra de Pearson</span>
+                                <span class="grado-tag-item">Química</span>
+                                <span class="grado-tag-item">Dreambox Math</span>
+                                <span class="grado-tag-item">Excel y Word avanzado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloque destacado 3.º Básico & Proyecto KN-U High -->
+                <div class="knu-block-card">
+                    <div class="knu-header-flex">
+                        <div class="knu-title-area">
+                            <span>Etapa decisiva y vocacional</span>
+                            <h3>3.º Básico: Proyecto KN-U High y física fundamental</h3>
+                        </div>
+                        <img src="Imagenes Alianzas/logoknuhight.png" alt="Logotipo institucional Knotion" class="knu-logo-img">
+                    </div>
+
+                    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+                        En 3.º básico da inicio el proyecto KN-U High dentro del ecosistema Knotion. A través de este programa integral, se realiza una evaluación estructurada basada en el método Ikigai para descubrir el propósito de vida, aptitudes, pasiones y talentos del estudiante. Esto permite orientarlo de manera personalizada hacia su futura carrera universitaria y diseñar un bachillerato a su medida en el nivel diversificado.
+                    </p>
+
+                    <div class="knu-details-grid">
+                        <div class="knu-detail-box">
+                            <h5>Evaluación Ikigai y orientación vocacional</h5>
+                            <p>Diagnóstico psicopedagógico especializado para definir la vocación del alumno, conectando sus fortalezas académicas con el perfil universitario deseado.</p>
+                        </div>
+
+                        <div class="knu-detail-box">
+                            <h5>Física fundamental y ciencias</h5>
+                            <p>Preparación rigurosa en física fundamental y análisis científico que cimienta los conocimientos requeridos para las carreras técnicas y universitarias.</p>
+                        </div>
+
+                        <div class="knu-detail-box">
+                            <h5>Matemática avanzada y computación</h5>
+                            <p>Profundización en modelos algebraicos avanzados, ecuaciones complejas y desarrollo de lógica de programación en computación.</p>
+                        </div>
+
+                        <div class="knu-detail-box">
+                            <h5>Certificación internacional TOEFL</h5>
+                            <p>Medición estandarizada del idioma inglés gestionada con Richmond Solution para certificar de forma objetiva la competencia comunicativa del egresado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Perfil de egreso con fotografías -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div class="perfil-destacado-grid">
+                    <div class="perfil-galeria-mosaic">
+                        <img src="Imagenes basico/bguate.jpg" class="mosaic-img" alt="Estudiante en actividades académicas del nivel básico">
+                        <img src="Imagenes basico/bcas.jpg" class="mosaic-img" alt="Alumnos trabajando con tecnologías interactivas">
+                    </div>
+
+                    <div class="perfil-info-box">
+                        <span class="title-badge">Resultados de aprendizaje</span>
+                        <h3>Perfil de egreso del nivel básico</h3>
+                        <p class="intro">Al egresar de 3.º básico, el estudiante del Colegio Americano Superior posee la madurez intelectual, solvencia académica y claridad de propósito indispensables para destacar en diversificado:</p>
+
+                        <div class="perfil-cards-list">
+                            <div class="perfil-mini-card">
+                                <h5>Propósito Ikigai</h5>
+                                <p>Claridad en aptitudes para elegir un bachillerato alineado a su proyecto universitario.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <h5>Física y química</h5>
+                                <p>Dominio de bases científicas en química de 2.º básico y física fundamental en 3.º básico.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <h5>Matemática y sistemas</h5>
+                                <p>Capacidad lógica en álgebra Pearson, Dreambox, programación y herramientas avanzadas de office.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <h5>Inglés certificado</h5>
+                                <p>Acreditación internacional del nivel comunicativo mediante la evaluación oficial TOEFL.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Galería de 3 fotografías -->
+                <div style="text-align: center; margin-top: 60px;">
+                    <span class="title-badge">Entornos educativos</span>
+                    <h2 class="seccion-titulo">Instalaciones interactivas y Smart Class</h2>
+                    <p class="seccion-subtitulo">Espacios diseñados para potenciar el aprendizaje dinámico, el pensamiento colaborativo y la inmersión tecnológica de los estudiantes.</p>
+                </div>
+
+                <div class="galeria-tres-grid">
+                    <div class="foto-galeria-card">
+                        <img src="Imagenes basico/Smart.jpg" alt="Salón de clases interactivo Smart Class">
+                        <div class="caption-overlay">Aulas interactivas Smart Class</div>
+                    </div>
+                    <div class="foto-galeria-card">
+                        <img src="Imagenes basico/aula.jpg" alt="Actividades de investigación y trabajo colaborativo">
+                        <div class="caption-overlay">Salones de clases amplios y equipados</div>
+                    </div>
+                    <div class="foto-galeria-card">
+                        <img src="Imagenes basico/COMPU1.jpg" alt="Laboratorios de computación y sistemas de programación">
+                        <div class="caption-overlay">Laboratorio de computación</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Navegación a otros niveles -->
+        <section class="cta-final">
+            <div class="container">
+                <span class="title-badge">Trayectoria académica</span>
+                <h2>Explora nuestros niveles educativos</h2>
+                <p>Acompañamos el desarrollo de nuestros alumnos en cada etapa de su vida académica con excelencia, compromiso e innovación.</p>
+
+                <div class="submenus-grid-fila">
+                    <a href="Preprimaria.html" class="submenu-btn-card">
+                        <i class="fas fa-shapes main-icon" aria-hidden="true"></i>
+                        <h3>Preprimaria</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Primaria.html" class="submenu-btn-card">
+                        <i class="fas fa-apple-whole main-icon" aria-hidden="true"></i>
+                        <h3>Primaria</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Basicos.html" class="submenu-btn-card" style="border-color: var(--accent-blue); background: #f0f7ff;">
+                        <i class="fas fa-book-bookmark main-icon" style="color: var(--accent-blue);" aria-hidden="true"></i>
+                        <h3>Básicos</h3>
+                        <span style="color: var(--accent-blue);">Nivel actual <i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Diversificado.html" class="submenu-btn-card">
+                        <i class="fas fa-graduation-cap main-icon" aria-hidden="true"></i>
+                        <h3>Diversificado</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer dinámico reutilizable -->
+    <mi-footer></mi-footer>
+
+    <!-- Carga del script de componentes globales -->
+    <script src="Componentes.js"></script>
+
+    <!-- Script para el funcionamiento interactivo del carrusel en el Hero Banner -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+        });
+    </script>
+</body>
+</html>

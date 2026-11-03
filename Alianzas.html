@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestras alianzas | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES Y ESTILOS BASE
+           ========================================================= */
+        :root {
+            --bg-dark: #1E3A8A;        
+            --bg-light: #FFFFFF;       
+            --bg-alt: #F8FAFC;         
+            --text-dark: #0F172A;      
+            --text-muted: #475569;     
+            --accent-gold: #F59E0B;    
+            --border-light: #E2E8F0;   
+            --primary-blue: #1E3A8A;
+            --light-blue: #38BDF8;
+            --menu-bg: #171b36;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(30, 58, 138, 0.08), 0 8px 10px -6px rgba(30, 58, 138, 0.04);
+            --shadow-hover: 0 20px 35px -10px rgba(30, 58, 138, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE ÚNICO DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 8px 20px rgba(37, 211, 102, 0.35);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.1) translateY(-3px);
+            background-color: #20ba5a;
+            color: #FFF;
+            box-shadow: 0px 12px 25px rgba(37, 211, 102, 0.45);
+        }
+
+        /* =========================================================
+           3. HERO BANNER
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 58vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding-top: 120px;
+            padding-bottom: 70px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease-in-out; }
+        .hero-bg-slide.active { opacity: 0.8; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--menu-bg) 0%, rgba(23, 27, 54, 0.92) 35%, rgba(23, 27, 54, 0.5) 70%, rgba(23, 27, 54, 0.1) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 3; width: 100%; }
+        .hero-content-box { max-width: 680px; }
+        .hero-content-box h1 { font-size: 3.4rem; font-weight: 800; line-height: 1.1; margin-bottom: 22px; color: #ffffff; letter-spacing: -1px; }
+        .hero-content-box p { font-size: 1.05rem; color: #e2e1f0; margin-bottom: 32px; line-height: 1.65; font-weight: 400; }
+
+        .btn-banner {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background-color: #2088b8; color: #ffffff; font-size: 0.92rem; font-weight: 700;
+            padding: 14px 32px; border-radius: 50px; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(32, 136, 184, 0.4);
+        }
+        .btn-banner:hover, .btn-banner:focus-visible { background-color: #1a729b; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(32, 136, 184, 0.5); }
+
+        .carousel-dots-banner { position: absolute; bottom: 25px; right: 40px; display: flex; gap: 8px; z-index: 10; }
+        .dot-banner { width: 10px; height: 10px; background: rgba(255, 255, 255, 0.35); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: var(--accent-gold); width: 28px; border-radius: 10px; }
+
+        /* =========================================================
+           4. SECCIONES DE CONTENIDO
+           ========================================================= */
+        .seccion-blanca { background-color: #ffffff; padding: 85px 0; border-bottom: 1px solid var(--border-light); }
+        .seccion-gris { background-color: var(--bg-alt); padding: 85px 0; border-bottom: 1px solid var(--border-light); }
+        
+        .seccion-titulo { text-align: center; font-size: 2.3rem; color: var(--primary-blue); margin-bottom: 12px; font-weight: 800; letter-spacing: -0.5px; }
+        .seccion-subtitulo { text-align: center; font-size: 1.02rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 50px auto; font-weight: 400; }
+
+        /* =========================================================
+           5. INTRODUCCIÓN Y VALORES
+           ========================================================= */
+        .intro-alianzas-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .intro-col-left h2 {
+            font-size: 2.4rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .intro-col-left p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+
+        .intro-col-left strong { color: var(--primary-blue); font-weight: 700; }
+
+        .intro-col-right {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .valor-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 28px 22px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .valor-card:hover { transform: translateY(-6px); border-color: rgba(30, 58, 138, 0.3); box-shadow: var(--shadow-md); }
+        .valor-card i { font-size: 2.2rem; color: var(--primary-blue); margin-bottom: 14px; display: inline-block; }
+        .valor-card h4 { font-size: 1.08rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+        .valor-card p { font-size: 0.86rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+        /* =========================================================
+           6. ALIANZA PRINCIPAL (KNOTION) Y SECUNDARIA (KN-U HIGH)
+           ========================================================= */
+        .knotion-hero-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 28px;
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 45px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .knotion-hero-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .knotion-info h3 {
+            font-size: 2.1rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .knotion-logo {
+            max-height: 55px;
+            margin-bottom: 18px;
+            object-fit: contain;
+        }
+
+        .knotion-info p {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+
+        .video-container-main {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #0f172a;
+            aspect-ratio: 16 / 9;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .video-container-main iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .knu-secondary-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--primary-blue);
+            border-radius: 24px;
+            padding: 35px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .knu-secondary-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .knu-content h3 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--primary-blue);
+            letter-spacing: -0.3px;
+        }
+
+        .knu-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .knu-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-knu {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+        }
+
+        .btn-knu:hover {
+            background-color: #1e293b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.35);
+        }
+
+        .knu-logo-box {
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .knu-logo-box img {
+            max-height: 100%;
+            max-width: 220px;
+            object-fit: contain;
+        }
+
+        /* =========================================================
+           7. SECCIÓN DE ALIANZAS Y CERTIFICACIONES
+           ========================================================= */
+        .alianzas-categoria-wrapper {
+            margin-bottom: 55px;
+        }
+
+        .alianzas-categoria-titulo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .alianzas-categoria-titulo::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 24px;
+            background-color: var(--accent-gold);
+            border-radius: 10px;
+        }
+
+        .alianzas-grid-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .alianza-item-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 30px 26px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .alianza-item-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(30, 58, 138, 0.25);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .item-header-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0 20px 0;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-light);
+            min-height: 90px;
+        }
+
+        .item-header-logo img {
+            max-height: 55px;
+            max-width: 180px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .item-header-logo h4 {
+            font-size: 1.15rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .alianza-item-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .badge-tag {
+            align-self: flex-start;
+            margin-top: auto;
+            background: rgba(245, 158, 11, 0.12);
+            color: #b45309;
+            font-weight: 800;
+            font-size: 0.72rem;
+            padding: 5px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* =========================================================
+           8. SUBMENÚS DE NAVEGACIÓN INFERIOR
+           ========================================================= */
+        .cta-final { background-color: var(--bg-alt); color: var(--text-dark); padding: 85px 20px; text-align: center; border-top: 1px solid var(--border-light); }
+        .cta-final h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; color: var(--primary-blue); letter-spacing: -0.5px; }
+        .cta-final p { font-size: 1rem; color: var(--text-muted); margin-bottom: 50px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1050px; margin: 0 auto; }
+
+        .submenu-btn-card {
+            background: #ffffff; border: 1px solid var(--border-light); border-radius: 20px; padding: 36px 28px;
+            text-decoration: none; color: var(--text-dark); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex;
+            flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);
+        }
+
+        .submenu-btn-card i.main-icon { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 16px; transition: transform 0.3s ease; }
+        .submenu-btn-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+        .submenu-btn-card span { font-size: 0.9rem; color: var(--primary-blue); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+        .submenu-btn-card span i { color: var(--primary-blue); transition: transform 0.3s ease; }
+
+        .submenu-btn-card:hover, .submenu-btn-card:focus-visible {
+            background: #ffffff; border-color: rgba(30, 58, 138, 0.3); transform: translateY(-6px); box-shadow: var(--shadow-hover);
+        }
+        .submenu-btn-card:hover i.main-icon, .submenu-btn-card:focus-visible i.main-icon { transform: scale(1.12); }
+        .submenu-btn-card:hover span i, .submenu-btn-card:focus-visible span i { transform: translateX(5px); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .alianzas-grid-list { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.5rem; }
+            .intro-alianzas-grid, .knotion-hero-card { grid-template-columns: 1fr; gap: 32px; }
+            .knu-secondary-card { flex-direction: column; text-align: center; }
+            .knu-actions { justify-content: center; }
+            .hero-overlay { background: linear-gradient(180deg, var(--menu-bg) 0%, var(--menu-bg) 60%, rgba(23, 27, 54, 0.7) 100%); }
+        }
+
+        @media (max-width: 768px) {
+            .alianzas-grid-list { grid-template-columns: 1fr; }
+            .seccion-blanca, .seccion-gris { padding: 60px 0; }
+        }
+
+        @media (max-width: 576px) {
+            .intro-col-right { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="alianzas"></mi-header>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Estoy%20interesado,%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20alianzas%20del%20colegio%20americano%20superior" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- HERO BANNER ALIANZAS -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes Alianzas/C3.jpg" class="hero-bg-slide active" alt="Instalaciones del Colegio Americano Superior">
+                <img src="Imagenes Alianzas/C2.jpg" class="hero-bg-slide" alt="Estudiantes aprendiendo con tecnología">
+                <img src="Imagenes Alianzas/C1.jpg" class="hero-bg-slide" alt="Proyectos y colaboraciones">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <h1>Nuestras alianzas estratégicas</h1>
+                    <p>Conectamos a nuestros estudiantes con plataformas, certificaciones y ecosistemas líderes en el mundo para garantizar una formación integral, tecnológica e internacional.</p>
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20sus%20alianzas%20y%20certificaciones" target="_blank" rel="noopener noreferrer" class="btn-banner">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> Más información
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Ir a la diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 3"></button>
+            </div>
+        </section>
+
+        <!-- VIDEO DE PRESENTACIÓN KNOTION -->
+        <section class="seccion-gris" style="padding-top: 60px; padding-bottom: 40px;">
+            <div class="container">
+                <div class="knotion-hero-card" style="margin-bottom: 0;">
+                    <div class="knotion-info">
+                        <img src="Imagenes Alianzas/Knotion logo.png" alt="Logo Knotion" class="knotion-logo">
+                        <h3>Knotion (Ecosistema Principal)</h3>
+                        <p>Knotion es nuestro ecosistema educativo digital inmersivo basado en retos, diseñado para transformar la experiencia de aprendizaje. Integrado en dispositivos iPad y alineado con los Objetivos de Desarrollo Sostenible (ODS) de la ONU, fomenta el pensamiento crítico, la conciencia global y el uso ético de la tecnología.</p>
+                        <span class="badge-tag">Ecosistema principal</span>
+                    </div>
+
+                    <div class="video-container-main">
+                        <iframe 
+                          width="560" 
+                          height="315" 
+                          src="https://www.youtube.com/embed/ThjlBbYz2oY" 
+                          title="YouTube video player" 
+                          frameborder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                          allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. INTRODUCCIÓN Y CÓMO FORTALECEN LA EDUCACIÓN -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div class="intro-alianzas-grid">
+                    <div class="intro-col-left">
+                        <h2>¿Qué son nuestras alianzas?</h2>
+                        <p>Las <strong>alianzas estratégicas</strong> representan la unión entre el Colegio Americano Superior y plataformas digitales, acreditaciones internacionales e instituciones especializadas reconocidas mundialmente.</p>
+                        <p><strong>¿Cómo fortalecen nuestra educación?</strong> Al integrar estas herramientas en el aula, transformamos el modelo de aprendizaje en una experiencia viva. Permiten personalizar el avance matemático, profundizar la comprensión lectora, desarrollar el pensamiento crítico y validar el dominio del idioma inglés con estándares globales.</p>
+                    </div>
+
+                    <div class="intro-col-right">
+                        <div class="valor-card">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <h4>Alcance global</h4>
+                            <p>Certificaciones e idiomas con validez e impacto internacional.</p>
+                        </div>
+                        <div class="valor-card">
+                            <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                            <h4>Innovación</h4>
+                            <p>Plataformas digitales adaptativas e inteligentes para cada nivel.</p>
+                        </div>
+                        <div class="valor-card">
+                            <i class="fas fa-brain" aria-hidden="true"></i>
+                            <h4>Razonamiento</h4>
+                            <p>Refuerzo especializado en matemáticas, lógica y lectoescritura.</p>
+                        </div>
+                        <div class="valor-card">
+                            <i class="fas fa-award" aria-hidden="true"></i>
+                            <h4>Excelencia</h4>
+                            <p>Formación alineada con los más altos estándares educativos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ECOSISTEMA PRINCIPAL Y PROGRAMAS EN FOTOGRAFÍAS -->
+        <section class="seccion-gris">
+            <div class="container">
+                <h2 class="seccion-titulo">Ecosistemas y programas aliados</h2>
+                <p class="seccion-subtitulo">Conoce nuestra alianza principal y los programas que respaldan el crecimiento académico de nuestra comunidad.</p>
+
+                <!-- ALIANZA SECUNDARIA: KN-U HIGH -->
+                <div class="knu-secondary-card">
+                    <div class="knu-content">
+                        <h3>Kn-u High (Especial para Bachillerato)</h3>
+                        <p>Programa de alto nivel enfocado en preparar a los estudiantes de nivel diversificado y bachillerato para el entorno universitario mediante investigación guiada, rigor académico, pensamiento autónomo y desarrollo de liderazgo.</p>
+                        <div class="knu-actions">
+                            <a href="kn-u-high.html" class="btn-knu">
+                                Conocer más sobre Kn-u High <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="knu-logo-box">
+                        <img src="Imagenes Alianzas/logoknuhight.png" alt="Logo Kn-u High">
+                    </div>
+                </div>
+
+                <!-- Categoría 1: Innovación y Desarrollo Digital -->
+                <div class="alianzas-categoria-wrapper">
+                    <h3 class="alianzas-categoria-titulo">Innovación y desarrollo digital</h3>
+                    <div class="alianzas-grid-list">
+                        <!-- Kn-Spark -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/kn-spark-sense-knotion-color.png" alt="Logo Kn-Spark">
+                                <h4>Kn-Spark</h4>
+                            </div>
+                            <p>Módulo de estimulación temprana e innovación diseñado para despertar la curiosidad científica, el pensamiento lógico y la creatividad en los primeros años escolares.</p>
+                            <span class="badge-tag">Innovación inicial</span>
+                        </article>
+
+                        <!-- Dreambox -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/DE-DreamBox-Logo_Pos.png" alt="Logo Dreambox">
+                                <h4>Dreambox</h4>
+                            </div>
+                            <p>Plataforma inteligente y adaptativa de aprendizaje matemático que personaliza las lecciones en tiempo real para fortalecer el razonamiento cuantitativo.</p>
+                            <span class="badge-tag">Matemática inteligente</span>
+                        </article>
+
+                        <!-- Lectura Inteligente -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/li.png" alt="Logo Lectura Inteligente">
+                                <h4>Lectura Inteligente</h4>
+                            </div>
+                            <p>Programa enfocado en potenciar la velocidad lectora, comprensión fluida, retención analítica y pensamiento crítico a través de ejercicios guiados.</p>
+                            <span class="badge-tag">Comprensión lectora</span>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Categoría 2: Idiomas y Estándares Internacionales -->
+                <div class="alianzas-categoria-wrapper">
+                    <h3 class="alianzas-categoria-titulo">Idiomas y competencias internacionales</h3>
+                    <div class="alianzas-grid-list">
+                        <!-- Richmond -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/richmond_logotipo.webp" alt="Logo Richmond">
+                                <h4>Richmond</h4>
+                            </div>
+                            <p>Herramienta avanzada orientada a potenciar talentos multidisciplinarios, estimulando el aprendizaje efectivo del idioma inglés en entornos interactivos.</p>
+                            <span class="badge-tag">Plataforma de inglés</span>
+                        </article>
+
+                        <!-- TOEFL -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/TOEFL_Logo.svg.webp" alt="Logo TOEFL">
+                                <h4>TOEFL</h4>
+                            </div>
+                            <p>Certificación internacional de suficiencia en el idioma inglés que valida de manera oficial el dominio del idioma para oportunidades globales.</p>
+                            <span class="badge-tag">Acreditación de idioma</span>
+                        </article>
+
+                        <!-- LARSA -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/Larsa.png" alt="Logo LARSA">
+                                <h4>LARSA</h4>
+                            </div>
+                            <p>Evaluación estandarizada en <strong>idioma inglés</strong> (<em>Language and Reading Skills Assessment</em>) que mide la comprensión lectora y competencia lingüística.</p>
+                            <span class="badge-tag">Evaluación de inglés</span>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Categoría 3: Medición y Diagnóstico Académico -->
+                <div class="alianzas-categoria-wrapper" style="margin-bottom: 0;">
+                    <h3 class="alianzas-categoria-titulo">Evaluaciones diagnósticas académicas</h3>
+                    <div class="alianzas-grid-list">
+                        <!-- MARSA -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/MARSA.png" alt="Logo MARSA">
+                                <h4>MARSA</h4>
+                            </div>
+                            <p>Evaluación estandarizada enfocada en <strong>matemáticas y razonamiento cuantitativo</strong> (<em>Math Reasoning and Skills Assessment</em>) que permite diagnosticar el nivel numérico y algebraico de los alumnos.</p>
+                            <span class="badge-tag">Evaluación de matemáticas</span>
+                        </article>
+
+                        <!-- MATEMÁTICAS PEARSON -->
+                        <article class="alianza-item-card">
+                            <div class="item-header-logo">
+                                <img src="Imagenes Alianzas/pearson-logo-1.svg" alt="Logo Matemáticas Pearson">
+                                <h4>Matemáticas Pearson</h4>
+                            </div>
+                            <p>Programa especializado para la enseñanza y diagnóstico continuo de las matemáticas, adaptado al desarrollo individual de habilidades lógico-matemáticas.</p>
+                            <span class="badge-tag">Diagnóstico matemático</span>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- NAVEGACIÓN A OTROS SUBMENÚS -->
+        <section class="cta-final">
+            <div class="container">
+                <h2>Explora más de nosotros</h2>
+                <p>Descubre a detalle nuestra propuesta pedagógica, valores institucionales y la vibrante vida estudiantil que nos caracteriza.</p>
+                
+                <div class="submenus-grid">
+                    <a href="Nosotros.html" class="submenu-btn-card">
+                        <i class="fas fa-university main-icon" aria-hidden="true"></i>
+                        <h3>Nosotros</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Metodologia.html" class="submenu-btn-card">
+                        <i class="fas fa-cogs main-icon" aria-hidden="true"></i>
+                        <h3>Metodología</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Actividades.html" class="submenu-btn-card">
+                        <i class="fas fa-calendar-alt main-icon" aria-hidden="true"></i>
+                        <h3>Actividades</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+
+    <!-- INICIALIZACIÓN DE SCRIPTS INTERACTIVOS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Carousel Hero Banner ---
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+        });
+    </script>
+</body>
+</html>

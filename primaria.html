@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primaria | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. PALETA DE COLORES VIBRANTES Y ENERGÉTICOS
+           ========================================================= */
+        :root {
+            --bg-dark: #1E3A8A;        
+            --bg-light: #FFFBF5;       
+            --bg-alt: #F0F7FF;         
+            --text-dark: #0F172A;      
+            --text-muted: #475569;     
+            --accent-gold: #FFB703;    
+            --primary-blue: #1E3A8A;   
+            --light-blue: #38BDF8;
+            --menu-bg: #171b36;        
+
+            /* Colores vivos e infantiles de Primaria */
+            --color-yellow: #FFD166;
+            --color-orange: #FF8800;
+            --color-green: #06D6A0;
+            --color-cyan: #00B4D8;
+            --color-pink: #FF4B72;
+            --color-purple: #9D4EDD;
+            --color-blue-card: #2196F3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, h4, .font-fun {
+            font-family: 'Fredoka', cursive, sans-serif !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* =========================================================
+           2. ANIMACIONES CSS
+           ========================================================= */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        @keyframes bounceSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .anim-float { animation: floatSlow 4s ease-in-out infinite; }
+        .anim-bounce { animation: bounceSoft 2.5s ease-in-out infinite; }
+
+        /* =========================================================
+           3. BOTÓN FLOTANTE DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 0px 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.15) rotate(8deg);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           4. HERO BANNER PRIMARIA
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 52vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #171b36 0%, #1E3A8A 100%);
+            color: #ffffff;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0; 
+            transition: opacity 1.2s ease-in-out; 
+        }
+        .hero-bg-slide.active { opacity: 0.75; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(23, 27, 54, 0.95) 0%, rgba(23, 27, 54, 0.82) 50%, rgba(23, 27, 54, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 4; width: 100%; }
+        .hero-content-box { max-width: 620px; }
+        
+        /* BADGE SUPERIOR EN AZUL MARINO */
+        .hero-content-box .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.4);
+        }
+
+        .hero-content-box h1 { 
+            font-size: 2.6rem; 
+            font-weight: 700; 
+            line-height: 1.18; 
+            margin-bottom: 12px; 
+            color: #ffffff; 
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+        }
+
+        .hero-content-box h1 span {
+            color: var(--color-yellow);
+        }
+
+        /* PÁRRAFO TEXTO SIMPLE */
+        .hero-content-box p { 
+            font-size: 0.95rem; 
+            color: #f1f5f9; 
+            margin-bottom: 22px; 
+            line-height: 1.6; 
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            border-left: none;
+            backdrop-filter: none;
+        }
+
+        /* BOTÓN DE ADMISIONES */
+        .btn-banner {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #0096C7 0%, #0284C7 100%);
+            color: #FFFFFF !important;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.3);
+            border: none;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-banner:hover, 
+        .btn-banner:focus-visible { 
+            transform: translateY(-3px) scale(1.03); 
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.5); 
+            color: #FFFFFF !important;
+        }
+
+        .carousel-dots-banner { position: absolute; bottom: 20px; right: 35px; display: flex; gap: 8px; z-index: 10; }
+        .dot-banner { width: 10px; height: 10px; background: rgba(255, 255, 255, 0.5); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: var(--color-yellow); width: 24px; border-radius: 8px; }
+
+        /* =========================================================
+           5. TARJETAS VIVAS Y COLORIDAS (PILARES)
+           ========================================================= */
+        .seccion-papares-saber {
+            background-color: #FFFBF5;
+            padding: 55px 0;
+            position: relative;
+        }
+
+        .papares-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            text-align: center;
+        }
+
+        .papares-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 18px;
+            background: #FFFFFF;
+            border-radius: 22px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.35s ease;
+            position: relative;
+            border: 3px solid transparent;
+        }
+
+        .papares-item:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .papares-item:nth-child(1) { border-color: var(--color-cyan); } 
+        .papares-item:nth-child(2) { border-color: var(--color-pink); } 
+        .papares-item:nth-child(3) { border-color: var(--color-green); } 
+        .papares-item:nth-child(4) { border-color: var(--color-purple); } 
+
+        .papares-item .icono-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            transition: transform 0.4s ease;
+        }
+
+        .papares-item:hover .icono-container {
+            transform: scale(1.12) rotate(-6deg);
+        }
+
+        .papares-item:nth-child(1) .icono-container { background: rgba(0, 180, 216, 0.15); color: var(--color-cyan); }
+        .papares-item:nth-child(2) .icono-container { background: rgba(255, 75, 114, 0.15); color: var(--color-pink); }
+        .papares-item:nth-child(3) .icono-container { background: rgba(6, 214, 160, 0.15); color: var(--color-green); }
+        .papares-item:nth-child(4) .icono-container { background: rgba(157, 78, 221, 0.15); color: var(--color-purple); }
+
+        .papares-item .icono-infantil { font-size: 2rem; }
+        .papares-item h4 { color: var(--text-dark); font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+        .papares-item p { color: var(--text-muted); font-size: 0.88rem; line-height: 1.45; }
+
+        /* =========================================================
+           6. SECCIONES GENERALES CON INSIGNIAS DE COLOR
+           ========================================================= */
+        .seccion-blanca { background-color: #ffffff; padding: 75px 0; position: relative; }
+        .seccion-gris { background: linear-gradient(180deg, #F0F7FF 0%, #E6F0FA 100%); padding: 75px 0; position: relative; }
+        .seccion-titulo { text-align: center; font-size: 2.3rem; color: var(--primary-blue); margin-bottom: 10px; font-weight: 700; position: relative; }
+        .seccion-subtitulo { text-align: center; font-size: 0.98rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 40px auto; line-height: 1.55; }
+
+        .title-badge {
+            display: inline-block;
+            background: var(--color-yellow);
+            color: #8D5B00;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 5px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        /* =========================================================
+           7. PLATAFORMAS DESTACADAS
+           ========================================================= */
+        .programas-lista-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .programa-item-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            border: 3px solid #E2E8F0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .programa-item-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1);
+        }
+
+        .programa-item-card:nth-child(1):hover { border-color: var(--color-orange); }
+        .programa-item-card:nth-child(2):hover { border-color: var(--color-cyan); }
+        .programa-item-card:nth-child(3):hover { border-color: var(--color-green); }
+
+        .item-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .item-header h4 { font-size: 1.35rem; color: var(--primary-blue); font-weight: 700; }
+
+        .item-media {
+            position: relative;
+            width: 100%;
+            height: 185px;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            background-color: #f1f5f9;
+        }
+
+        .item-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .programa-item-card:hover .item-media img { transform: scale(1.06); }
+
+        .media-icon-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffffff;
+            color: var(--primary-blue);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .programa-item-card:hover .media-icon-badge { transform: scale(1.1) rotate(8deg); }
+        .programa-item-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 15px; }
+
+        .bullet-list { list-style: none; margin-top: auto; padding-top: 12px; border-top: 2px dashed #E2E8F0; }
+        .bullet-list li { font-size: 0.85rem; color: var(--text-dark); font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .bullet-list li i { color: var(--color-green); font-size: 0.9rem; }
+
+        .badge-tag {
+            align-self: flex-start;
+            margin-top: 14px;
+            background: rgba(255, 209, 102, 0.3);
+            color: #9E6B00;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border-radius: 18px;
+            text-transform: uppercase;
+        }
+
+        /* =========================================================
+           8. EXPLORACIÓN DIRECTA: PRIMARIA BAJA Y PRIMARIA ALTA
+           ========================================================= */
+        .ciclos-container {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .ciclo-card {
+            background: #ffffff;
+            border-radius: 26px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 3px solid #E0E7FF;
+            transition: all 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ciclo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.08);
+        }
+
+        .ciclo-card.baja {
+            border-top: 6px solid var(--color-cyan);
+        }
+
+        .ciclo-card.alta {
+            border-top: 6px solid var(--color-blue-card);
+        }
+
+        .ciclo-card-badge {
+            align-self: flex-start;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ciclo-card.baja .ciclo-card-badge {
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--color-cyan);
+        }
+
+        .ciclo-card.alta .ciclo-card-badge {
+            background: rgba(157, 78, 221, 0.15);
+            color: var(--color-blue-card);
+        }
+
+        .ciclo-card h3 {
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .ciclo-card p {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .ciclo-skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .skill-box {
+            background: #FFF9F2;
+            border: 2px solid #FFE8D6;
+            border-radius: 14px;
+            padding: 12px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-box i { color: var(--color-orange); font-size: 1rem; }
+
+        /* =========================================================
+           9. SECCIÓN PILARES
+           ========================================================= */
+        .seccion-mundo-medida {
+            position: relative;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding: 85px 0;
+            overflow: hidden;
+        }
+
+        .seccion-mundo-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .seccion-mundo-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+
+        .seccion-mundo-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(23, 27, 54, 0.9) 0%, rgba(30, 58, 138, 0.8) 100%);
+            z-index: 2;
+        }
+
+        .mundo-medida-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .mundo-medida-left h2 { font-size: 3rem; font-weight: 700; line-height: 1.15; color: #ffffff; margin-bottom: 16px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .mundo-medida-left h2 span { color: var(--color-yellow); display: block; }
+        .mundo-medida-left p { font-size: 1rem; color: #E2E8F0; line-height: 1.65; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+
+        .mundo-cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .mundo-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 24px 18px;
+            text-align: center;
+            transition: all 0.35s ease;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .mundo-card:hover {
+            background: rgba(15, 23, 42, 0.95);
+            border-color: var(--color-yellow);
+            transform: translateY(-6px);
+        }
+
+        .mundo-card-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 14px auto;
+            color: #ffffff;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+        }
+
+        .mundo-card:nth-child(1) .mundo-card-icon { background: var(--color-orange); }
+        .mundo-card:nth-child(2) .mundo-card-icon { background: var(--color-green); }
+        .mundo-card:nth-child(3) .mundo-card-icon { background: var(--color-cyan); }
+        .mundo-card:nth-child(4) .mundo-card-icon { background: var(--color-purple); }
+
+        .mundo-card h4 { font-size: 1.18rem; font-weight: 700; color: #ffffff; margin-bottom: 8px; }
+        .mundo-card p { font-size: 0.86rem; color: #CBD5E1; line-height: 1.45; margin: 0; }
+
+        /* =========================================================
+           10. GALERÍA DE INSTALACIONES
+           ========================================================= */
+        .galeria-instalaciones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+        .foto-instalacion-card {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            border: 4px solid #FFFFFF;
+            background-color: #f1f5f9;
+            transition: transform 0.4s ease;
+        }
+
+        .foto-instalacion-card:hover { transform: scale(1.02) rotate(1deg); }
+        .foto-instalacion-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .foto-instalacion-card:hover img { transform: scale(1.08); }
+
+        /* =========================================================
+           11. BLOQUE DE INGLÉS PREVIO AL PERFIL DE EGRESO
+           ========================================================= */
+        .seccion-ingles-pre-perfil {
+            background: linear-gradient(135deg, #F0F7FF 0%, #E6F0FA 100%);
+            border-radius: 26px;
+            padding: 35px;
+            border: 3px dashed var(--color-cyan);
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.08);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .seccion-ingles-pre-perfil .ingles-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .seccion-ingles-pre-perfil .ingles-header i {
+            font-size: 2.2rem;
+            color: var(--color-cyan);
+        }
+
+        .seccion-ingles-pre-perfil .ingles-header h3 {
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .seccion-ingles-pre-perfil p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.65;
+            margin-bottom: 12px;
+        }
+
+        .seccion-ingles-pre-perfil p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* =========================================================
+           12. PERFIL DE EGRESO GENERAL
+           ========================================================= */
+        .perfil-destacado-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 35px;
+            align-items: center;
+            background: #FFFFFF;
+            border-radius: 26px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 3px solid #E0E7FF;
+        }
+
+        .perfil-galeria-mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; height: 100%; min-height: 310px; }
+        .mosaic-img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; box-shadow: 0 5px 12px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
+        .mosaic-img:hover { transform: scale(1.03); }
+
+        .perfil-info-box h3 { font-size: 2rem; color: var(--primary-blue); font-weight: 700; margin-bottom: 12px; }
+        .perfil-info-box p.intro { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.55; }
+        .perfil-cards-list { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        .perfil-mini-card {
+            background: #FFF9F2;
+            border-radius: 16px;
+            padding: 16px;
+            border: 2px solid #FFE8D6;
+            transition: all 0.3s ease;
+        }
+
+        .perfil-mini-card:hover {
+            transform: translateY(-3px);
+            background: #FFFFFF;
+            border-color: var(--color-yellow);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .perfil-mini-card i { font-size: 1.35rem; margin-bottom: 6px; display: inline-block; }
+        .perfil-mini-card:nth-child(1) i { color: var(--color-orange); }
+        .perfil-mini-card:nth-child(2) i { color: var(--color-green); }
+        .perfil-mini-card:nth-child(3) i { color: var(--color-cyan); }
+        .perfil-mini-card:nth-child(4) i { color: var(--color-purple); }
+
+        .perfil-mini-card h5 { font-size: 0.98rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+        .perfil-mini-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.38; margin: 0; }
+
+        /* =========================================================
+           13. NAVEGACIÓN A OTROS NIVELES
+           ========================================================= */
+        .cta-final { background: linear-gradient(180deg, #FFFBF5 0%, #F0F7FF 100%); color: #1e293b; padding: 75px 20px; text-align: center; position: relative; }
+        .cta-final h2 { font-size: 2.3rem; font-weight: 700; margin-bottom: 8px; color: var(--primary-blue); }
+        .cta-final p { font-size: 1rem; color: var(--text-muted); margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+        .submenu-btn-card {
+            background: #ffffff; 
+            border: 3px solid #E0E7FF; 
+            border-radius: 22px; 
+            padding: 25px 18px;
+            text-decoration: none; 
+            color: var(--text-dark); 
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .submenu-btn-card i.main-icon { font-size: 2.2rem; color: var(--primary-blue); margin-bottom: 12px; transition: transform 0.3s ease; }
+        .submenu-btn-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--text-dark); }
+        .submenu-btn-card span { font-size: 0.85rem; color: var(--primary-blue); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+
+        .submenu-btn-card:hover, .submenu-btn-card:focus-visible {
+            background: #ffffff; 
+            border-color: var(--color-cyan); 
+            transform: translateY(-6px) scale(1.02); 
+            box-shadow: 0 12px 25px rgba(0, 180, 216, 0.18);
+        }
+        .submenu-btn-card:hover i.main-icon { transform: scale(1.15) rotate(-5deg); color: var(--color-cyan); }
+
+        /* RESPONSIVE ADAPTATIVO */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.3rem; }
+            .papares-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+            .programas-lista-grid, .mundo-medida-grid, .perfil-destacado-grid, .galeria-instalaciones-grid, .ciclos-container { grid-template-columns: 1fr; gap: 25px; }
+            .submenus-grid-fila { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 576px) {
+            .papares-grid, .mundo-cards-container, .perfil-cards-list, .submenus-grid-fila, .ciclo-skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="primaria"></mi-header>
+
+    <!-- BOTÓN FLOTANTE ÚNICO DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20nivel%20de%20Primaria%20en%20el%20Colegio%20Americano%20Superior" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- 1. HERO BANNER PRIMARIA -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes Primaria/Banner4.jpg" class="hero-bg-slide active" alt="Estudiantes de Primaria aprendiendo">
+                <img src="Imagenes Primaria/Banner2.jpg" class="hero-bg-slide" alt="Alumnos en plataforma matemática Dreambox">
+                <img src="Imagenes Primaria/juegos.jpg" class="hero-bg-slide" alt="Pensamiento analítico y ciencia">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <span class="hero-tag"><i class="" aria-hidden="true"></i> Nivel Primaria</span>
+                    <h1>Desarrollando la mente con <span>excelencia y alegría</span></h1>
+                    <p>En primaria impulsamos el potencial de nuestros estudiantes combinando matemática adaptativa de alto rendimiento con Dreambox, Lectura Inteligente, tecnología Knotion e inglés inmersivo.</p>
+                    
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20agendar%20una%20visita%20para%20conocer%20el%20nivel%20de%20Primaria" 
+                       class="btn-banner" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <span>¡Infórmate aquí!</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 3"></button>
+            </div>
+        </section>
+
+        <!-- 2. PILARES CLAVE DE PRIMARIA -->
+        <section class="seccion-papares-saber">
+            <div class="container">
+                <div class="papares-grid">
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-square-root-variable icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Matemática avanzada</h4>
+                        <p>Plataforma Dreambox para razonamiento cuantitativo y lógica desde 1.º primaria.</p>
+                    </div>
+
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-brain icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Lectura Inteligente</h4>
+                        <p>Programa enfocado en velocidad, comprensión profunda y pensamiento analítico.</p>
+                    </div>
+
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-comments icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Inglés avanzado</h4>
+                        <p>Desarrollo fluido de la comunicación oral y escrita con estándares internacionales.</p>
+                    </div>
+
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-tablet-screen-button icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Ecosistema digital</h4>
+                        <p>Uso pedagógico de iPads y Knotion para retos del mundo real.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PLATAFORMAS DESTACADAS -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="title-badge">Innovación educativa</span>
+                    <h2 class="seccion-titulo">Plataformas y programas de vanguardia</h2>
+                    <p class="seccion-subtitulo">Brindamos a nuestros estudiantes herramientas digitales de nivel mundial que potencian su aprendizaje y despiertan su creatividad.</p>
+                </div>
+
+                <div class="programas-lista-grid">
+                    <!-- Dreambox Math -->
+                    <article class="programa-item-card">
+                        <div class="item-header">
+                            <h4>Dreambox Math</h4>
+                            <span style="font-size: 1.5rem;">🧩</span>
+                        </div>
+                        <div class="item-media">
+                            <img src="Imagenes Primaria/Dreambox.png" alt="Matemática inteligente Dreambox">
+                            <div class="media-icon-badge">
+                                <i class="fas fa-calculator" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <p>Plataforma adaptativa e inteligente que enseña matemática visual y abstracta ajustándose al ritmo de cada niño para lograr un aprendizaje sin vacíos.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Algoritmos personalizados de progreso.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Razonamiento lógico y preálgebra.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Desafíos interactivos premiados.</li>
+                        </ul>
+                        <span class="badge-tag">Matemática avanzada</span>
+                    </article>
+
+                    <!-- Lectura Inteligente -->
+                    <article class="programa-item-card">
+                        <div class="item-header">
+                            <h4>Lectura Inteligente</h4>
+                            <span style="font-size: 1.5rem;">📚</span>
+                        </div>
+                        <div class="item-media">
+                            <img src="Imagenes Primaria/inteligente.jpg" alt="Lectura Inteligente">
+                            <div class="media-icon-badge">
+                                <i class="fas fa-book-open" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <p>Metodología diseñada para acelerar la velocidad lectora, enriquecer el vocabulario y garantizar la comprensión crítica e inferencial de textos.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Incremento comprobado de velocidad.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Análisis e interpretación de textos.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Estímulo a la afición por la lectura.</li>
+                        </ul>
+                        <span class="badge-tag">Comprensión lectora</span>
+                    </article>
+
+                    <!-- Knotion Ecosystem -->
+                    <article class="programa-item-card">
+                        <div class="item-header">
+                            <h4>Knotion Primary</h4>
+                            <span style="font-size: 1.5rem;">🌐</span>
+                        </div>
+                        <div class="item-media">
+                            <img src="Imagenes Primaria/Banner3.jpg" alt="Ecosistema Knotion">
+                            <div class="media-icon-badge">
+                                <i class="fas fa-globe" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <p>Ecosistema educativo transdisciplinario en iPad donde los alumnos conectan las ciencias, la historia y la tecnología con la resolución de retos globales.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Aprendizaje basado en retos (ABL).</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Contenidos bilingües e interactivos.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Formación en ciudadanía digital.</li>
+                        </ul>
+                        <span class="badge-tag">Ecosistema digital</span>
+                    </article>
+                </div>
+
+                <!-- 4. EXPLORACIÓN DIRECTA: PRIMARIA BAJA Y PRIMARIA ALTA -->
+                <div style="text-align: center; margin-top: 55px;">
+                    <span class="title-badge" style="background: var(--color-cyan); color: #FFF;">Etapas de aprendizaje</span>
+                    <h2 class="seccion-titulo">Evolución escolar en primaria</h2>
+                    <p class="seccion-subtitulo" style="margin-bottom: 0;">Conoce la progresión del desarrollo integral de nuestros estudiantes a lo largo del nivel primario.</p>
+                </div>
+
+                <div class="ciclos-container">
+                    <!-- Primaria Baja (1.º a 3.º) -->
+                    <div class="ciclo-card baja">
+                        <span class="ciclo-card-badge"><i class="fas fa-child" aria-hidden="true"></i> 1.º a 3.º grado</span>
+                        <h3>Primaria Baja: fundamentos y descubrimiento</h3>
+                        <p>En el primer ciclo consolidamos la lectura fluida, las operaciones numéricas avanzadas y la autonomía en el estudio a través de un entorno motivador, dinámico y participativo.</p>
+                        
+                        <div class="ciclo-skills-grid">
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Multiplicación y lógica matemática</div>
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Comprensión lectora fluida</div>
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Vocabulario y conversación en inglés</div>
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Manejo educativo del iPad</div>
+                        </div>
+                    </div>
+
+                    <!-- Primaria Alta (4.º a 6.º) -->
+                    <div class="ciclo-card alta">
+                        <span class="ciclo-card-badge"><i class="fas fa-user-graduate" aria-hidden="true"></i> 4.º a 6.º grado</span>
+                        <h3>Primaria Alta: pensamiento crítico y liderazgo</h3>
+                        <p>En la Primaria Alta reforzamos el pensamiento abstracto, el análisis de problemas complejos, la redacción de ensayos y el inglés fluido para asegurar un paso exitoso al Nivel Básico.</p>
+                        
+                        <div class="ciclo-skills-grid">
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Preálgebra y geometría avanzada</div>
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Ensayos y síntesis inferencial</div>
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Debate y fluidez en inglés B1/B2</div>
+                            <div class="skill-box"><i class="fas fa-check-circle" aria-hidden="true"></i> Investigación y proyectos digitales</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PILARES ACADÉMICOS DE EXCELENCIA -->
+        <section class="seccion-mundo-medida">
+            <div class="seccion-mundo-bg">
+                <img src="Imagenes Primaria/P1.jpg" alt="Pilares académicos">
+            </div>
+            
+            <div class="seccion-mundo-overlay"></div>
+
+            <div class="container">
+                <div class="mundo-medida-grid">
+                    <div class="mundo-medida-left">
+                        <span class="title-badge" style="background: var(--color-orange); color: #FFF;">Sólida formación</span>
+                        <h2>Pilares de nuestra <span>excelencia académica</span></h2>
+                        <p>Nos enfocamos en construir bases sólidas en competencias analíticas y lingüísticas para asegurar un rendimiento superior durante toda la trayectoria escolar.</p>
+                    </div>
+
+                    <div class="mundo-cards-container">
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+                            <h4>Matemática adaptativa</h4>
+                            <p>Desarrollo intensivo del razonamiento cuantitativo mediante plataformas inteligentes y retroalimentación en tiempo real.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-comments" aria-hidden="true"></i></div>
+                            <h4>Inglés avanzado</h4>
+                            <p>Enfoque comunicativo e inmersivo para la fluidez en debate, redacción y comprensión auditiva nivel.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-laptop-code" aria-hidden="true"></i></div>
+                            <h4>Pensamiento computacional</h4>
+                            <p>Nociones de programación, análisis lógico y uso estratégico de herramientas tecnológicas.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-user-graduate" aria-hidden="true"></i></div>
+                            <h4>Autonomía escolar</h4>
+                            <p>Desarrollo de técnicas de estudio, responsabilidad en tareas y gestión eficiente del tiempo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. GALERÍA DE INSTALACIONES DE PRIMARIA -->
+        <section class="seccion-gris">
+            <div class="container">
+                <div style="text-align: center;">
+                    <h2 class="seccion-titulo">Nuestro entorno</h2>
+                    <p class="seccion-subtitulo">Nuestras instalaciones están diseñadas para que los estudiantes vivan el aprendizaje en acción: desde el arte y la comunicación multimedia hasta el trabajo en aulas digitales.</p>
+                </div>
+
+                <div class="galeria-instalaciones-grid">
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes Primaria/Artes.jpg" alt="Aulas interactivas de Primaria">
+                    </div>
+
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes Primaria/Smart2.jpg" alt="Laboratorios de aprendizaje interactivo">
+                    </div>
+
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes Primaria/Salón.jpg" alt="Instalaciones del Colegio Americano Superior">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. SECCIÓN DEL PERFIL DE EGRESO (CON BLOQUE PREVIO DE INGLÉS) -->
+        <section class="seccion-blanca">
+            <div class="container">
+                
+                <!-- BLOQUE DESTACADO DE INGLÉS UBICADO ANTES DEL PERFIL DE EGRESO -->
+                <div class="seccion-ingles-pre-perfil">
+                    <div class="ingles-header">
+                        <i class="fas fa-language" aria-hidden="true"></i>
+                        <h3>Perfil de egreso – Sexto primaria | Idioma inglés</h3>
+                    </div>
+                    <p>Al finalizar sexto grado de primaria, el estudiante habrá desarrollado competencias comunicativas correspondientes al nivel A1 del Marco Común Europeo de Referencia para las Lenguas (MCER), con proyección hacia el nivel A2. Será capaz de comprender expresiones cotidianas, intercambiar información personal, participar en conversaciones sencillas, describir personas y situaciones de su entorno, comprender textos breves y redactar oraciones y párrafos básicos en inglés.</p>
+                    <p>Asimismo, demostrará conocimientos fundamentales de vocabulario, gramática y pronunciación, aplicándolos en situaciones escolares, sociales y cotidianas. Desarrollará confianza para comunicarse, autonomía progresiva y respeto por la diversidad cultural, sentando las bases para alcanzar una comunicación más independiente, comprender mensajes habituales y expresar ideas sobre temas familiares en el nivel A2 durante su educación secundaria.</p>
+                </div>
+
+                <!-- PERFIL DE EGRESO GENERAL DE PRIMARIA -->
+                <div class="perfil-destacado-grid">
+                    <div class="perfil-galeria-mosaic">
+                        <img src="Imagenes Primaria/Cas2.jpg" class="mosaic-img" alt="Estudiantes graduandos de primaria">
+                        <img src="Imagenes Primaria/Cas1.jpg" class="mosaic-img" alt="Alumnos aplicando matemática avanzada">
+                    </div>
+
+                    <div class="perfil-info-box">
+                        <span class="title-badge">Grandes logros</span>
+                        <h3>Perfil de egreso de primaria (6.º grado)</h3>
+                        <p class="intro">Al egresar de 6.º primaria, nuestros alumnos poseen una sólida preparación académica y de carácter para triunfar en el nivel básico:</p>
+
+                        <div class="perfil-cards-list">
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-calculator" aria-hidden="true"></i>
+                                <h5>Dominio matemático</h5>
+                                <p>Capacidad para resolver operaciones complejas, proporciones y conceptos de preálgebra.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-language" aria-hidden="true"></i>
+                                <h5>Inglés avanzado</h5>
+                                <p>Comunicación fluida oral y escrita con amplia soltura de vocabulario académico.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-book-open" aria-hidden="true"></i>
+                                <h5>Comprensión crítica</h5>
+                                <p>Habilidad para analizar textos extensos, sintetizar ideas y redactar ensayos breves.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-laptop" aria-hidden="true"></i>
+                                <h5>Competencia digital</h5>
+                                <p>Uso ético y eficiente de plataformas en la nube, investigación y software educativo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. NAVEGACIÓN A OTROS NIVELES CON ENLACES CORREGIDOS -->
+        <section class="cta-final">
+            <div class="container">
+                <span class="title-badge">Camino de crecimiento</span>
+                <h2>Explora todos nuestros niveles educativos</h2>
+                <p>Acompañamos el crecimiento de tus hijos en cada etapa de su vida académica con excelencia e innovación.</p>
+
+                <div class="submenus-grid-fila">
+                    <a href="Preprimaria.html" class="submenu-btn-card">
+                        <i class="fas fa-shapes main-icon" aria-hidden="true"></i>
+                        <h3>Preprimaria</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Primaria.html" class="submenu-btn-card" style="border-color: var(--color-cyan); background: #F0F7FF;">
+                        <i class="fas fa-apple-whole main-icon" style="color: var(--color-cyan);" aria-hidden="true"></i>
+                        <h3>Primaria</h3>
+                        <span style="color: var(--color-cyan);">Nivel actual <i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Basico.html" class="submenu-btn-card">
+                        <i class="fas fa-book-bookmark main-icon" aria-hidden="true"></i>
+                        <h3>Básicos</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Diversificado.html" class="submenu-btn-card">
+                        <i class="fas fa-graduation-cap main-icon" aria-hidden="true"></i>
+                        <h3>Diversificado</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+
+    <!-- INICIALIZACIÓN DE SCRIPTS INTERACTIVOS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Carousel Hero Banner ---
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+        });
+    </script>
+</body>
+</html>

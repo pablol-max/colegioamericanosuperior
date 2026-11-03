@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preprimaria | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES CON EL AZUL INSTITUCIONAL DE TU PÁGINA
+           ========================================================= */
+        :root {
+            --bg-dark: #1E3A8A;        
+            --bg-light: #FFF9F2;       
+            --bg-alt: #F4F9FF;         
+            --text-dark: #0F172A;      
+            --text-muted: #475569;     
+            --accent-gold: #F5B411;    
+            --border-light: #E0E7FF;   
+            --primary-blue: #1E3A8A;   
+            --light-blue: #38BDF8;
+            --menu-bg: #171b36;        
+            --btn-blue: #2086be;
+            --btn-blue-hover: #1a73a3;
+
+            /* Colores Preescolares de Alegría y Armonía */
+            --color-pink: #FF6B8B;
+            --color-yellow: #FFD166;
+            --color-green: #06D6A0;
+            --color-sky: #38BDF8;
+            --color-purple: #A259FF;
+            --color-orange: #FF9F1C;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, h4, .font-fun {
+            font-family: 'Fredoka', cursive, sans-serif !important;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* =========================================================
+           2. ANIMACIONES CSS
+           ========================================================= */
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animated-spin { animation: spin-slow 20s linear infinite; }
+
+        /* =========================================================
+           3. BOTÓN FLOTANTE DE WHATSAPP CON ALEGRÍA
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 0px 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: bounce-gentle 2.5s infinite;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.18) rotate(8deg);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           4. HERO BANNER PREPRIMARIA (TOTALMENTE DESPEJADO)
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding-top: 120px;
+            padding-bottom: 90px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0; 
+            transition: opacity 1.2s ease-in-out; 
+        }
+        .hero-bg-slide.active { opacity: 0.85; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(23, 27, 54, 0.92) 0%, rgba(23, 27, 54, 0.75) 45%, rgba(23, 27, 54, 0.25) 85%, rgba(23, 27, 54, 0.1) 100%);
+            z-index: 2;
+        }
+
+        /* ILUSTRACIONES INFANTILES LIMPIAS */
+        .hero-decorations {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .hero-decor {
+            position: absolute;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        /* Sol en la esquina superior derecha */
+        .decor-sun { top: 25px; right: 2%; width: 75px; animation: spin-slow 25s linear infinite; }
+        
+        /* Arcoíris en la esquina inferior derecha */
+        .decor-rainbow { bottom: 35px; right: 100px; width: 130px; opacity: 0.9; }
+
+        .hero-container { position: relative; z-index: 4; width: 100%; }
+        .hero-content-box { max-width: 650px; }
+        .hero-content-box .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.2);
+            backdrop-filter: blur(8px);
+            color: var(--color-yellow);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid rgba(255, 209, 102, 0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .hero-content-box h1 { 
+            font-size: 3.4rem; 
+            font-weight: 700; 
+            line-height: 1.15; 
+            margin-bottom: 20px; 
+            color: #ffffff; 
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+        .hero-content-box h1 span {
+            color: var(--color-yellow);
+            display: inline-block;
+            animation: wiggle 3s infinite ease-in-out;
+        }
+        .hero-content-box p { 
+            font-size: 1.02rem; 
+            color: #f1f5f9; 
+            margin-bottom: 35px; 
+            line-height: 1.65; 
+            font-weight: 400; 
+            background: rgba(15, 23, 42, 0.55);
+            padding: 16px 22px;
+            border-radius: 16px;
+            backdrop-filter: blur(6px);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn-banner {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            background: linear-gradient(45deg, var(--color-pink), var(--color-orange));
+            color: #ffffff; font-size: 1.05rem; font-weight: 800;
+            padding: 16px 36px; border-radius: 50px; text-decoration: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(255, 107, 139, 0.5);
+            border: 2px solid #ffffff;
+        }
+        .btn-banner:hover, .btn-banner:focus-visible { 
+            transform: translateY(-4px) scale(1.05); 
+            box-shadow: 0 12px 30px rgba(255, 159, 28, 0.7); 
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+        }
+
+        .carousel-dots-banner { position: absolute; bottom: 35px; right: 40px; display: flex; gap: 10px; z-index: 10; }
+        .dot-banner { width: 12px; height: 12px; background: rgba(255, 255, 255, 0.5); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: var(--color-yellow); width: 30px; border-radius: 10px; }
+
+        /* Divisor Ondulado */
+        .wavy-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 5;
+        }
+        .wavy-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 50px;
+        }
+
+        /* =========================================================
+           5. LO QUE LOS PAPÁS DESEAN SABER
+           ========================================================= */
+        .seccion-papares-saber {
+            background-color: #FFF9F2;
+            padding: 60px 0 70px 0;
+            position: relative;
+        }
+
+        .papares-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .papares-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            background: #FFFFFF;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.35s ease;
+            position: relative;
+            border: 3px solid transparent;
+        }
+
+        .papares-item:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .papares-item:nth-child(1) { border-color: var(--color-pink); } 
+        .papares-item:nth-child(2) { border-color: var(--color-sky); } 
+        .papares-item:nth-child(3) { border-color: var(--color-orange); } 
+        .papares-item:nth-child(4) { border-color: var(--color-purple); } 
+
+        .papares-item .icono-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            transition: transform 0.4s ease;
+        }
+
+        .papares-item:hover .icono-container {
+            transform: scale(1.15) rotate(-8deg);
+        }
+
+        .papares-item:nth-child(1) .icono-container { background: rgba(255, 107, 139, 0.15); color: var(--color-pink); }
+        .papares-item:nth-child(2) .icono-container { background: rgba(56, 189, 248, 0.15); color: var(--color-sky); }
+        .papares-item:nth-child(3) .icono-container { background: rgba(255, 159, 28, 0.15); color: var(--color-orange); }
+        .papares-item:nth-child(4) .icono-container { background: rgba(162, 89, 255, 0.15); color: var(--color-purple); }
+
+        .papares-item .icono-infantil { font-size: 2.2rem; }
+        .papares-item h4 { color: var(--text-dark); font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+        .papares-item p { color: var(--text-muted); font-size: 0.93rem; line-height: 1.5; }
+
+        /* =========================================================
+           6. SECCIONES GENERALES
+           ========================================================= */
+        .seccion-blanca { background-color: #ffffff; padding: 85px 0; position: relative; }
+        .seccion-gris { background: linear-gradient(180deg, #F4F9FF 0%, #EBF4FF 100%); padding: 85px 0; position: relative; }
+        .seccion-titulo { text-align: center; font-size: 2.6rem; color: var(--primary-blue); margin-bottom: 12px; font-weight: 700; position: relative; }
+        .seccion-subtitulo { text-align: center; font-size: 1.05rem; color: var(--text-muted); max-width: 780px; margin: 0 auto 50px auto; line-height: 1.6; }
+
+        .title-badge {
+            display: inline-block;
+            background: var(--color-yellow);
+            color: #8D5B00;
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 5px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        /* =========================================================
+           7. LISTADO DE PROGRAMAS
+           ========================================================= */
+        .programas-lista-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .programa-item-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 3px solid #E2E8F0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .programa-item-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(30, 58, 138, 0.12);
+        }
+
+        .programa-item-card:nth-child(1):hover { border-color: var(--color-orange); }
+        .programa-item-card:nth-child(2):hover { border-color: var(--color-sky); }
+        .programa-item-card:nth-child(3):hover { border-color: var(--color-green); }
+
+        .item-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+        .item-header h4 { font-size: 1.5rem; color: var(--primary-blue); font-weight: 700; }
+
+        .item-media {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            background-color: #f1f5f9;
+        }
+
+        .item-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .programa-item-card:hover .item-media img { transform: scale(1.08); }
+
+        .media-icon-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ffffff;
+            color: var(--primary-blue);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .programa-item-card:hover .media-icon-badge { transform: scale(1.15) rotate(10deg); }
+        .programa-item-card p { font-size: 0.94rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+
+        .bullet-list { list-style: none; margin-top: auto; padding-top: 14px; border-top: 2px dashed #E2E8F0; }
+        .bullet-list li { font-size: 0.88rem; color: var(--text-dark); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .bullet-list li i { color: var(--color-green); font-size: 1rem; }
+
+        .badge-tag {
+            align-self: flex-start;
+            margin-top: 16px;
+            background: rgba(255, 209, 102, 0.3);
+            color: #9E6B00;
+            font-weight: 800;
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        /* =========================================================
+           8. EDUCACIÓN QUE INSPIRA Y TRANSFORMA
+           ========================================================= */
+        .seccion-mundo-medida {
+            position: relative;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .seccion-mundo-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .seccion-mundo-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.60; }
+
+        .seccion-mundo-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(23, 27, 54, 0.88) 0%, rgba(30, 58, 138, 0.75) 100%);
+            z-index: 2;
+        }
+
+        .mundo-medida-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 45px;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .mundo-medida-left h2 { font-size: 3.4rem; font-weight: 700; line-height: 1.15; color: #ffffff; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.6); }
+        .mundo-medida-left h2 span { color: var(--color-yellow); display: block; }
+        .mundo-medida-left p { font-size: 1.08rem; color: #E2E8F0; line-height: 1.7; text-shadow: 0 1px 4px rgba(0,0,0,0.7); }
+
+        .mundo-cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+
+        .mundo-card {
+            background: rgba(15, 23, 42, 0.78);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 28px 22px;
+            text-align: center;
+            transition: all 0.35s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .mundo-card:hover {
+            background: rgba(15, 23, 42, 0.92);
+            border-color: var(--color-yellow);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .mundo-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin: 0 auto 16px auto;
+            color: #ffffff;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+        .mundo-card:nth-child(1) .mundo-card-icon { background: var(--color-pink); }
+        .mundo-card:nth-child(2) .mundo-card-icon { background: var(--color-purple); }
+        .mundo-card:nth-child(3) .mundo-card-icon { background: var(--color-sky); }
+        .mundo-card:nth-child(4) .mundo-card-icon { background: var(--color-green); }
+
+        .mundo-card h4 { font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+        .mundo-card p { font-size: 0.9rem; color: #CBD5E1; line-height: 1.5; margin: 0; }
+
+        /* =========================================================
+           9. GALERÍA DE INSTALACIONES
+           ========================================================= */
+        .galeria-instalaciones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+
+        .foto-instalacion-card {
+            position: relative;
+            width: 100%;
+            height: 270px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 4px solid #FFFFFF;
+            background-color: #f1f5f9;
+            transition: transform 0.4s ease;
+        }
+
+        .foto-instalacion-card:hover { transform: scale(1.03) rotate(1deg); }
+        .foto-instalacion-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .foto-instalacion-card:hover img { transform: scale(1.1); }
+
+        .foto-instalacion-card::after {
+            content: '✨';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.85);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =========================================================
+           10. PERFIL DE EGRESO
+           ========================================================= */
+        .perfil-destacado-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            align-items: center;
+            background: #FFFFFF;
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+            border: 3px solid #E0E7FF;
+        }
+
+        .perfil-galeria-mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; height: 100%; min-height: 340px; }
+        .mosaic-img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+        .mosaic-img:hover { transform: scale(1.04); }
+
+        .perfil-info-box h3 { font-size: 2.2rem; color: var(--primary-blue); font-weight: 700; margin-bottom: 14px; }
+        .perfil-info-box p.intro { font-size: 1rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; }
+        .perfil-cards-list { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+        .perfil-mini-card {
+            background: #FFF9F2;
+            border-radius: 18px;
+            padding: 18px;
+            border: 2px solid #FFE8D6;
+            transition: all 0.3s ease;
+        }
+
+        .perfil-mini-card:hover {
+            transform: translateY(-4px);
+            background: #FFFFFF;
+            border-color: var(--color-yellow);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .perfil-mini-card i { font-size: 1.5rem; margin-bottom: 8px; display: inline-block; }
+        .perfil-mini-card:nth-child(1) i { color: var(--color-pink); }
+        .perfil-mini-card:nth-child(2) i { color: var(--color-purple); }
+        .perfil-mini-card:nth-child(3) i { color: var(--color-sky); }
+        .perfil-mini-card:nth-child(4) i { color: var(--color-green); }
+
+        .perfil-mini-card h5 { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+        .perfil-mini-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin: 0; }
+
+        /* =========================================================
+           11. NIVELES EDUCATIVOS
+           ========================================================= */
+        .cta-final { background: linear-gradient(180deg, #FFF9F2 0%, #F4F9FF 100%); color: #1e293b; padding: 85px 20px; text-align: center; position: relative; }
+        .cta-final h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; color: var(--primary-blue); }
+        .cta-final p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 50px; max-width: 680px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; max-width: 1100px; margin: 0 auto; }
+
+        .submenu-btn-card {
+            background: #ffffff; 
+            border: 3px solid #E0E7FF; 
+            border-radius: 24px; 
+            padding: 30px 20px;
+            text-decoration: none; 
+            color: var(--text-dark); 
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            position: relative;
+        }
+
+        .submenu-btn-card i.main-icon { font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 14px; transition: transform 0.3s ease; }
+        .submenu-btn-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+        .submenu-btn-card span { font-size: 0.9rem; color: var(--btn-blue); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+
+        .submenu-btn-card:hover, .submenu-btn-card:focus-visible {
+            background: #ffffff; 
+            border-color: var(--color-pink); 
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.2);
+        }
+        .submenu-btn-card:hover i.main-icon { transform: scale(1.2) rotate(-5deg); color: var(--color-pink); }
+
+        /* RESPONSIVE ADAPTATIVO */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.7rem; }
+            .papares-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .programas-lista-grid, .mundo-medida-grid, .perfil-destacado-grid, .galeria-instalaciones-grid { grid-template-columns: 1fr; gap: 30px; }
+            .submenus-grid-fila { grid-template-columns: repeat(2, 1fr); }
+            .hero-decorations { display: none; }
+        }
+
+        @media (max-width: 576px) {
+            .papares-grid, .mundo-cards-container, .perfil-cards-list, .submenus-grid-fila { grid-template-columns: 1fr; }
+            .hero-content-box h1 { font-size: 2.2rem; }
+            .seccion-titulo { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="preprimaria"></mi-header>
+
+    <!-- BOTÓN FLOTANTE ÚNICO DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20nivel%20de%20Preprimaria%20en%20el%20Colegio%20Americano%20Superior" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- 1. HERO BANNER PREPRIMARIA -->
+        <section class="hero-banner">
+            <!-- Ilustraciones Infantiles Limpias -->
+            <div class="hero-decorations">
+                <!-- Sol Sonriente (Esquina Superior Derecha) -->
+                <svg class="hero-decor decor-sun" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="25" fill="#FFD166"/>
+                    <path d="M50 10V20M50 80V90M10 50H20M80 50H90M22 22L29 29M71 71L78 78M22 78L29 71M71 29L78 22" stroke="#FFD166" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="43" cy="45" r="3" fill="#2B2D42"/>
+                    <circle cx="57" cy="45" r="3" fill="#2B2D42"/>
+                    <path d="M43 55Q50 62 57 55" stroke="#2B2D42" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+
+                <!-- Arcoíris (Inferior Derecho) -->
+                <svg class="hero-decor decor-rainbow" viewBox="0 0 120 70" fill="none">
+                    <path d="M10 65 A 50 50 0 0 1 110 65" stroke="#FF6B8B" stroke-width="8" fill="none"/>
+                    <path d="M18 65 A 42 42 0 0 1 102 65" stroke="#FFD166" stroke-width="8" fill="none"/>
+                    <path d="M26 65 A 34 34 0 0 1 94 65" stroke="#06D6A0" stroke-width="8" fill="none"/>
+                    <path d="M34 65 A 26 26 0 0 1 86 65" stroke="#38BDF8" stroke-width="8" fill="none"/>
+                </svg>
+            </div>
+
+            <div class="hero-bg-carousel">
+                <img src="Imagenes de prprimaria/legos1.jpg" class="hero-bg-slide active" alt="Niños de Preprimaria aprendiendo jugando">
+                <img src="Imagenes de prprimaria/Camila1.jpg" class="hero-bg-slide" alt="Construcción con Legos y estimulación">
+                <img src="Imagenes de prprimaria/Prepri1.png" class="hero-bg-slide" alt="Instalaciones de Preprimaria">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <span class="hero-tag"><i class="fas fa-shapes" aria-hidden="true"></i> Nivel Preprimaria</span>
+                    <h1>Cimentando las bases con <span>amor y alegría</span></h1>
+                    <p>En preprimaria despertamos la curiosidad natural del niño a través del juego, la tecnología adaptativa en iPad, el desarrollo del idioma inglés y una sólida estimulación neuromotora y socioemocional.</p>
+                    
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20agendar%20una%20visita%20para%20conocer%20el%20área%20de%20Preprimaria" 
+                       class="btn-banner" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <span>¡Infórmate aquí!</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 3"></button>
+            </div>
+
+            <!-- Divisor Ondulado Suave -->
+            <div class="wavy-divider">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z" fill="#FFF9F2"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- 2. LO QUE LOS PAPÁS DESEAN SABER -->
+        <section class="seccion-papares-saber">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <span class="title-badge">Bienestar y tranquilidad</span>
+                    <h2 class="seccion-titulo" style="font-size: 2.2rem; margin-bottom: 0;">Lo que los papás desean saber</h2>
+                </div>
+
+                <div class="papares-grid">
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-shield-cat icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Ambiente seguro</h4>
+                        <p>Instalaciones protegidas, mobiliario adaptado y supervisión cercana y afectuosa constante.</p>
+                    </div>
+
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-wand-magic-sparkles icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Docentes calificadas</h4>
+                        <p>Profesionales con alta vocación especializadas en educación inicial que guían a tus hijos con amor, calidez y dedicación.</p>
+                    </div>
+
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-comments-dollar icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Comunicación diaria</h4>
+                        <p>Seguimiento continuo de tareas, actividades y bienestar mediante la agenda escolar y plataformas digitales.</p>
+                    </div>
+
+                    <div class="papares-item">
+                        <div class="icono-container">
+                            <i class="fas fa-heart-circle-check icono-infantil" aria-hidden="true"></i>
+                        </div>
+                        <h4>Cuidado integral</h4>
+                        <p>Acompañamiento en hábitos de higiene, nutrición saludable y refuerzo positivo para fortalecer la autoestima.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. LISTADO DE PROGRAMAS CON FOTOGRAFÍAS -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="title-badge">Innovación educativa</span>
+                    <h2 class="seccion-titulo">Plataformas y programas de vanguardia</h2>
+                    <p class="seccion-subtitulo">Ofrecemos a nuestros pequeños herramientas tecnológicas creadas por expertos internacionales para despertar su creatividad, comunicación y pensamiento lógico.</p>
+                </div>
+
+                <div class="programas-lista-grid">
+                    <!-- Kn-Spark -->
+                    <article class="programa-item-card">
+                        <div class="item-header">
+                            <h4>Kn-Spark</h4>
+                            <span style="font-size: 1.5rem;">💡</span>
+                        </div>
+                        <div class="item-media">
+                            <img src="Imagenes de prprimaria/Prepri5.jpg" alt="Muestra de estimulación Kn-Spark">
+                            <div class="media-icon-badge" title="Innovación Temprana">
+                                <i class="fas fa-lightbulb" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <p>Módulo interactivo de estimulación temprana e innovación diseñado para despertar la curiosidad científica, el descubrimiento del entorno y la resolución creativa de problemas desde los primeros años.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Estimulación sensorial y cognitiva.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Primeros pasos en ciencia y exploración.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Fomento de la creatividad y curiosidad.</li>
+                        </ul>
+                        <span class="badge-tag">Estimulación temprana</span>
+                    </article>
+
+                    <!-- Knotion Pre-K -->
+                    <article class="programa-item-card">
+                        <div class="item-header">
+                            <h4>Knotion</h4>
+                            <span style="font-size: 1.5rem;">📱</span>
+                        </div>
+                        <div class="item-media">
+                            <img src="Imagenes de prprimaria/Knotion1.jpg" alt="Muestra de aprendizaje Knotion en Preprimaria">
+                            <div class="media-icon-badge" title="Ecosistema Digital">
+                                <i class="fas fa-tablet-screen-button" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <p>Ecosistema educativo inmersivo en iPad que combina aprendizaje adaptativo, juegos, cuentos interactivos, audiovisuales y cuadernillos físicos para impulsar el desarrollo auditivo, la creatividad y la conciencia social ambiental.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Aprendizaje guiado paso a paso.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Desarrollo de destrezas combinadas.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Enseñanza inmersiva y práctica.</li>
+                        </ul>
+                        <span class="badge-tag">Ecosistema digital</span>
+                    </article>
+
+                    <!-- Dreambox Math -->
+                    <article class="programa-item-card">
+                        <div class="item-header">
+                            <h4>Dreambox</h4>
+                            <span style="font-size: 1.5rem;">🧩</span>
+                        </div>
+                        <div class="item-media">
+                            <img src="Imagenes de prprimaria/dreambox.jpg" alt="Muestra de juego matemático en Dreambox">
+                            <div class="media-icon-badge" title="Matemática Adaptativa">
+                                <i class="fas fa-cubes" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <p>Plataforma inteligente y adaptativa de matemáticas que presenta conceptos numéricos, formas y patrones a través de juegos visuales que se ajustan al ritmo de aprendizaje de cada niño.</p>
+                        <ul class="bullet-list">
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Pensamiento lógico-matemático.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Reconocimiento de patrones y números.</li>
+                            <li><i class="fas fa-star" aria-hidden="true"></i> Aprendizaje adaptativo personalizado.</li>
+                        </ul>
+                        <span class="badge-tag">Matemática inteligente</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. EDUCACIÓN QUE INSPIRA Y TRANSFORMA -->
+        <section class="seccion-mundo-medida">
+            <div class="seccion-mundo-bg">
+                <img src="Imagenes de prprimaria/legos1.jpg" alt="Fondo educación que inspira y transforma">
+            </div>
+            
+            <div class="seccion-mundo-overlay"></div>
+
+            <div class="container">
+                <div class="mundo-medida-grid">
+                    <div class="mundo-medida-left">
+                        <span class="title-badge" style="background: var(--color-pink); color: #FFF;">Un mundo mágico</span>
+                        <h2>Educación que inspira <span>y transforma</span></h2>
+                        <p>Diseñamos cada espacio, metodología y experiencia adaptándonos al ritmo natural de aprendizaje de los niños, en un equilibrio perfecto entre tecnología, afecto y desarrollo físico.</p>
+                    </div>
+
+                    <div class="mundo-cards-container">
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-hands-holding-child" aria-hidden="true"></i></div>
+                            <h4>Desarrollo neuromotor</h4>
+                            <p>Desarrollo psicomotriz integral para potenciar el control corporal, la destreza manual y la precisión en cada movimiento.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-face-smile-beam" aria-hidden="true"></i></div>
+                            <h4>Gestión emocional</h4>
+                            <p>Desarrollo de la autoconfianza, autorregulación emocional y empatía, orientados al fortalecimiento de valores universales.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-comments" aria-hidden="true"></i></div>
+                            <h4>Inglés inmersivo</h4>
+                            <p>Aprender inglés de forma natural: a través de canciones, cuentos interactivos y comunicación viva en el aula.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-pen-fancy" aria-hidden="true"></i></div>
+                            <h4>Experiencia sensorial</h4>
+                            <p>Desarrollo progresivo de la grafomotricidad y el trazo mediante la integración de recursos analógicos, texturas físicas en cada etapa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. GALERÍA LIMPIA DE NUESTRAS INSTALACIONES -->
+        <section class="seccion-gris">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="title-badge">Nuestros espacios</span>
+                    <h2 class="seccion-titulo">Instalaciones diseñadas para ellos</h2>
+                    <p class="seccion-subtitulo">Espacios acogedores, seguros, llenos de luz y pensados para el bienestar y aprendizaje de nuestros pequeños exploradores.</p>
+                </div>
+
+                <div class="galeria-instalaciones-grid">
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes de prprimaria/Salon1.jpg" alt="Instalaciones de Preprimaria">
+                    </div>
+
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes de prprimaria/juegos1.jpg" alt="Espacios de juego y estimulación">
+                    </div>
+
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes de prprimaria/Castillo.jpg" alt="Instalaciones del Colegio Americano Superior">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. PERFIL DE EGRESO -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div class="perfil-destacado-grid">
+                    <div class="perfil-galeria-mosaic">
+                        <img src="Imagenes de prprimaria/Lance1.jpg" class="mosaic-img" alt="Niños en Preprimaria">
+                        <img src="Imagenes de prprimaria/Nico1.jpg" class="mosaic-img" alt="Actividad de estimulación">
+                    </div>
+
+                    <div class="perfil-info-box">
+                        <span class="title-badge">Grandes logros</span>
+                        <h3>Perfil de egreso de preprimaria 🎓</h3>
+                        <p class="intro">Nuestros estudiantes avanzan con seguridad, confianza y educación integral hacia la primaria, consolidados en las siguientes competencias clave:</p>
+
+                        <div class="perfil-cards-list">
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-book-open-reader" aria-hidden="true"></i>
+                                <h5>Lectoescritura inicial</h5>
+                                <p>Desarrollo de la conciencia fonológica, asociación de sonidos y grafías, e iniciación a la lectura fluida de palabras sencillas.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-icons" aria-hidden="true"></i>
+                                <h5>Lógica y números</h5>
+                                <p>Desarrollo del sentido numérico, reconocimiento de formas, conteo estructurado e identificación de patrones lógicos.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-globe-americas" aria-hidden="true"></i>
+                                <h5>Comprensión en inglés</h5>
+                                <p>Desarrollo de la escucha activa para el seguimiento de instrucciones, adquisición de vocabulario de uso diario y afianzamiento del idioma a través de la música y dinámicas grupales.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-child-reaching" aria-hidden="true"></i>
+                                <h5>Autonomía y valores</h5>
+                                <p>Consolidación de hábitos de independencia y autocuidado, sentido de responsabilidad y práctica constante de la empatía y el respeto hacia sus pares.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. NAVEGACIÓN A OTROS NIVELES -->
+        <section class="cta-final">
+            <div class="container">
+                <span class="title-badge">Camino de crecimiento</span>
+                <h2>Explora todos nuestros niveles educativos</h2>
+                <p>Acompañamos el crecimiento de tus hijos en cada etapa de su vida académica con excelencia e innovación.</p>
+
+                <div class="submenus-grid-fila">
+                    <a href="Preprimaria.html" class="submenu-btn-card" style="border-color: var(--color-pink); background: #FFF5F7;">
+                        <i class="fas fa-shapes main-icon" style="color: var(--color-pink);" aria-hidden="true"></i>
+                        <h3>Preprimaria</h3>
+                        <span style="color: var(--color-pink);">Nivel actual <i class="fas fa-heart" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Primaria.html" class="submenu-btn-card">
+                        <i class="fas fa-apple-whole main-icon" aria-hidden="true"></i>
+                        <h3>Primaria</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Basico.html" class="submenu-btn-card">
+                        <i class="fas fa-book-bookmark main-icon" aria-hidden="true"></i>
+                        <h3>Básicos</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Diversificado.html" class="submenu-btn-card">
+                        <i class="fas fa-graduation-cap main-icon" aria-hidden="true"></i>
+                        <h3>Diversificado</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+
+    <!-- INICIALIZACIÓN DE SCRIPTS INTERACTIVOS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Carousel Hero Banner ---
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diversificado | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. PALETA DE COLORES DIVERSIFICADO
+           ========================================================= */
+        :root {
+            --bg-dark: #0F172A;        
+            --bg-light: #F8FAFC;       
+            --bg-alt: #E2E8F0;         
+            --text-dark: #0F172A;      
+            --text-muted: #64748B;     
+            --primary-navy: #1E3A8A;   
+            --accent-gold: #D97706;    
+            --accent-blue: #0284C7;
+            --accent-cyan: #0891B2;
+            --menu-bg: #171b36;        
+            --card-border: #CBD5E1;
+
+            /* Botones principales */
+            --btn-info-bg: #2563EB;
+            --btn-info-hover: #1D4ED8;
+            --btn-knu-bg: #0284C7;
+            --btn-knu-hover: #0369A1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 0px 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           3. HERO BANNER DIVERSIFICADO
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 55vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+            color: #ffffff;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0; 
+            transition: opacity 1.2s ease-in-out; 
+        }
+        .hero-bg-slide.active { opacity: 0.6; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.96) 0%, rgba(15, 23, 42, 0.88) 55%, rgba(15, 23, 42, 0.45) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 4; width: 100%; }
+        .hero-content-box { max-width: 720px; }
+        
+        .hero-content-box .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.4);
+        }
+
+        .hero-content-box h1 { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            line-height: 1.18; 
+            margin-bottom: 16px; 
+            color: #ffffff; 
+        }
+
+        .hero-content-box h1 span {
+            color: #38BDF8;
+        }
+
+        .hero-content-box p { 
+            font-size: 1rem; 
+            color: #E2E8F0; 
+            margin-bottom: 28px; 
+            line-height: 1.65; 
+            background: none;
+            padding: 0;
+            border: none;
+            backdrop-filter: none;
+        }
+
+        .hero-buttons-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-banner {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--btn-info-bg);
+            color: #FFFFFF !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-banner:hover, 
+        .btn-banner:focus-visible { 
+            transform: translateY(-2px); 
+            background: var(--btn-info-hover);
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.6); 
+        }
+
+        .btn-knu {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--btn-knu-bg);
+            color: #FFFFFF !important;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-knu:hover, 
+        .btn-knu:focus-visible {
+            transform: translateY(-2px);
+            background: var(--btn-knu-hover);
+            box-shadow: 0 8px 22px rgba(2, 132, 199, 0.6);
+        }
+
+        .carousel-dots-banner { position: absolute; bottom: 20px; right: 35px; display: flex; gap: 8px; z-index: 10; }
+        .dot-banner { width: 10px; height: 10px; background: rgba(255, 255, 255, 0.4); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: #38BDF8; width: 24px; border-radius: 8px; }
+
+        /* =========================================================
+           4. SECCIÓN PILARES MINIMALISTAS
+           ========================================================= */
+        .seccion-pilares-minimal {
+            background-color: #FFFFFF;
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .pilares-minimal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .pilar-minimal-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+
+        .pilar-minimal-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .pilar-minimal-item i {
+            font-size: 2.5rem;
+            color: #334155;
+            margin-bottom: 16px;
+        }
+
+        .pilar-minimal-item h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .pilar-minimal-item p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin: 0;
+        }
+
+        /* =========================================================
+           5. SECCIONES GENERALES
+           ========================================================= */
+        .seccion-blanca { background-color: #ffffff; padding: 70px 0; position: relative; }
+        .seccion-gris { background: #F1F5F9; padding: 70px 0; position: relative; }
+        .seccion-titulo { text-align: center; font-size: 2.1rem; color: var(--primary-navy); margin-bottom: 10px; font-weight: 700; }
+        .seccion-subtitulo { text-align: center; font-size: 0.98rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 40px auto; line-height: 1.6; }
+
+        .title-badge {
+            display: inline-block;
+            background: #E2E8F0;
+            color: var(--primary-navy);
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 5px 16px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* =========================================================
+           6. LISTADO CON FOTO INTEGRADORA EN LA PARTE SUPERIOR
+           ========================================================= */
+        .excelencia-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto 50px auto;
+        }
+
+        .excelencia-top-image {
+            width: 100%;
+            height: 340px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 3px solid #FFFFFF;
+        }
+
+        .excelencia-top-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Espaciado incrementado entre los elementos del listado principal */
+        .excelencia-lista-elegante {
+            display: flex;
+            flex-direction: column;
+            gap: 45px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .excelencia-item-circle {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            position: relative;
+        }
+
+        .excelencia-circle-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 2px solid var(--accent-blue);
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.15);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .excelencia-item-circle:hover .excelencia-circle-icon {
+            background: var(--accent-blue);
+            color: #FFFFFF;
+            transform: scale(1.08);
+        }
+
+        .excelencia-body {
+            flex: 1;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--card-border);
+        }
+
+        .excelencia-body h4 {
+            font-size: 1.25rem;
+            color: var(--primary-navy);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .excelencia-body p {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        /* Espaciado incrementado entre las viñetas */
+        .excelencia-tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 30px;
+            row-gap: 14px;
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .excelencia-tags-list li {
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .excelencia-tags-list li i {
+            color: var(--accent-blue);
+            font-size: 0.75rem;
+        }
+
+        /* =========================================================
+           7. PROYECTO KN-U HIGH CON FONDO GRIS MÁS OSCURO
+           ========================================================= */
+        .seccion-knu-gris {
+            background-color: #E2E8F0;
+            padding: 80px 0;
+            border-top: 1px solid #CBD5E1;
+            border-bottom: 1px solid #CBD5E1;
+        }
+
+        .knu-content-free {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .knu-content-free h3 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 10px;
+        }
+
+        .knu-exclusivity-text {
+            color: var(--accent-gold);
+            font-size: 0.98rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .knu-content-free p {
+            font-size: 0.98rem;
+            color: #334155;
+            line-height: 1.65;
+            margin-bottom: 30px;
+        }
+
+        .knu-features-inline {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 35px;
+        }
+
+        .knu-feat-inline-item {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFFFFF;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid #CBD5E1;
+        }
+
+        .knu-feat-inline-item i {
+            color: var(--accent-blue);
+        }
+
+        .knu-invite-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .knu-logo-img {
+            max-width: 150px;
+            height: auto;
+        }
+
+        /* =========================================================
+           8. PILARES DE VISIÓN PREUNIVERSITARIA
+           ========================================================= */
+        .seccion-mundo-medida {
+            position: relative;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .seccion-mundo-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .seccion-mundo-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
+
+        .seccion-mundo-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.94) 0%, rgba(30, 58, 138, 0.88) 100%);
+            z-index: 2;
+        }
+
+        .mundo-medida-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .mundo-medida-left h2 { font-size: 2.6rem; font-weight: 700; line-height: 1.18; color: #ffffff; margin-bottom: 16px; }
+        .mundo-medida-left h2 span { color: #38BDF8; display: block; }
+        .mundo-medida-left p { font-size: 0.98rem; color: #E2E8F0; line-height: 1.65; }
+
+        .mundo-cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+        .mundo-card {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 20px 16px;
+            text-align: left;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .mundo-card:hover {
+            background: rgba(15, 23, 42, 0.9);
+            border-color: #38BDF8;
+            transform: translateY(-4px);
+        }
+
+        .mundo-card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+            background: var(--accent-blue);
+        }
+
+        .mundo-card h4 { font-size: 1.05rem; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .mundo-card p { font-size: 0.85rem; color: #CBD5E1; line-height: 1.45; margin: 0; }
+
+        /* =========================================================
+           9. GALERÍA DE INSTALACIONES Y CLASES CON ALUMNOS
+           ========================================================= */
+        .galeria-instalaciones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+        .foto-instalacion-card {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 3px solid #FFFFFF;
+            background-color: #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .foto-instalacion-card:hover { transform: translateY(-4px); }
+        .foto-instalacion-card img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .foto-instalacion-card .caption-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 16px;
+            background: linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.85) 100%);
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           10. PERFIL DE EGRESO (FOTO ÚNICA HORIZONTAL)
+           ========================================================= */
+        .perfil-destacado-container {
+            background: #FFFFFF;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+            border: 1px solid var(--card-border);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .perfil-foto-horizontal {
+            width: 100%;
+            height: 320px;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .perfil-foto-horizontal img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .perfil-info-box h3 { font-size: 1.9rem; color: var(--primary-navy); font-weight: 700; margin-bottom: 12px; }
+        .perfil-info-box p.intro { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.55; }
+        .perfil-cards-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+        .perfil-mini-card {
+            background: #F8FAFC;
+            border-radius: 10px;
+            padding: 18px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+
+        .perfil-mini-card:hover {
+            transform: translateY(-2px);
+            background: #FFFFFF;
+            border-color: var(--accent-blue);
+        }
+
+        .perfil-mini-card i { font-size: 1.3rem; color: var(--accent-blue); margin-bottom: 8px; display: inline-block; }
+        .perfil-mini-card h5 { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+        .perfil-mini-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; margin: 0; }
+
+        /* =========================================================
+           11. NAVEGACIÓN A OTROS NIVELES
+           ========================================================= */
+        .cta-final { background: linear-gradient(180deg, #FFFBF5 0%, #F0F7FF 100%); color: #1e293b; padding: 70px 20px; text-align: center; position: relative; }
+        .cta-final h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; color: var(--primary-navy); }
+        .cta-final p { font-size: 0.98rem; color: var(--text-muted); margin-bottom: 35px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid-fila { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+
+        .submenu-btn-card {
+            background: #ffffff; 
+            border: 1px solid var(--card-border); 
+            border-radius: 14px; 
+            padding: 24px 18px;
+            text-decoration: none; 
+            color: var(--text-dark); 
+            transition: all 0.3s ease; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .submenu-btn-card i.main-icon { font-size: 2rem; color: var(--primary-navy); margin-bottom: 10px; transition: transform 0.3s ease; }
+        .submenu-btn-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: var(--text-dark); }
+        .submenu-btn-card span { font-size: 0.82rem; color: var(--primary-navy); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+
+        .submenu-btn-card:hover, .submenu-btn-card:focus-visible {
+            background: #ffffff; 
+            border-color: var(--accent-blue); 
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.12);
+        }
+
+        /* RESPONSIVE ADAPTATIVO */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.1rem; }
+            .pilares-minimal-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+            .excelencia-layout-grid, .mundo-medida-grid, .galeria-instalaciones-grid { grid-template-columns: 1fr; gap: 25px; }
+            .submenus-grid-fila { grid-template-columns: repeat(2, 1fr); }
+            .perfil-foto-horizontal { height: 250px; }
+        }
+
+        @media (max-width: 576px) {
+            .pilares-minimal-grid, .mundo-cards-container, .perfil-cards-list, .submenus-grid-fila { grid-template-columns: 1fr; }
+            .hero-buttons-group { flex-direction: column; }
+            .excelencia-item-circle { flex-direction: column; align-items: center; text-align: center; }
+            .perfil-foto-horizontal { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header dinámico reutilizable -->
+    <mi-header pagina-activa="diversificado"></mi-header>
+
+    <!-- Botón flotante único de WhatsApp -->
+    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20nivel%20de%20Diversificado%20en%20el%20Colegio%20Americano%20Superior" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- 1. Hero Banner Diversificado -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes diversificado/Banner1.jpg" class="hero-bg-slide active" alt="Estudiantes de diversificado en laboratorio">
+                <img src="Imagenes diversificado/Compu1.jpg" class="hero-bg-slide" alt="Módulos de computación y programación">
+                <img src="Imagenes diversificado/4to.jpg" class="hero-bg-slide" alt="Tutorías de ingreso universitario">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <span class="hero-tag"><i class="fas fa-graduation-cap" aria-hidden="true"></i>Diversificado</span>
+                    <h1>Bachillerato en ciencias y letras con <span>orientación en computación</span></h1>
+                    <p>Con nuestro programa exclusivo KN-U High, nuestros estudiantes no solo completan su carrera, sino que obtienen certificaciones acreditadas independientes que fortalecen su currículum vitae. Una preparación práctica que les permite postularse con ventaja a oportunidades laborales.</p>
+                    
+                    <div class="hero-buttons-group">
+                        <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20el%20Bachillerato%20en%20Computaci%C3%B3n" 
+                           class="btn-banner" 
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            <span>Solicitar información</span>
+                        </a>
+
+                        <a href="kn-u-high.html" class="btn-knu">
+                            <i class="fas fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                            <span>Conoce KN-U High</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Diapositiva 3"></button>
+            </div>
+        </section>
+
+        <!-- 2. Pilares estilo minimalista -->
+        <section class="seccion-pilares-minimal">
+            <div class="container">
+                <div class="pilares-minimal-grid">
+                    <a href="#detalle-programas" class="pilar-minimal-item">
+                        <i class="fas fa-laptop" aria-hidden="true"></i>
+                        <h4>Orientación en computación</h4>
+                        <p>Perfil técnico profesional en sistemas y programación.</p>
+                    </a>
+
+                    <a href="#detalle-programas" class="pilar-minimal-item">
+                        <i class="fas fa-award" aria-hidden="true"></i>
+                        <h4>Cursos acreditados</h4>
+                        <p>Certificaciones respaldadas para implementar al currículum vitae.</p>
+                    </a>
+
+                    <a href="#detalle-programas" class="pilar-minimal-item">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                        <h4>Inglés por niveles</h4>
+                        <p>Formación lingüística avanzada y preparación TOEFL.</p>
+                    </a>
+
+                    <a href="#detalle-programas" class="pilar-minimal-item">
+                        <i class="fas fa-university" aria-hidden="true"></i>
+                        <h4>Matemática preuniversitaria</h4>
+                        <p>Refuerzo directo para exámenes de ingreso a la educación superior.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Excelencia académica y tecnológica con foto práctica de computación arriba -->
+        <section class="seccion-blanca" id="detalle-programas">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="title-badge">Formación preuniversitaria</span>
+                    <h2 class="seccion-titulo">Excelencia académica y tecnológica</h2>
+                    <p class="seccion-subtitulo">Un plan de estudio riguroso diseñado para graduar jóvenes competitivos, capaces de liderar en el ámbito universitario y tecnológico.</p>
+                </div>
+
+                <!-- Bloque destacado superior: foto de alumnos desarmando computadoras + primer ítem de la lista -->
+                <div class="excelencia-layout-grid">
+                    <div class="excelencia-top-image">
+                        <!-- Foto de práctica técnica -->
+                        <img src="Imagenes diversificado/Compu2.jpg" alt="Estudiantes en práctica de computación y ensamblaje">
+                    </div>
+
+                    <div class="excelencia-item-circle" style="margin: 0;">
+                        <div class="excelencia-circle-icon">
+                            <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                        </div>
+                        <div class="excelencia-body" style="border: none;">
+                            <h4>Orientación en computación</h4>
+                            <p>Perfil técnico orientado al desarrollo de software, estructuración de lógica de programación, mantenimiento, soporte y reparación de equipos de cómputo, bases de datos y administración de redes, complementado con diseño web y manejo avanzado de herramientas ofimáticas.</p>
+                            <ul class="excelencia-tags-list">
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Algoritmos y lógica de programación.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Redes, mantenimiento y sistemas operacionales.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Proyectos tecnológicos y diseño digital.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resto de la lista en viñetas circulares (Con mayor separación) -->
+                <div class="excelencia-lista-elegante">
+                    <!-- Cursos acreditados -->
+                    <div class="excelencia-item-circle">
+                        <div class="excelencia-circle-icon">
+                            <i class="fas fa-award" aria-hidden="true"></i>
+                        </div>
+                        <div class="excelencia-body">
+                            <h4>Cursos acreditados</h4>
+                            <p>A través de nuestro programa KN-U High, los estudiantes acceden a certificaciones avaladas por universidades y empresas líderes globales, personalizando su formación según sus metas profesionales.</p>
+                            <ul class="excelencia-tags-list">
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Certificaciones internacionales reconocidas.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Selección según ruta e interés profesional.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Diploma respaldado con enlace de verificación.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Inglés por niveles -->
+                    <div class="excelencia-item-circle">
+                        <div class="excelencia-circle-icon">
+                            <i class="fas fa-user-graduate" aria-hidden="true"></i>
+                        </div>
+                        <div class="excelencia-body">
+                            <h4>Inglés por niveles</h4>
+                            <p>Formación lingüística adaptada según la competencia real del estudiante. Proporcionamos un aprendizaje progresivo que culmina con la preparación intensiva para obtener la certificación TOEFL en quinto bachillerato.</p>
+                            <ul class="excelencia-tags-list">
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Clasificación según nivel competencial real.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Enfoque comunicativo y técnico profesional.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Preparación específica para evaluación TOEFL.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Matemática preuniversitaria -->
+                    <div class="excelencia-item-circle">
+                        <div class="excelencia-circle-icon">
+                            <i class="fas fa-building-columns" aria-hidden="true"></i>
+                        </div>
+                        <div class="excelencia-body">
+                            <h4>Matemática preuniversitaria</h4>
+                            <p>Capacitación matemática de nivel avanzado focalizada en el razonamiento analítico, resolución de problemas complejos y física, preparando con éxito los exámenes de ingreso a cualquier universidad.</p>
+                            <ul class="excelencia-tags-list">
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Matemáticas de Pearson.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Refuerzo sólido en cálculo, física y química avanzada.</li>
+                                <li><i class="fas fa-circle" aria-hidden="true"></i> Desarrollo de pensamiento lógico-estructurado.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Sección Proyecto KN-U High en tono de gris más pronunciado -->
+        <section class="seccion-knu-gris">
+            <div class="container">
+                <div class="knu-content-free">
+                    <span class="title-badge">Plataforma de futuro</span>
+                    <h3>Proyecto KN-U High en diversificado</h3>
+                    
+                    <div class="knu-exclusivity-text">
+                        <i class="fas fa-star" aria-hidden="true"></i>
+                        <span>Somos el único colegio en Antigua Guatemala que ofrece este programa</span>
+                    </div>
+
+                    <p>El programa busca apoyar al estudiante en su transición e ingreso a la universidad mediante la articulación de contenidos especializados. A través de este programa, los alumnos acceden a cursos certificados por Coursera, los cuales aportan un alto valor agregado y diferenciador a su currículum vitae.</p>
+                    
+                    <div class="knu-features-inline">
+                        <div class="knu-feat-inline-item"><i class="fas fa-check-circle" aria-hidden="true"></i> Diagnóstico y ruta de carrera</div>
+                        <div class="knu-feat-inline-item"><i class="fas fa-check-circle" aria-hidden="true"></i> Cursos con enlace de verificación</div>
+                        <div class="knu-feat-inline-item"><i class="fas fa-check-circle" aria-hidden="true"></i> Preparación para exámenes de admisión</div>
+                        <div class="knu-feat-inline-item"><i class="fas fa-check-circle" aria-hidden="true"></i> Acompañamiento tutorial continuo</div>
+                    </div>
+
+                    <!-- Invitación con Logo y botón oficial -->
+                    <div class="knu-invite-block">
+                        <img src="Imagenes Alianzas/logoknuhight.png" alt="Logo de KN-U High" class="knu-logo-img">
+                        <a href="kn-u-high.html" class="btn-knu">
+                            <span>Conoce KN-U High <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Pilares de Visión Preuniversitaria (Sección con fondo azul e imagen) -->
+        <section class="seccion-mundo-medida">
+            <div class="seccion-mundo-bg">
+                <img src="Imagenes diversificado/Banner1.jpg" alt="Pilares académicos de diversificado">
+            </div>
+            
+            <div class="seccion-mundo-overlay"></div>
+
+            <div class="container">
+                <div class="mundo-medida-grid">
+                    <div class="mundo-medida-left">
+                        <h2>Nuestra propuesta <span>educativa</span></h2>
+                        <p>En nuestro colegio estamos comprometidos con una educación integral, moderna y adaptada a los retos del mundo actual. Nuestro modelo combina el desarrollo ético de los estudiantes con el aprendizaje interactivo, la innovación tecnológica y una rigurosa preparación académica que abre puertas hacia su futuro personal y profesional.</p>
+                    </div>
+
+                    <div class="mundo-cards-container">
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
+                            <h4>Valores y formación humana</h4>
+                            <p>Desarrollo integral enfocado en la ética, la empatía y la responsabilidad personal, construyendo la base de líderes con pensamiento crítico y compromiso social.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-award" aria-hidden="true"></i></div>
+                            <h4>Inglés por niveles</h4>
+                            <p>Enseñanza del idioma estructurada por niveles de dominio, mediante dinámicas participativas y contenido enfocado en un aprendizaje progresivo y práctico.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-laptop-code" aria-hidden="true"></i></div>
+                            <h4>Innovación educativa</h4>
+                            <p>Uso de herramientas tecnológicas avanzadas aplicadas a la enseñanza para potenciar el aprendizaje interactivo, la creatividad y las competencias digitales.</p>
+                        </div>
+
+                        <div class="mundo-card">
+                            <div class="mundo-card-icon"><i class="fas fa-compass" aria-hidden="true"></i></div>
+                            <h4>Proyección preuniversitaria</h4>
+                            <p>Enfoque académico riguroso orientado a desarrollar habilidades de pensamiento crítico, certificaciones de alto valor y preparación continua para la educación superior.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Galería de instalaciones y aulas con alumnos -->
+        <section class="seccion-gris">
+            <div class="container">
+                <div style="text-align: center;">
+                    <span class="title-badge">Espacios educativos</span>
+                    <h2 class="seccion-titulo">Instalaciones y vida estudiantil</h2>
+                    <p class="seccion-subtitulo">Aulas equipadas, laboratorios tecnológicos y espacios interactivos donde nuestros alumnos desarrollan sus actividades académicas.</p>
+                </div>
+
+                <div class="galeria-instalaciones-grid">
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes diversificado/quinto.jpg" alt="Estudiantes en el área de clases interactivas">
+                        <div class="caption-overlay">Proyección social</div>
+                    </div>
+
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes diversificado/Compu1.jpg" alt="Alumnos en proyectos prácticos con docentes">
+                        <div class="caption-overlay">Prácticas de mantenimiento de equipo de cómputo</div>
+                    </div>
+
+                    <div class="foto-instalacion-card">
+                        <img src="Imagenes diversificado/clase.jpg" alt="Laboratorios de desarrollo de proyectos">
+                        <div class="caption-overlay">Entrevista en inglés</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Perfil de egreso del bachiller (Foto única horizontal y 4 tarjetas abajo) -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div class="perfil-destacado-container">
+                    <!-- Foto única en horizontal -->
+                    <div class="perfil-foto-horizontal">
+                        <img src="Imagenes diversificado/Graduacion.jpg" alt="Graduandos de bachillerato en ciencias y letras">
+                    </div>
+
+                    <div class="perfil-info-box">
+                        <span class="title-badge">Perfil del graduando</span>
+                        <h3>Perfil del bachiller en computación</h3>
+                        <p class="intro">Al graduarse de diversificado, nuestros estudiantes obtienen el título de Bachiller en Ciencias y Letras con Orientación en Computación y cuentan con un perfil de alto impacto:</p>
+
+                        <div class="perfil-cards-list">
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-university" aria-hidden="true"></i>
+                                <h5>Preparación preuniversitaria</h5>
+                                <p>Preparación técnica y teórica integral para superar con éxito los exámenes de ingreso más exigentes.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-award" aria-hidden="true"></i>
+                                <h5>Cursos certificados</h5>
+                                <p>Acreditaciones en cursos optativos que respaldan cuatro áreas principales: inglés, tecnología, relaciones humanas y certificaciones adaptadas a los intereses del estudiante.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                                <h5>Alto conocimiento tecnológico</h5>
+                                <p>Dominio práctico en la resolución de problemas lógicos y desarrollo computacional, manejando diversos sistemas operativos y herramientas de ofimática a nivel especialista.</p>
+                            </div>
+
+                            <div class="perfil-mini-card">
+                                <i class="fas fa-user-check" aria-hidden="true"></i>
+                                <h5>Conocimientos matemáticos, físicos y químicos</h5>
+                                <p>Los estudiantes egresados del Colegio Americano Superior poseen un alto nivel en estas áreas fundamentales para diversas carreras universitarias.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Navegación a otros niveles educativos -->
+        <section class="cta-final">
+            <div class="container">
+                <span class="title-badge">Camino de crecimiento</span>
+                <h2>Explora todos nuestros niveles educativos</h2>
+                <p>Acompañamos el crecimiento de tus hijos en cada etapa de su vida académica con excelencia e innovación.</p>
+
+                <div class="submenus-grid-fila">
+                    <a href="Preprimaria.html" class="submenu-btn-card">
+                        <i class="fas fa-shapes main-icon" aria-hidden="true"></i>
+                        <h3>Preprimaria</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Primaria.html" class="submenu-btn-card">
+                        <i class="fas fa-apple-whole main-icon" aria-hidden="true"></i>
+                        <h3>Primaria</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Basico.html" class="submenu-btn-card">
+                        <i class="fas fa-book-bookmark main-icon" aria-hidden="true"></i>
+                        <h3>Básicos</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Diversificado.html" class="submenu-btn-card" style="border-color: var(--accent-blue); background: #F0F7FF;">
+                        <i class="fas fa-graduation-cap main-icon" style="color: var(--accent-blue);" aria-hidden="true"></i>
+                        <h3>Diversificado</h3>
+                        <span style="color: var(--accent-blue);">Nivel actual <i class="fas fa-check-circle" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer dinámico reutilizable -->
+    <mi-footer></mi-footer>
+
+    <!-- Carga del script de componentes globales -->
+    <script src="Componentes.js"></script>
+
+    <!-- Inicialización de scripts interactivos -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Carousel Hero Banner ---
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+        });
+    </script>
+</body>
+</html>

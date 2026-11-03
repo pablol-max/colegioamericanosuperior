@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kn-U High | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES Y ESTILOS BASE
+           ========================================================= */
+        :root {
+            --bg-dark: #1E3A8A;        
+            --bg-light: #FFFFFF;       
+            --bg-alt: #F8FAFC;         
+            --text-dark: #0F172A;      
+            --text-muted: #475569;     
+            --accent-gold: #F59E0B;    
+            --border-light: #E2E8F0;   
+            --primary-blue: #1E3A8A;
+            --light-blue: #38BDF8;
+            --menu-bg: #171b36;
+            --coursera-blue: #0056D2;
+            --soft-blue-bg: #f1f5f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE ÚNICO DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           3. HERO BANNER KN-U HIGH (IMAGEN FIJA)
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding-top: 110px;
+            padding-bottom: 60px;
+            overflow: hidden;
+        }
+
+        .hero-bg-single { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0.85; 
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--menu-bg) 0%, rgba(23, 27, 54, 0.95) 30%, rgba(23, 27, 54, 0.45) 60%, rgba(23, 27, 54, 0.15) 85%, rgba(23, 27, 54, 0.05) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 3; width: 100%; }
+        .hero-content-box { max-width: 680px; }
+
+        .hero-content-box h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: #ffffff; letter-spacing: -0.5px; }
+        .hero-content-box p { font-size: 0.98rem; color: #e2e1f0; margin-bottom: 30px; line-height: 1.6; font-weight: 400; }
+
+        .btn-banner {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background-color: #2088b8; color: #ffffff; font-size: 0.9rem; font-weight: 800;
+            padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 180, 17, 0.4);
+        }
+        .btn-banner:hover, .btn-banner:focus-visible { background-color: #1a729b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 180, 17, 0.6); }
+
+        /* =========================================================
+           4. SECCIONES DE CONTENIDO GENERAL
+           ========================================================= */
+        .seccion-blanca { background-color: #ffffff; padding: 75px 0 0 0; }
+        .seccion-gris { background-color: #f8fafc; padding: 75px 0; border-bottom: 1px solid #e2e8f0; }
+        
+        .seccion-titulo { text-align: center; font-size: 2.1rem; color: var(--primary-blue); margin-bottom: 10px; font-weight: 800; letter-spacing: -0.3px; }
+        .seccion-subtitulo { text-align: center; font-size: 0.98rem; color: #64748b; max-width: 800px; margin: 0 auto 40px auto; line-height: 1.6; }
+
+        /* =========================================================
+           5. EXPLICACIÓN DETALLADA DEL PROYECTO
+           ========================================================= */
+        .project-explanation {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .project-explanation-text h2 {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 18px;
+            line-height: 1.25;
+        }
+
+        .project-explanation-text p {
+            font-size: 0.98rem;
+            color: #475569;
+            margin-bottom: 16px;
+            line-height: 1.65;
+        }
+
+        /* LISTA INTEGRADA SIN CUADRO DE FONDO */
+        .info-highlight-clean {
+            margin-top: 25px;
+            padding-top: 10px;
+        }
+
+        .info-highlight-clean h3 {
+            font-size: 1.15rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-bullets li {
+            font-size: 0.96rem;
+            color: #334155;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .info-bullets li i {
+            color: #16a34a;
+            font-size: 1.1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* FOTOGRAFÍA EN LUGAR DE RESPALDO GLOBAL */
+        .project-image-box {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 1px solid #E2E8F0;
+        }
+
+        .project-image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* =========================================================
+           6. SECCIÓN CLARA DE AÑOS DE BACHILLERATO (BORDE A BORDE)
+           ========================================================= */
+        .seccion-anos-full {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background-color: var(--soft-blue-bg);
+            padding: 70px 0;
+            margin-bottom: 75px;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cert-highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .cert-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 35px rgba(30, 58, 138, 0.12);
+            border-color: var(--primary-blue);
+        }
+
+        .cert-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(30, 58, 138, 0.08);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .cert-card.highlight {
+            background: #ffffff;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .cert-card.highlight .cert-card-icon {
+            background: var(--accent-gold);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .cert-badge-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-gold);
+            color: #ffffff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cert-number {
+            font-size: 3.4rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            line-height: 1;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .cert-card h3 {
+            font-size: 1.25rem;
+            color: #0f172a;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .cert-card p {
+            font-size: 0.92rem;
+            color: #64748b;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* =========================================================
+           7. ESTRUCTURA CURRICULAR EN RAMIFICACIÓN (TREE BRANCH)
+           ========================================================= */
+        .curriculum-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            margin-bottom: 75px;
+        }
+
+        .tree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .tree-root {
+            background: var(--primary-blue);
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .tree-line-main {
+            width: 2px;
+            height: 30px;
+            background: var(--accent-gold);
+        }
+
+        .tree-branches {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+            position: relative;
+            padding-top: 20px;
+        }
+
+        .tree-branches::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 12.5%;
+            right: 12.5%;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .tree-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            width: 2px;
+            height: 20px;
+            background: var(--accent-gold);
+        }
+
+        .curriculum-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 24px 20px;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .curriculum-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin: 0 auto 15px;
+        }
+
+        .curriculum-item h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .curriculum-item .badge-count {
+            display: inline-block;
+            background: rgba(30, 58, 138, 0.1);
+            color: var(--primary-blue);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .curriculum-item p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           8. MUESTRA DEL CERTIFICADO Y VIDEO EXPLICATIVO
+           ========================================================= */
+        .cert-sample-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .cert-img-container {
+            max-width: 750px;
+            margin: 0 auto 15px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid #E2E8F0;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .cert-img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cert-caption-tag {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #475569;
+            background: #F1F5F9;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .cert-caption-tag i { color: var(--accent-gold); margin-right: 6px; }
+
+        .student-video-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .student-video-container h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .student-video-container p {
+            font-size: 0.95rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .video-wrapper-local {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #E2E8F0;
+            background-color: #000000;
+            aspect-ratio: 16 / 9;
+            display: flex;
+        }
+
+        .video-wrapper-local iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        /* =========================================================
+           9. SECCIÓN ORIENTACIÓN IKIGAI (CON FOTO DE FONDO)
+           ========================================================= */
+        .seccion-ikigai-full {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: url('Imagenes knu/Todos.jpg') center/cover no-repeat;
+            color: #ffffff;
+            padding: 90px 5%;
+        }
+
+        .ikigai-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(23, 27, 54, 0.88);
+            z-index: 1;
+        }
+
+        .ikigai-content-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ikigai-text {
+            text-align: center;
+        }
+
+        .ikigai-text h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .ikigai-text h2 span { color: var(--accent-gold); }
+
+        .ikigai-text p {
+            font-size: 1.05rem;
+            color: #e2e1f0;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .ikigai-cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 35px;
+        }
+
+        .ikigai-card-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .ikigai-card-item i {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .ikigai-card-item h4 {
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .ikigai-card-item p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.3rem; }
+            .project-explanation { grid-template-columns: 1fr; gap: 30px; }
+            .cert-highlight-grid { grid-template-columns: repeat(2, 1fr); }
+            .tree-branches { grid-template-columns: repeat(2, 1fr); row-gap: 30px; }
+            .tree-branches::before { display: none; }
+            .tree-node::before { display: none; }
+            .ikigai-cards-container { grid-template-columns: 1fr; }
+            .hero-overlay { background: linear-gradient(180deg, var(--menu-bg) 0%, var(--menu-bg) 60%, rgba(23, 27, 54, 0.7) 100%); }
+        }
+
+        @media (max-width: 640px) {
+            .cert-highlight-grid, .tree-branches { grid-template-columns: 1fr; }
+            .seccion-ikigai-full { padding: 60px 4%; }
+            .curriculum-box, .student-video-container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="kn-u-high.html"></mi-header>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Estoy%20interesado,%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Kn-U%20High%20y%20las%20certificaciones%20Coursera" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- SECCIÓN 1: HERO BANNER KN-U HIGH (IMAGEN FIJA) -->
+        <section class="hero-banner">
+            <img src="Imagenes Index/Diver.jpg" class="hero-bg-single" alt="Estudiantes de Diversificado en Kn-U High">
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <h1>Kn-U High</h1>
+                    <p>El programa académico internacional en el Colegio Americano Superior que permite a nuestros estudiantes de Diversificado graduarse con hasta 20 certificaciones emitidas por prestigiosas universidades globales.</p>
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20el%20programa%20Kn-U%20High" target="_blank" rel="noopener noreferrer" class="btn-banner">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i> Solicitar información
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: EXPLICACIÓN COMPLETA DEL PROYECTO Y DISTRIBUCIÓN POR AÑOS -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div class="project-explanation">
+                    <div class="project-explanation-text">
+                        <h2>¿En qué consiste el proyecto Kn-U High?</h2>
+                        <p>
+                            <strong>Kn-U High</strong> es un ecosistema de educación preparatoria de alto nivel integrado a nuestro Bachillerato. Surge de la alianza entre <strong>Knotion y Coursera</strong> (la plataforma líder mundial en aprendizaje en línea) para ofrecer a nuestros estudiantes acceso directo a cursos de universidades de clase mundial.
+                        </p>
+                        <p>
+                            A través de este programa, los estudiantes no solo completan su pensum nacional oficial, sino que simultáneamente aprueban asignaturas certificadas que fortalecen sus competencias académicas, habilidades humanas y perfil laboral.
+                        </p>
+                        
+                        <!-- VIÑETAS LIMPIAS INTEGRADAS SIN RECUADRO DE FONDO -->
+                        <div class="info-highlight-clean">
+                            <h3>Perfil diferenciador antes de la universidad</h3>
+                            <ul class="info-bullets">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span><strong>Bachillerato tradicional:</strong> Solo obtiene diploma de nivel medio.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span><strong>Kn-U High:</strong> Graduación con título de Bachiller + <strong>20 certificaciones internacionales</strong>.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- FOTOGRAFÍA REEMPLAZANDO A RESPALDO GLOBAL -->
+                    <div class="project-image-box">
+                        <img src="Imagenes knu/Tres.jpg" alt="Estudiantes de Kn-U High colaborando en clase">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN CON EL COLOR SOLICITADO BORDE A BORDE (DISTRIBUCIÓN POR AÑOS) -->
+            <div class="seccion-anos-full">
+                <div class="container">
+                    <div class="cert-highlight-grid">
+                        
+                        <article class="cert-card">
+                            <div class="cert-card-icon">
+                                <i class="fas fa-award" aria-hidden="true"></i>
+                            </div>
+                            <div class="cert-number">10</div>
+                            <h3>1.er año de Bachillerato</h3>
+                            <p>Obtención de las primeras 10 certificaciones internacionales en el primer grado de Diversificado.</p>
+                        </article>
+
+                        <article class="cert-card">
+                            <div class="cert-card-icon">
+                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            </div>
+                            <div class="cert-number">10</div>
+                            <h3>2.º año de Bachillerato</h3>
+                            <p>Acreditación de 10 certificaciones avanzadas adicionales durante el segundo año académico.</p>
+                        </article>
+
+                        <article class="cert-card highlight">
+                            <span class="cert-badge-tag"><i class="fas fa-star"></i> Meta final</span>
+                            <div class="cert-card-icon">
+                                <i class="fas fa-trophy" aria-hidden="true"></i>
+                            </div>
+                            <div class="cert-number">20</div>
+                            <h3>Total al graduarse</h3>
+                            <p>Al completar los 2 años de Bachillerato en el colegio, el estudiante se gradúa con 20 certificaciones oficiales.</p>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- ESTRUCTURA CURRICULAR EN RAMIFICACIÓN -->
+                <div class="curriculum-box">
+                    <h2 class="seccion-titulo" style="font-size: 1.6rem; margin-bottom: 5px;">Distribución de los cursos</h2>
+                    <p class="seccion-subtitulo" style="margin-bottom: 20px;">Cada año se cursan 6 asignaturas del tronco común y 4 materias electivas especializadas (12 de tronco común y 8 electivas al completar ambos años).</p>
+
+                    <div class="tree-container">
+                        <div class="tree-root">Programa Kn-U High</div>
+                        <div class="tree-line-main"></div>
+                        
+                        <div class="tree-branches">
+                            <div class="tree-node">
+                                <div class="curriculum-item">
+                                    <div class="curriculum-icon"><i class="fas fa-language" aria-hidden="true"></i></div>
+                                    <span class="badge-count">2 por año (4 en total)</span>
+                                    <h4>Cursos de Inglés</h4>
+                                    <p>Dominio del idioma en entornos académicos, redacción avanzada y fluidez profesional.</p>
+                                </div>
+                            </div>
+
+                            <div class="tree-node">
+                                <div class="curriculum-item">
+                                    <div class="curriculum-icon"><i class="fas fa-laptop-code" aria-hidden="true"></i></div>
+                                    <span class="badge-count">2 por año (4 en total)</span>
+                                    <h4>Cursos de Tecnología</h4>
+                                    <p>Desarrollo de competencias digitales, manejo de datos y herramientas tecnológicas clave.</p>
+                                </div>
+                            </div>
+
+                            <div class="tree-node">
+                                <div class="curriculum-item">
+                                    <div class="curriculum-icon"><i class="fas fa-users" aria-hidden="true"></i></div>
+                                    <span class="badge-count">2 por año (4 en total)</span>
+                                    <h4>Habilidades sociales</h4>
+                                    <p>Desarrollo de habilidades blandas: liderazgo, trabajo en equipo y competencias clave.</p>
+                                </div>
+                            </div>
+
+                            <div class="tree-node">
+                                <div class="curriculum-item">
+                                    <div class="curriculum-icon"><i class="fas fa-compass" aria-hidden="true"></i></div>
+                                    <span class="badge-count">4 por año (8 en total)</span>
+                                    <h4>Cursos electivos</h4>
+                                    <p>Materias introductorias a la carrera universitaria elegida para brindar conocimiento previo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: CERTIFICADO DE EJEMPLO Y VIDEO DEL ESTUDIANTE -->
+        <section class="seccion-gris">
+            <div class="container">
+                <h2 class="seccion-titulo">Muestra del certificado y propósito del programa</h2>
+                <p class="seccion-subtitulo">A continuación, te mostramos un ejemplo del tipo de acreditación internacional que reciben nuestros graduandos y un informe detallado sobre las metas de Kn-U High.</p>
+
+                <!-- FOTO DE EJEMPLO DEL CERTIFICADO -->
+                <div class="cert-sample-section">
+                    <div class="cert-img-container">
+                        <img src="Imagenes knu/Certificado.webp" alt="Ejemplo de certificado internacional emitido por Coursera">
+                    </div>
+                    <span class="cert-caption-tag">
+                        <i class="fas fa-info-circle"></i> Muestra representativa de los certificados internacionales otorgados por Coursera
+                    </span>
+                </div>
+
+                <!-- VIDEO DEL ESTUDIANTE -->
+                <div class="student-video-container">
+                    <h3><i class="fas fa-user-graduate"></i> Conoce el propósito de Kn-U High</h3>
+                    <p>Informe preparado por nuestros estudiantes sobre las metas y el impacto del programa en el Colegio Americano Superior.</p>
+                    
+                    <div class="video-wrapper-local">
+                        <iframe 
+                            width="560" 
+                            height="315" 
+                            src="https://www.youtube.com/embed/3nnSM8HZ8MA" 
+                            title="Propósito de Kn-U High" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: ORIENTACIÓN IKIGAI (CON FOTO DE FONDO EN LO AZUL) -->
+        <section class="seccion-ikigai-full">
+            <div class="ikigai-overlay"></div>
+            <div class="ikigai-content-grid">
+                <div class="ikigai-text">
+                    <h2>Orientación vocacional: <span>El estudio Ikigai</span></h2>
+                    <p>Para definir las 4 materias electivas anuales asignadas a cada estudiante, aplicamos la filosofía Ikigai para alinear los gustos, fortalezas y metas de cada joven con su futura carrera universitaria.</p>
+                    
+                    <div class="ikigai-cards-container">
+                        <div class="ikigai-card-item">
+                            <i class="fas fa-compass" aria-hidden="true"></i>
+                            <h4>Enfoque claro</h4>
+                            <p>Identificación guiada del camino universitario de acuerdo con los intereses del estudiante.</p>
+                        </div>
+                        <div class="ikigai-card-item">
+                            <i class="fas fa-book-open" aria-hidden="true"></i>
+                            <h4>Materias electivas</h4>
+                            <p>Asignación de cursos especializados acordes a la vocación elegida.</p>
+                        </div>
+                        <div class="ikigai-card-item">
+                            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                            <h4>Preparación previa</h4>
+                            <p>Bases conceptuales sólidas antes del ingreso a la universidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+</body>
+</html>

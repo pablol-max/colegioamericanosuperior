@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartStage | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES Y ESTILOS BASE
+           ========================================================= */
+        :root {
+            --bg-dark: #1E3A8A;        
+            --bg-light: #FFFFFF;       
+            --bg-alt: #F8FAFC;         
+            --text-dark: #0F172A;      
+            --text-muted: #475569;     
+            --accent-gold: #F59E0B;    
+            --border-light: #E2E8F0;   
+            --primary-blue: #1E3A8A;
+            --light-blue: #38BDF8;
+            --menu-bg: #171b36;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE ÚNICO DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           3. HERO BANNER SMARTSTAGE (ESTILO METODOLOGÍA)
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding-top: 110px;
+            padding-bottom: 60px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; }
+        .hero-bg-slide.active { opacity: 0.85; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--menu-bg) 0%, rgba(23, 27, 54, 0.95) 30%, rgba(23, 27, 54, 0.45) 60%, rgba(23, 27, 54, 0.15) 85%, rgba(23, 27, 54, 0.05) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 3; width: 100%; }
+        .hero-content-box { max-width: 620px; }
+        .hero-content-box h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: #ffffff; letter-spacing: -0.5px; }
+        .hero-content-box p { font-size: 0.95rem; color: #e2e1f0; margin-bottom: 30px; line-height: 1.6; font-weight: 400; }
+
+        .btn-banner {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background-color: #2088b8; color: #ffffff; font-size: 0.9rem; font-weight: 800;
+            padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 180, 17, 0.4);
+        }
+        .btn-banner:hover, .btn-banner:focus-visible { background-color: #1a729b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 180, 17, 0.6); }
+
+        .carousel-dots-banner { position: absolute; bottom: 20px; right: 40px; display: flex; gap: 8px; z-index: 10; }
+        .dot-banner { width: 10px; height: 10px; background: rgba(255, 255, 255, 0.4); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: var(--accent-gold); width: 24px; border-radius: 10px; }
+
+        /* =========================================================
+           4. SECCIONES DE CONTENIDO GENERAL
+           ========================================================= */
+        .seccion-blanca { background-color: #ffffff; padding: 75px 0; border-bottom: 1px solid #e2e8f0; }
+        .seccion-gris { background-color: #f8fafc; padding: 75px 0; border-bottom: 1px solid #e2e8f0; }
+        
+        .seccion-titulo { text-align: center; font-size: 2.1rem; color: var(--primary-blue); margin-bottom: 10px; font-weight: 800; letter-spacing: -0.3px; }
+        .seccion-subtitulo { text-align: center; font-size: 0.98rem; color: #64748b; max-width: 750px; margin: 0 auto 40px auto; }
+
+        /* =========================================================
+           5. SECCIÓN CARACTERÍSTICAS DE SMARTSTAGE
+           ========================================================= */
+        .smart-features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .smart-feature-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .smart-feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .smart-feature-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            border: 2px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--primary-blue);
+            margin: 0 auto 18px;
+        }
+
+        .smart-feature-card h3 {
+            font-size: 1.2rem;
+            color: #0f172a;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .smart-feature-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.55;
+        }
+
+        /* =========================================================
+           6. SECCIÓN OPINIÓN DE LOS NIÑOS ANCHO COMPLETO (FULL WIDTH)
+           ========================================================= */
+        .seccion-kids-full {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: var(--menu-bg);
+            color: #ffffff;
+            padding: 70px 5%;
+        }
+
+        .kids-talk-box-full {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .kids-talk-info h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .kids-talk-info h2 span { color: var(--accent-gold); }
+
+        .kids-talk-info p {
+            font-size: 0.98rem;
+            color: #e2e1f0;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .kids-talk-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .kids-talk-list li {
+            font-size: 0.95rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .kids-talk-list li i { color: var(--accent-gold); font-size: 1.1rem; }
+
+        .video-wrapper-local {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background-color: #000000;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            aspect-ratio: 16 / 9;
+            display: flex;
+        }
+
+        .video-wrapper-local iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        /* =========================================================
+           7. GALERÍA DE VIDEOS EDUCATIVOS GRABADOS (EMBEDS)
+           ========================================================= */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .video-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .video-card .video-wrapper-local {
+            box-shadow: none;
+            border-radius: 0;
+            border: none;
+        }
+
+        .video-card-body {
+            padding: 18px;
+        }
+
+        .video-card-body h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 6px;
+        }
+
+        .video-card-body p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        /* =========================================================
+           8. GALERÍA FOTOGRÁFICA
+           ========================================================= */
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .photo-item {
+            position: relative;
+            height: 220px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, transparent 100%);
+            padding: 12px;
+            color: #ffffff;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.3rem; }
+            .smart-features-grid, .videos-grid { grid-template-columns: repeat(2, 1fr); }
+            .photos-grid { grid-template-columns: repeat(2, 1fr); }
+            .kids-talk-box-full { grid-template-columns: 1fr; gap: 30px; }
+            .hero-overlay { background: linear-gradient(180deg, var(--menu-bg) 0%, var(--menu-bg) 60%, rgba(23, 27, 54, 0.7) 100%); }
+        }
+
+        @media (max-width: 640px) {
+            .smart-features-grid, .videos-grid, .photos-grid { grid-template-columns: 1fr; }
+            .seccion-kids-full { padding: 50px 4%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="smartstage"></mi-header>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Estoy%20interesado,%20m%C3%A1s%20informaci%C3%B3n%20sobre%20SmartStage" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- SECCIÓN 1: HERO BANNER SMARTSTAGE -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes Index/Smart.jpg" class="hero-bg-slide active" alt="Set de producción SmartStage">
+                <img src="Imagenes smart/Banner 2.jpg" class="hero-bg-slide" alt="Edición de contenidos multimedia">
+                <img src="Imagenes smart/Banner 3.jpg" class="hero-bg-slide" alt="Pizarra digital interactiva en SmartStage">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <h1>SmartStage</h1>
+                    <p>Un innovador espacio audiovisual inmersivo equipado con pizarra interactiva y set de pantalla verde, diseñado para transformar contenidos educativos en experiencias digitales envolventes e inolvidables.</p>
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20SmartStage" target="_blank" rel="noopener noreferrer" class="btn-banner">
+                        <i class="fas fa-video" aria-hidden="true"></i> Conocer el Proyecto
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Ir a la diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 3"></button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: PILARES Y TECNOLOGÍA DEL SMARTSTAGE -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <h2 class="seccion-titulo">¿Qué ofrece nuestro SmartStage?</h2>
+                <p class="seccion-subtitulo">Un entorno de producción único que lleva el aprendizaje más allá del aula de clases tradicional.</p>
+
+                <div class="smart-features-grid">
+                    <article class="smart-feature-card">
+                        <div class="smart-feature-icon"><i class="fas fa-chalkboard" aria-hidden="true"></i></div>
+                        <h3>Pizarra Interactiva</h3>
+                        <p>Facilita la explicación de conceptos matemáticos, científicos y teóricos mediante diagramas en vivo y software educativo dinámico.</p>
+                    </article>
+
+                    <article class="smart-feature-card">
+                        <div class="smart-feature-icon"><i class="fas fa-video" aria-hidden="true"></i></div>
+                        <h3>Set con Pantalla Verde</h3>
+                        <p>Permite transportar virtualmente a docentes y alumnos al interior de una célula, eventos históricos o el espacio exterior mediante croma.</p>
+                    </article>
+
+                    <article class="smart-feature-card">
+                        <div class="smart-feature-icon"><i class="fas fa-photo-video" aria-hidden="true"></i></div>
+                        <h3>Experiencia Inmersiva</h3>
+                        <p>Los estudiantes crean, presentan y graban sus propios proyectos, desarrollando expresión verbal y dominio de la tecnología.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: OPINIÓN DE LOS NIÑOS ANCHO COMPLETO (DE BORDE A BORDE) -->
+        <section class="seccion-kids-full">
+            <div class="kids-talk-box-full">
+                <div class="kids-talk-info">
+                    <h2>¿Qué opinan los niños sobre <span>SmartClass</span>?</h2>
+                    <p>Los alumnos expresan cómo la tecnología inmersiva y las actividades en video hacen que el aprendizaje sea más natural, emocionante y fácil de comprender.</p>
+                    <ul class="kids-talk-list">
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Clases dinámicas e interactivas</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Mayor participación y motivación</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Proyectos donde ellos son los protagonistas</li>
+                    </ul>
+                </div>
+
+                <!-- REPRODUCTOR DE VIDEO EMBED (YOUTUBE) -->
+                <div class="video-wrapper-local">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/jMWtYEzTc3E" 
+                        title="Opinión de los niños sobre SmartClass" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: VIDEOS EDUCATIVOS GRABADOS (EMBEDS DE YOUTUBE) -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <h2 class="seccion-titulo">Videos Educativos Producidos</h2>
+                <p class="seccion-subtitulo">Muestra del contenido dinámico elaborado por estudiantes en el set de SmartStage.</p>
+
+                <div class="videos-grid">
+                    <!-- Columna 1 -->
+                    <article class="video-card">
+                        <div class="video-wrapper-local">
+                            <iframe 
+                                width="560" 
+                                height="315" 
+                                src="https://www.youtube.com/embed/tzpbGaAm1BA" 
+                                title="Exploración de Júpiter" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-card-body">
+                            <h3>Exploración de Júpiter</h3>
+                            <p>Clase interactiva grabada con pantalla verde para Ciencias Naturales.</p>
+                        </div>
+                    </article>
+
+                    <!-- Columna 2 -->
+                    <article class="video-card">
+                        <div class="video-wrapper-local">
+                            <iframe 
+                                width="560" 
+                                height="315" 
+                                src="https://www.youtube.com/embed/jQ_HGgqndF4" 
+                                title="Explicación del sol" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-card-body">
+                            <h3>Explicación del sol</h3>
+                            <p>Video grabado por los estudiantes, en el que explican ¿Qué es el sol?</p>
+                        </div>
+                    </article>
+
+                    <!-- Columna 3 -->
+                    <article class="video-card">
+                        <div class="video-wrapper-local">
+                            <iframe 
+                                width="560" 
+                                height="315" 
+                                src="https://www.youtube.com/embed/wkMibxMN1AE" 
+                                title="El agua" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="video-card-body">
+                            <h3>El agua</h3>
+                            <p>Video creado por estudiantes de quinto bachillerato.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: GALERÍA DE FOTOS -->
+        <section class="seccion-gris">
+            <div class="container">
+                <h2 class="seccion-titulo">Galería de Fotografías</h2>
+                <p class="seccion-subtitulo">Algunos momentos de nuestros alumnos en nuestro Smart Stage</p>
+
+                <div class="photos-grid">
+                    <div class="photo-item">
+                        <img src="Imagenes Index/Smart.jpg" alt="Pizarra Interactiva en SmartStage">
+                        <div class="photo-caption"></div>
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="Imagenes smart/Foto 1.jpg" alt="Edición Multimedia">
+                        <div class="photo-caption"></div>
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="Imagenes smart/Foto 2.jpg" alt="Estudiantes en el Set">
+                        <div class="photo-caption"></div>
+                    </div>
+
+                    <div class="photo-item">
+                        <img src="Imagenes smart/Foto 3.jpg" alt="Instalaciones SmartStage">
+                        <div class="photo-caption"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+
+    <!-- LÓGICA DE INTERACCIÓN LOCAL Y CARRUSEL HERO BANNER -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+        });
+    </script>
+</body>
+</html>

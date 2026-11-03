@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades y galerías | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES Y ESTILOS BASE
+           ========================================================= */
+        :root {
+            --bg-dark: #252440;        
+            --bg-light: #FFFFFF;       
+            --bg-alt: #F8FAFC;         
+            --text-dark: #111827;      
+            --text-muted: #4B5563;     
+            --accent-gold: #F5B411;    
+            --border-light: #E5E7EB;   
+            --primary-blue: #1E3A8A;
+            --menu-bg: #171b36;
+            --btn-blue: #2086be;
+            --btn-blue-hover: #1a73a3;
+            --facebook-blue: #1877F2;
+            --facebook-hover: #166fe5;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE ÚNICO DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+            will-change: transform;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           3. HERO BANNER
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 55vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding-top: 110px;
+            padding-bottom: 60px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0; 
+            transition: opacity 1s ease-in-out; 
+            will-change: opacity;
+        }
+        .hero-bg-slide.active { opacity: 0.85; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--menu-bg) 0%, rgba(23, 27, 54, 0.95) 35%, rgba(23, 27, 54, 0.5) 70%, rgba(23, 27, 54, 0.15) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 3; width: 100%; }
+        .hero-content-box { max-width: 650px; }
+        .hero-content-box h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: #ffffff; }
+        .hero-content-box p { font-size: 0.98rem; color: #e2e1f0; margin-bottom: 25px; line-height: 1.6; }
+
+        .btn-hero-inscripcion {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: var(--btn-blue);
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(32, 134, 190, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+        }
+
+        .btn-hero-inscripcion:hover {
+            background-color: var(--btn-blue-hover);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 28px rgba(32, 134, 190, 0.6);
+            color: #ffffff;
+        }
+
+        .btn-hero-inscripcion i {
+            font-size: 1.2rem;
+            transform: rotate(-15deg);
+        }
+
+        /* =========================================================
+           4. BANNER COMPACTO DE INVITACIÓN A FACEBOOK
+           ========================================================= */
+        .seccion-facebook-invite {
+            background-color: #EEF2FF;
+            border-bottom: 1px solid #CBD5E1;
+            padding: 12px 0;
+        }
+
+        .facebook-invite-box {
+            background: linear-gradient(135deg, #1877F2 0%, #0B51B3 100%);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
+            flex-wrap: wrap;
+        }
+
+        .facebook-invite-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .facebook-invite-icon {
+            font-size: 1.8rem;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.18);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .facebook-invite-text h3 {
+            font-size: 0.98rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .facebook-invite-text p {
+            font-size: 0.82rem;
+            color: #E0E7FF;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .btn-facebook-invite {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #ffffff;
+            color: var(--facebook-blue);
+            font-weight: 800;
+            font-size: 0.82rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-facebook-invite:hover {
+            background-color: #F8FAFC;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            color: var(--facebook-hover);
+        }
+
+        /* =========================================================
+           5. SECCIÓN BENEFICIOS Y PROPÓSITO
+           ========================================================= */
+        .seccion-proposito { padding: 50px 0; background-color: #ffffff; border-bottom: 1px solid #e2e8f0; }
+        .seccion-titulo { text-align: center; font-size: 2.2rem; color: var(--primary-blue); margin-bottom: 12px; font-weight: 800; }
+        .seccion-subtitulo { text-align: center; font-size: 1rem; color: #64748b; max-width: 800px; margin: 0 auto 40px auto; }
+
+        .beneficios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .beneficio-card {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 22px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+        .beneficio-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); }
+        .beneficio-icon {
+            width: 42px; height: 42px; background: rgba(30, 58, 138, 0.1); color: var(--primary-blue);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; margin-bottom: 14px;
+        }
+        .beneficio-card h3 { font-size: 1.1rem; color: #0f172a; font-weight: 800; margin-bottom: 6px; }
+        .beneficio-card p { font-size: 0.88rem; color: #475569; line-height: 1.5; }
+
+        /* =========================================================
+           6. SECCIONES CON GALERÍAS DE FOTOS
+           ========================================================= */
+        .seccion-actividad-item {
+            padding: 50px 0;
+            border-bottom: 1px solid #e2e8f0;
+            contain: content;
+        }
+        .seccion-actividad-item:nth-child(even) { background-color: #f8fafc; }
+        .seccion-actividad-item:nth-child(odd) { background-color: #ffffff; }
+
+        .actividad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .actividad-header-info { max-width: 750px; }
+        .actividad-header-info .tag {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: var(--primary-blue);
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .actividad-header-info h2 { font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+        .actividad-header-info p { font-size: 0.95rem; color: #475569; line-height: 1.6; }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .galeria-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 200px;
+            background-color: #e2e8f0;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            transform: translateZ(0);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            will-change: transform, opacity;
+            background-color: #cbd5e1;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.08);
+            opacity: 0.88;
+        }
+
+        .galeria-overlay-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.6);
+            color: #ffffff;
+            font-size: 1.8rem;
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+        }
+
+        .galeria-item:hover .galeria-overlay-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* =========================================================
+           7. VISOR EMERGENTE DE FOTOS (LIGHTBOX CON NAVEGACIÓN)
+           ========================================================= */
+        .modal-lightbox {
+            display: flex;
+            visibility: hidden;
+            opacity: 0;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-lightbox.active { 
+            visibility: visible;
+            opacity: 1; 
+        }
+
+        .modal-content-img {
+            max-width: 85%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            object-fit: contain;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-lightbox.active .modal-content-img {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            line-height: 1;
+            z-index: 10001;
+        }
+
+        .modal-close:hover { color: var(--accent-gold); }
+
+        .modal-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            z-index: 10001;
+        }
+
+        .modal-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-50%) scale(1.1);
+            color: var(--accent-gold);
+        }
+
+        .modal-btn-prev { left: 25px; }
+        .modal-btn-next { right: 25px; }
+
+        /* =========================================================
+           8. NAVEGACIÓN A SUBMENÚS
+           ========================================================= */
+        .cta-final { 
+            background-color: #ffffff; 
+            color: #1e293b; 
+            padding: 60px 20px; 
+            text-align: center; 
+            border-top: 1px solid #e2e8f0; 
+        }
+        .cta-final h2 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--primary-blue); }
+        .cta-final p { font-size: 0.95rem; color: #64748b; margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
+            max-width: 1000px; margin: 0 auto;
+        }
+
+        .submenu-btn-card {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px 24px;
+            text-decoration: none; color: #1e293b; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            will-change: transform;
+        }
+        .submenu-btn-card i.main-icon { font-size: 2.2rem; color: var(--primary-blue); margin-bottom: 12px; transition: transform 0.3s ease; }
+        .submenu-btn-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; color: #0f172a; }
+        .submenu-btn-card span { font-size: 0.88rem; color: var(--primary-blue); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+        .submenu-btn-card:hover { background: #ffffff; border-color: var(--primary-blue); transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); }
+
+        @media (max-width: 992px) {
+            .galeria-grid { grid-template-columns: repeat(3, 1fr); }
+            .galeria-item { height: 160px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content-box h1 { font-size: 2.2rem; }
+            .facebook-invite-box { flex-direction: column; text-align: center; padding: 12px 16px; }
+            .facebook-invite-content { flex-direction: column; gap: 8px; }
+            .btn-facebook-invite { width: 100%; justify-content: center; }
+            .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+            .galeria-item { height: 140px; }
+            .btn-hero-inscripcion { width: 100%; }
+            .modal-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+            .modal-btn-prev { left: 10px; }
+            .modal-btn-next { right: 10px; }
+            .modal-content-img { max-width: 95%; }
+        }
+
+        @media (max-width: 480px) {
+            .galeria-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .galeria-item { height: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="actividades"></mi-header>
+
+    <!-- BOTÓN DE ACCIÓN ÚNICO DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20actividades%20y%20eventos%20escolares" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- 1. HERO BANNER -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes Actividades/baner1.jpg" class="hero-bg-slide active" alt="Galería deportiva" loading="eager">
+                <img src="Imagenes Actividades/baner2.jpg" class="hero-bg-slide" alt="Graduaciones" loading="lazy">
+                <img src="Imagenes Actividades/baner3.jpg" class="hero-bg-slide" alt="Cierres de reto" loading="lazy">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <h1>Galerías de actividades</h1>
+                    <p>Revive a través de nuestras imágenes los momentos más significativos de la vida escolar. Celebraciones, logros académicos y encuentros deportivos que enriquecen el desarrollo integral de nuestros estudiantes.</p>
+                    
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20iniciar%20el%20proceso%20de%20inscripci%C3%B3n" 
+                       class="btn-hero-inscripcion" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <span>Iniciar proceso de inscripción</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. INVITACIÓN A FACEBOOK COMPACTA -->
+        <section class="seccion-facebook-invite">
+            <div class="container">
+                <div class="facebook-invite-box">
+                    <div class="facebook-invite-content">
+                        <div class="facebook-invite-icon">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </div>
+                        <div class="facebook-invite-text">
+                            <h3>¡Conoce nuestro día a día en Facebook!</h3>
+                            <p>En nuestras redes sociales podrás encontrar fotos, noticias y álbumes completos de las vivencias escolares.</p>
+                        </div>
+                    </div>
+                    <a href="https://www.facebook.com/CASAntiguaG" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="btn-facebook-invite">
+                        <i class="fab fa-facebook" aria-hidden="true"></i>
+                        <span>Visitar página de Facebook</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PROPÓSITO Y BENEFICIOS -->
+        <section class="seccion-proposito">
+            <div class="container">
+                <h2 class="seccion-titulo">Importancia de nuestras actividades</h2>
+                <p class="seccion-subtitulo">En el Colegio Americano Superior organizamos eventos y convivencias que complementan la excelencia académica, promoviendo el desarrollo emocional, físico y social.</p>
+
+                <div class="beneficios-grid">
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon"><i class="fas fa-heart" aria-hidden="true"></i></div>
+                        <h3>Inteligencia emocional</h3>
+                        <p>Fomentamos el compañerismo, la empatía y la sana convivencia fuera del entorno del aula tradicional.</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon"><i class="fas fa-trophy" aria-hidden="true"></i></div>
+                        <h3>Deporte y trabajo en equipo</h3>
+                        <p>La participación en torneos estimula el liderazgo, la perseverancia y los hábitos de vida saludables.</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i></div>
+                        <h3>Proyección de conocimientos</h3>
+                        <p>Los cierres de unidad permiten a los niños argumentar y presentar soluciones a problemas reales con tecnología.</p>
+                    </div>
+
+                    <div class="beneficio-card">
+                        <div class="beneficio-icon"><i class="fas fa-users" aria-hidden="true"></i></div>
+                        <h3>Integración familiar</h3>
+                        <p>Involucramos a los padres de familia en las presentaciones y momentos de reconocimiento de sus hijos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. GALERÍA 2: DÍA DE LA MADRE -->
+        <section class="seccion-actividad-item">
+            <div class="container">
+                <div class="actividad-header">
+                    <div class="actividad-header-info">
+                        <span class="tag">Comunidad y familia</span>
+                        <h2>Homenaje al Día de la Madre</h2>
+                        <p>Un emotivo festival artístico en el cual los alumnos rinden tributo a sus madres mediante poesías, bailes y obras musicales preparadas en las áreas expresivas.</p>
+                    </div>
+                </div>
+
+                <div class="galeria-grid">
+                    <div class="galeria-item"><img src="Imagenes Actividades/Madre1.jpg" alt="Día de la Madre foto 1" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 1</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Madre2.jpg" alt="Día de la Madre foto 2" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 2</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Madre3.jpg" alt="Día de la Madre foto 3" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 3</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Madre4.jpg" alt="Día de la Madre foto 4" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 4</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Madre5.jpg" alt="Día de la Madre foto 5" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 5</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Madre6.jpg" alt="Día de la Madre foto 6" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 6</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. GALERÍA 3: CELEBRACIÓN DE INDEPENDENCIA (15 DE SEPTIEMBRE) -->
+        <section class="seccion-actividad-item">
+            <div class="container">
+                <div class="actividad-header">
+                    <div class="actividad-header-info">
+                        <span class="tag">Cultura y civismo</span>
+                        <h2>Celebración de Independencia (15 de Septiembre)</h2>
+                        <p>Honramos la patria con fervor cívico a través de desfiles, actos protocolarios, recorridos de antorchas y presentaciones culturales que fortalecen la identidad y el amor por nuestro país.</p>
+                    </div>
+                </div>
+
+                <div class="galeria-grid">
+                    <div class="galeria-item"><img src="Imagenes Actividades/Sep1.jpg" alt="15 de Septiembre foto 1" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 1</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Sep2.jpg" alt="15 de Septiembre foto 2" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 2</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Sep3.jpg" alt="15 de Septiembre foto 3" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 3</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/sep4.jpg" alt="15 de Septiembre foto 4" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 4</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/sep5.jpg" alt="15 de Septiembre foto 5" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 5</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/sep6.jpg" alt="15 de Septiembre foto 6" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 6</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. GALERÍA 4: JUEGOS MUNICIPALES -->
+        <section class="seccion-actividad-item">
+            <div class="container">
+                <div class="actividad-header">
+                    <div class="actividad-header-info">
+                        <span class="tag">Deportes y salud</span>
+                        <h2>Participación en Juegos Municipales</h2>
+                        <p>Nuestros atletas representan a la institución en competencias locales de fútbol, baloncesto y atletismo, fortaleciendo el espíritu deportivo y la disciplina.</p>
+                    </div>
+                </div>
+
+                <div class="galeria-grid">
+                    <div class="galeria-item"><img src="Imagenes Actividades/Deportes1.jpg" alt="Juegos Municipales foto 1" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 1</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Deportes2.jpg" alt="Juegos Municipales foto 2" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 2</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Deportes 3.jpg" alt="Juegos Municipales foto 3" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 3</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Deportes 4.jpg" alt="Juegos Municipales foto 4" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 4</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Deportes5.jpg" alt="Juegos Municipales foto 5" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 5</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/deportes6.jpg" alt="Juegos Municipales foto 6" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 6</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. GALERÍA 5: CIERRES DE RETO Y UNIDAD -->
+        <section class="seccion-actividad-item">
+            <div class="container">
+                <div class="actividad-header">
+                    <div class="actividad-header-info">
+                        <span class="tag">Académico e innovación</span>
+                        <h2>Cierres de Reto y Unidad (Knotion)</h2>
+                        <p>Al término de cada bloque formativo, los estudiantes exponen ante la comunidad escolar las propuestas y productos construidos con tecnología en iPad e idioma inglés para solucionar retos reales.</p>
+                    </div>
+                </div>
+
+                <div class="galeria-grid">
+                    <div class="galeria-item"><img src="Imagenes Actividades/Cierre1.jpg" alt="Cierre de Reto foto 1" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 1</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Cierre2.jpg" alt="Cierre de Reto foto 2" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 2</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Cierre3.jpg" alt="Cierre de Reto foto 3" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 3</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Cierre4.jpg" alt="Cierre de Reto foto 4" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 4</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Cierre 5.jpg" alt="Cierre de Reto foto 5" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 5</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Cierre6.jpg" alt="Cierre de Reto foto 6" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 6</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. GALERÍA 6: CLAUSURAS -->
+        <section class="seccion-actividad-item">
+            <div class="container">
+                <div class="actividad-header">
+                    <div class="actividad-header-info">
+                        <span class="tag">Protocolo institucional</span>
+                        <h2>Clausuras y graduaciones</h2>
+                        <p>Actos solemnes de graduación y entrega de diplomas donde se reconoce la perseverancia, el esfuerzo académico y la formación en valores de los alumnos graduandos.</p>
+                    </div>
+                </div>
+
+                <div class="galeria-grid">
+                    <div class="galeria-item"><img src="Imagenes Actividades/Clausura1.jpg" alt="Clausuras foto 1" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 1</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Clausura2.jpg" alt="Clausuras foto 2" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 2</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Clausura3.jpg" alt="Clausuras foto 3" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 3</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Clausura4.jpg" alt="Clausuras foto 4" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 4</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Clausura5.jpg" alt="Clausuras foto 5" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 5</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                    <div class="galeria-item"><img src="Imagenes Actividades/Clausura6.jpg" alt="Clausuras foto 6" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%2364748b%22 text-anchor=%22middle%22 dy=%22.3em%22>Foto 6</text></svg>';"><i class="fas fa-search-plus galeria-overlay-icon" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. NAVEGACIÓN A SUBMENÚS -->
+        <section class="cta-final">
+            <div class="container">
+                <h2>Explora más de nuestra institución</h2>
+                <p>Descubre nuestra historia, metodología de aprendizaje e integraciones institucionales.</p>
+
+                <div class="submenus-grid">
+                    <a href="Nosotros.html" class="submenu-btn-card">
+                        <i class="fas fa-school main-icon" aria-hidden="true"></i>
+                        <h3>Nosotros</h3>
+                        <span>Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Metodologia.html" class="submenu-btn-card">
+                        <i class="fas fa-brain main-icon" aria-hidden="true"></i>
+                        <h3>Metodología</h3>
+                        <span>Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Alianzas.html" class="submenu-btn-card">
+                        <i class="fas fa-handshake main-icon" aria-hidden="true"></i>
+                        <h3>Alianzas</h3>
+                        <span>Ver más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- VISOR EN PANTALLA COMPLETA (LIGHTBOX CON NAVEGACIÓN) -->
+    <div class="modal-lightbox" id="modalLightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos">
+        <span class="modal-close" id="modalClose" title="Cerrar">&times;</span>
+        <button class="modal-btn modal-btn-prev" id="modalPrev" title="Anterior" aria-label="Imagen anterior">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img class="modal-content-img" id="modalImg" src="" alt="Vista ampliada">
+        <button class="modal-btn modal-btn-next" id="modalNext" title="Siguiente" aria-label="Imagen siguiente">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // CARRUSEL DEL HERO
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.hero-bg-slide');
+
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 5000);
+            }
+
+            // LIGHTBOX CON NAVEGACIÓN DERECHA / IZQUIERDA
+            const modal = document.getElementById('modalLightbox');
+            const modalImg = document.getElementById('modalImg');
+            const modalClose = document.getElementById('modalClose');
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
+
+            let currentImagesList = [];
+            let currentImageIndex = 0;
+
+            function updateModalImage(index) {
+                if (currentImagesList.length === 0) return;
+                currentImageIndex = (index + currentImagesList.length) % currentImagesList.length;
+                const targetImg = currentImagesList[currentImageIndex];
+                modalImg.src = targetImg.src;
+                modalImg.alt = targetImg.alt || 'Imagen ampliada';
+            }
+
+            document.addEventListener('click', (e) => {
+                const item = e.target.closest('.galeria-item');
+                if (item) {
+                    const gallerySection = item.closest('.seccion-actividad-item');
+                    if (gallerySection) {
+                        const imgs = Array.from(gallerySection.querySelectorAll('.galeria-item img'));
+                        currentImagesList = imgs;
+                        const clickedImg = item.querySelector('img');
+                        currentImageIndex = imgs.indexOf(clickedImg);
+                        if (currentImageIndex !== -1) {
+                            updateModalImage(currentImageIndex);
+                            modal.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                        }
+                    }
+                }
+            });
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(() => { 
+                    modalImg.src = ''; 
+                    currentImagesList = [];
+                }, 300);
+            }
+
+            modalClose.addEventListener('click', closeModal);
+            
+            modalPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateModalImage(currentImageIndex - 1);
+            });
+
+            modalNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateModalImage(currentImageIndex + 1);
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // CONTROL CON TECLADO (Flechas <- y ->, Tecla ESC)
+            document.addEventListener('keydown', (e) => {
+                if (!modal.classList.contains('active')) return;
+
+                if (e.key === 'Escape') {
+                    closeModal();
+                } else if (e.key === 'ArrowLeft') {
+                    updateModalImage(currentImageIndex - 1);
+                } else if (e.key === 'ArrowRight') {
+                    updateModalImage(currentImageIndex + 1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

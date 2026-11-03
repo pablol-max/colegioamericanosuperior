@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES Y ESTILOS BASE
+           ========================================================= */
+        :root {
+            --bg-dark: #252440;        
+            --bg-light: #FFFFFF;       
+            --bg-alt: #F8FAFC;         
+            --text-dark: #111827;      
+            --text-muted: #4B5563;     
+            --accent-gold: #F5B411;    
+            --border-light: #E5E7EB;   
+            --primary-blue: #1E3A8A;
+            --menu-bg: #171b36;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE ÚNICO DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           3. HERO BANNER (NOSOTROS)
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding-top: 110px;
+            padding-bottom: 60px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; }
+        .hero-bg-slide.active { opacity: 0.85; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--menu-bg) 0%, rgba(23, 27, 54, 0.95) 30%, rgba(23, 27, 54, 0.45) 60%, rgba(23, 27, 54, 0.15) 85%, rgba(23, 27, 54, 0.05) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 3; width: 100%; }
+        .hero-content-box { max-width: 580px; }
+        .hero-content-box h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: #ffffff; letter-spacing: -0.5px; }
+        .hero-content-box p { font-size: 0.95rem; color: #e2e1f0; margin-bottom: 30px; line-height: 1.6; font-weight: 400; }
+
+        .btn-banner {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background-color: #2088b8; color: #ffffff; font-size: 0.9rem; font-weight: 800;
+            padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 180, 17, 0.4);
+        }
+        .btn-banner:hover, .btn-banner:focus-visible { background-color: #1a729b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 180, 17, 0.6); }
+
+        .carousel-dots-banner { position: absolute; bottom: 20px; right: 40px; display: flex; gap: 8px; z-index: 10; }
+        .dot-banner { width: 10px; height: 10px; background: rgba(255, 255, 255, 0.4); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: var(--accent-gold); width: 24px; border-radius: 10px; }
+
+        /* =========================================================
+           4. FRANJA DE INDICADORES CLAVE
+           ========================================================= */
+        .indicadores { background-color: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 35px 0; }
+        .indicadores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; text-align: center; }
+        .indicador-item { padding: 10px; }
+        .indicador-item .icono { font-size: 2.2rem; color: var(--primary-blue); margin-bottom: 8px; }
+        .indicador-item h4 { color: #0f172a; font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+        .indicador-item p { color: #64748b; font-size: 0.88rem; }
+
+        /* =========================================================
+           5. SECCIÓN NUESTRA HISTORIA
+           ========================================================= */
+        .seccion-historia { padding: 70px 0; background-color: #ffffff; border-bottom: 1px solid #e2e8f0; }
+        .historia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .historia-texto h2 { font-size: 2rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 16px; }
+        .historia-texto p { font-size: 0.95rem; color: #475569; margin-bottom: 14px; line-height: 1.6; }
+
+        .historia-media-video {
+            width: 100%; max-width: 320px; margin: 0 auto; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); background-color: #000000; aspect-ratio: 9 / 16; position: relative;
+        }
+        .historia-media-video video { width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+
+        /* =========================================================
+           6. SECCIÓN IDENTIDAD Y PROPUESTA
+           ========================================================= */
+        .seccion-identidad { padding: 70px 0; background-color: #f8fafc; }
+        .seccion-titulo { text-align: center; font-size: 2rem; color: var(--primary-blue); margin-bottom: 10px; font-weight: 800; }
+        .seccion-subtitulo { text-align: center; font-size: 1rem; color: #64748b; max-width: 700px; margin: 0 auto 40px auto; }
+        .identidad-cards-container { display: flex; flex-direction: column; gap: 25px; }
+
+        .propuesta-card {
+            background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 30px;
+            display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .propuesta-info h3 { font-size: 1.4rem; color: #0f172a; margin-bottom: 12px; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .propuesta-info h3 i { color: var(--primary-blue); }
+        .propuesta-list { list-style: none; }
+        .propuesta-list li { position: relative; padding-left: 28px; margin-bottom: 8px; font-size: 0.9rem; color: #334155; }
+        .propuesta-list li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--primary-blue); font-weight: bold; font-size: 1rem; }
+
+        .propuesta-side { 
+            background: #f8fafc; 
+            border-radius: 12px; 
+            padding: 22px; 
+            border-left: 4px solid var(--primary-blue);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .propuesta-side-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .propuesta-side-header i {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+        }
+        .propuesta-side h4 { font-size: 1rem; color: #0f172a; font-weight: 700; margin: 0; }
+        .propuesta-side p { font-size: 0.85rem; color: #64748b; margin: 0; }
+
+        /* =========================================================
+           7. SECCIÓN PILARES INSTITUCIONALES
+           ========================================================= */
+        .valores-seccion { background-color: #ffffff; padding: 70px 0; border-top: 1px solid #e2e8f0; }
+        .valores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .valor-card { 
+            background: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 16px; 
+            padding: 24px; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .valor-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06); }
+        
+        .valor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .valor-badge { 
+            background-color: #e0f2fe; 
+            color: var(--primary-blue); 
+            font-size: 0.78rem; 
+            font-weight: 700; 
+            padding: 4px 12px; 
+            border-radius: 20px; 
+        }
+        .valor-icon {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(30, 58, 138, 0.08);
+            color: var(--primary-blue);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .valor-card h3 { color: #1e293b; font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+        .valor-card p { color: #475569; font-size: 0.88rem; line-height: 1.5; }
+        
+        .valor-card.destacada { border: 2px solid var(--accent-gold); background: #ffffff; }
+        .valor-badge.especial { background-color: var(--accent-gold); color: var(--bg-dark); }
+        .valor-card.destacada .valor-icon {
+            background-color: rgba(245, 180, 17, 0.18);
+            color: #b48000;
+        }
+
+        /* =========================================================
+           8. BOTONES DE ACCIÓN A SUBMENÚS
+           ========================================================= */
+        .cta-final { 
+            background-color: #f8fafc; 
+            color: #1e293b; 
+            padding: 70px 20px; 
+            text-align: center; 
+            border-top: 1px solid #e2e8f0; 
+        }
+        .cta-final h2 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; color: var(--primary-blue); }
+        .cta-final p { font-size: 0.95rem; color: #64748b; margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .submenu-btn-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-decoration: none;
+            color: #1e293b;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .submenu-btn-card i.main-icon {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .submenu-btn-card h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .submenu-btn-card span {
+            font-size: 0.88rem;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+        }
+
+        .submenu-btn-card span i {
+            color: var(--primary-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .submenu-btn-card:hover, .submenu-btn-card:focus-visible {
+            background: #ffffff;
+            border-color: var(--primary-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .submenu-btn-card:hover i.main-icon, .submenu-btn-card:focus-visible i.main-icon {
+            transform: scale(1.15);
+        }
+
+        .submenu-btn-card:hover span i, .submenu-btn-card:focus-visible span i {
+            transform: translateX(4px);
+        }
+
+        /* =========================================================
+           9. RESPONSIVE / ADAPTACIÓN MÓVIL Y IPAD
+           ========================================================= */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.3rem; }
+            .historia-grid { grid-template-columns: 1fr; gap: 25px; }
+            .propuesta-card { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+            .hero-overlay { background: linear-gradient(180deg, var(--menu-bg) 0%, var(--menu-bg) 60%, rgba(23, 27, 54, 0.7) 100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="nosotros"></mi-header>
+
+    <!-- BOTÓN DE ACCIÓN ÚNICO DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Estoy%20interesado,%20m%C3%A1s%20informaci%C3%B3n%20al%20n%C3%BAmero%20del%20colegio%20americano%20superior" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- 1. HERO BANNER DE NOSOTROS -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes Nosotros/Cas1.jpg" class="hero-bg-slide active" alt="Aula de clases">
+                <img src="Imagenes Nosotros/Comedor.jpg" class="hero-bg-slide" alt="Estudiantes con iPad">
+                <img src="Imagenes Nosotros/Smart A.jpg" class="hero-bg-slide" alt="Trabajo en equipo">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <h1>Conoce nuestra institución</h1>
+                    <p>Más de 18 años formando líderes integrales, combinando la innovación tecnológica, el modelo educativo Knotion en iPad y sólidos valores humanos y familiares.</p>
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20el%20proceso%20de%20Inscripci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn-banner">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> Solicita más información
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Ir a la diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 3"></button>
+            </div>
+        </section>
+
+        <!-- 2. FRANJA DE INDICADORES CLAVE -->
+        <section class="indicadores">
+            <div class="container">
+                <div class="indicadores-grid">
+                    <div class="indicador-item">
+                        <div class="icono"><i class="fas fa-award" aria-hidden="true"></i></div>
+                        <h4>+18 años</h4>
+                        <p>Trayectoria dedicada a la excelencia académica y pedagógica.</p>
+                    </div>
+                    <div class="indicador-item">
+                        <div class="icono"><i class="fas fa-tablet-alt" aria-hidden="true"></i></div>
+                        <h4>Digital</h4>
+                        <p>Uso de iPad como estación interactiva sin carga de libros impresos.</p>
+                    </div>
+                    <div class="indicador-item">
+                        <div class="icono"><i class="fas fa-globe" aria-hidden="true"></i></div>
+                        <h4>Acreditación TOEFL</h4>
+                        <p>Certificación internacional de inglés en Primaria y Básico.</p>
+                    </div>
+                    <div class="indicador-item">
+                        <div class="icono"><i class="fas fa-users" aria-hidden="true"></i></div>
+                        <h4>Enfoque familiar</h4>
+                        <p>Promovemos la participación y valores humanos en la comunidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. NUESTRA HISTORIA -->
+        <section class="seccion-historia">
+            <div class="container">
+                <div class="historia-grid">
+                    <div class="historia-texto">
+                        <h2>Nuestra historia</h2>
+                        <p>El <strong>Colegio Americano Superior</strong> inició en el <strong>año 2008</strong> con la idea fundamental de dar un <strong>servicio educativo de excelencia y calidad</strong> a la población de La Antigua Guatemala.</p>
+                        <p>De la mano de su fundador y Director General, el <strong>Sr. Carlos Nevarez</strong>, ciudadano de raíces americanas, se inició este gran proyecto con visión de futuro, superando retos y siempre con la idea clara de lo que se quería lograr: ofrecer una formación integral contando con un <strong>sólido apoyo familiar</strong>, pilar indispensable en nuestro modelo.</p>
+                        <p>Al día de hoy el proyecto sigue en constante evolución, incorporando día con día <strong>innovación tecnológica</strong>, mejores docentes y metodologías activas de aprendizaje, lo cual nos ha permitido alcanzar un destacado nivel de <strong>crecimiento e integración comunitaria</strong>.</p>
+                        <p>En el <strong>año 2020</strong>, respondiendo a los desafíos globales, expandimos nuestras <strong>plataformas digitales e-Learning</strong> para potenciar la educación a distancia y el <strong>HomeSchooling</strong>, abriendo nuestras puertas a familias dentro y fuera de nuestras fronteras.</p>
+                    </div>
+                    <div class="historia-media-video">
+                        <video autoplay loop muted playsinline controls>
+                            <source src="Videos Nosotros/Instalacion.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PROPUESTA EDUCATIVA / IDENTIDAD -->
+        <section class="seccion-identidad">
+            <div class="container">
+                <h2 class="seccion-titulo">Nuestra identidad institucional</h2>
+                <p class="seccion-subtitulo">Unimos la rigurosidad académica con la pedagogía activa para brindar una formación completa y con sentido humano.</p>
+
+                <div class="identidad-cards-container">
+                    <!-- MISIÓN -->
+                    <div class="propuesta-card">
+                        <div class="propuesta-info">
+                            <h3><i class="fas fa-bullseye" aria-hidden="true"></i> Nuestra misión</h3>
+                            <p>Proporcionar un servicio educativo de calidad que favorezca el desarrollo integral de competencias en los alumnos, con una mente futurista. Estamos comprometidos a formar líderes con calidad humana.</p>
+                            <ul class="propuesta-list">
+                                <li>Desarrollo integral de competencias clave orientadas hacia un enfoque futurista y de innovación.</li>
+                                <li>Prestación de un servicio educativo de excelencia y alta calidad académica.</li>
+                                <li>Formación activa de líderes comprometidos con una profunda calidad humana y sentido social.</li>
+                            </ul>
+                        </div>
+                        <div class="propuesta-side">
+                            <div class="propuesta-side-header">
+                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                                <h4>Compromiso académico</h4>
+                            </div>
+                            <p>Acompañamos el crecimiento de cada alumno mediante metodologías personalizadas que maximizan su potencial.</p>
+                        </div>
+                    </div>
+
+                    <!-- VISIÓN -->
+                    <div class="propuesta-card">
+                        <div class="propuesta-info">
+                            <h3><i class="fas fa-eye" aria-hidden="true"></i> Nuestra visión</h3>
+                            <p>Formar ciudadanos íntegros que se reconozcan y sean capaces de enfrentar retos de la vida en los campos: personal, social, intelectual y profesional, permitiéndoles alcanzar sus metas en un marco moral, humanista y ético.</p>
+                            <ul class="propuesta-list">
+                                <li>Capacitación y preparación para superar retos en el ámbito personal, social, intelectual y profesional.</li>
+                                <li>Desarrollo y acompañamiento para el logro de metas y proyectos de vida.</li>
+                                <li>Formación en valores fundamentada en un marco moral, ético y humanista.</li>
+                            </ul>
+                        </div>
+                        <div class="propuesta-side" style="border-left-color: var(--accent-gold);">
+                            <div class="propuesta-side-header">
+                                <i class="fas fa-compass" style="color: #d99b00;" aria-hidden="true"></i>
+                                <h4>Liderazgo con futuro</h4>
+                            </div>
+                            <p>Evolucionamos constantemente para preparar ciudadanos globales listos para la era digital.</p>
+                        </div>
+                    </div>
+
+                    <!-- FILOSOFÍA -->
+                    <div class="propuesta-card">
+                        <div class="propuesta-info">
+                            <h3><i class="fas fa-lightbulb" aria-hidden="true"></i> Filosofía pedagógica</h3>
+                            <p>Sustituimos la enseñanza pasiva por un modelo interactivo donde el alumno investiga, propone soluciones a retos reales y utiliza la tecnología de forma ética y responsable.</p>
+                            <ul class="propuesta-list">
+                                <li>Proyectos integradores que relacionan distintas áreas del conocimiento.</li>
+                                <li>Uso cotidiano de iPad para la investigación, diseño y presentación de tareas.</li>
+                                <li>Acompañamiento docente permanente para garantizar un ambiente seguro, inclusivo y libre de bullying.</li>
+                            </ul>
+                        </div>
+                        <div class="propuesta-side" style="border-left-color: #10b981;">
+                            <div class="propuesta-side-header">
+                                <i class="fas fa-chalkboard-teacher" style="color: #10b981;" aria-hidden="true"></i>
+                                <h4>Aulas activas</h4>
+                            </div>
+                            <p>Los alumnos son los protagonistas de su aprendizaje, desarrollando autonomía y pensamiento propio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PILARES INSTITUCIONALES -->
+        <section class="valores-seccion">
+            <div class="container">
+                <h2 class="seccion-titulo">Nuestros pilares institucionales</h2>
+                <p class="seccion-subtitulo">Fundamentos sobre los cuales construimos la experiencia educativa en todos los niveles.</p>
+
+                <div class="valores-grid">
+                    <!-- PILAR 1 -->
+                    <div class="valor-card">
+                        <div class="valor-header">
+                            <span class="valor-badge">Pilar 1</span>
+                            <div class="valor-icon">
+                                <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <h3>Innovación tecnológica</h3>
+                        <p>Incorporamos dispositivos móviles, aplicaciones educativas avanzadas y metodologías activas que transforman el aprendizaje en una experiencia viva.</p>
+                    </div>
+
+                    <!-- PILAR 2 -->
+                    <div class="valor-card">
+                        <div class="valor-header">
+                            <span class="valor-badge">Pilar 2</span>
+                            <div class="valor-icon">
+                                <i class="fas fa-language" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <h3>Educación en inglés</h3>
+                        <p>Desarrollamos competencias lingüísticas en inglés con profesores nativos que permiten a los estudiantes comunicarse, investigar y certificarse internacionalmente (TOEFL).</p>
+                    </div>
+
+                    <!-- PILAR CENTRAL -->
+                    <div class="valor-card destacada">
+                        <div class="valor-header">
+                            <span class="valor-badge especial">Pilar central</span>
+                            <div class="valor-icon">
+                                <i class="fas fa-users-between-lines" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <h3>Núcleo familiar</h3>
+                        <p>Entendemos a la familia como aliada fundamental de la educación, manteniendo una comunicación estrecha entre padres, docentes y dirección.</p>
+                    </div>
+
+                    <!-- PILAR 4 -->
+                    <div class="valor-card">
+                        <div class="valor-header">
+                            <span class="valor-badge">Pilar 4</span>
+                            <div class="valor-icon">
+                                <i class="fas fa-square-root-variable" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <h3>Excelencia matemática</h3>
+                        <p>Fortalecemos la lógica, el análisis y el razonamiento cuantitativo desde los primeros niveles para asegurar el éxito en las ciencias avanzadas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. NAVEGACIÓN A SUBMENÚS -->
+        <section class="cta-final">
+            <div class="container">
+                <h2>Explora más de nosotros</h2>
+                <p>Descubre a detalle cómo transformamos la educación a través de nuestros métodos, alianzas estratégicas y vida estudiantil.</p>
+
+                <div class="submenus-grid">
+                    <a href="Metodologia.html" class="submenu-btn-card">
+                        <i class="fas fa-brain main-icon" aria-hidden="true"></i>
+                        <h3>Metodología</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Alianzas.html" class="submenu-btn-card">
+                        <i class="fas fa-handshake main-icon" aria-hidden="true"></i>
+                        <h3>Alianzas</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Actividades.html" class="submenu-btn-card">
+                        <i class="fas fa-calendar-alt main-icon" aria-hidden="true"></i>
+                        <h3>Actividades</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+
+    <!-- SCRIPT DEL CARRUSEL PROPIO DE LA PÁGINA -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+        });
+    </script>
+</body>
+</html>

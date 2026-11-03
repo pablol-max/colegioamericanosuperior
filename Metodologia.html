@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra metodología | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES Y ESTILOS BASE
+           ========================================================= */
+        :root {
+            --bg-dark: #1E3A8A;        
+            --bg-light: #FFFFFF;       
+            --bg-alt: #F8FAFC;         
+            --text-dark: #0F172A;      
+            --text-muted: #475569;     
+            --accent-gold: #F59E0B;    
+            --border-light: #E2E8F0;   
+            --primary-blue: #1E3A8A;
+            --light-blue: #38BDF8;
+            --menu-bg: #171b36;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE ÚNICO DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           3. HERO BANNER METODOLOGÍA
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #ffffff;
+            padding-top: 110px;
+            padding-bottom: 60px;
+            overflow: hidden;
+        }
+
+        .hero-bg-carousel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-bg-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; }
+        .hero-bg-slide.active { opacity: 0.85; }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--menu-bg) 0%, rgba(23, 27, 54, 0.95) 30%, rgba(23, 27, 54, 0.45) 60%, rgba(23, 27, 54, 0.15) 85%, rgba(23, 27, 54, 0.05) 100%);
+            z-index: 2;
+        }
+
+        .hero-container { position: relative; z-index: 3; width: 100%; }
+        .hero-content-box { max-width: 620px; }
+        .hero-content-box h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: #ffffff; letter-spacing: -0.5px; }
+        .hero-content-box p { font-size: 0.95rem; color: #e2e1f0; margin-bottom: 30px; line-height: 1.6; font-weight: 400; }
+
+        .btn-banner {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background-color: #2088b8; color: #ffffff; font-size: 0.9rem; font-weight: 800;
+            padding: 12px 28px; border-radius: 8px; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 180, 17, 0.4);
+        }
+        .btn-banner:hover, .btn-banner:focus-visible { background-color: #1a729b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245, 180, 17, 0.6); }
+
+        .carousel-dots-banner { position: absolute; bottom: 20px; right: 40px; display: flex; gap: 8px; z-index: 10; }
+        .dot-banner { width: 10px; height: 10px; background: rgba(255, 255, 255, 0.4); border: none; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; }
+        .dot-banner.active { background: var(--accent-gold); width: 24px; border-radius: 10px; }
+
+        /* =========================================================
+           4. SECCIONES DE CONTENIDO GENERAL
+           ========================================================= */
+        .seccion-blanca { background-color: #ffffff; padding: 75px 0; border-bottom: 1px solid #e2e8f0; }
+        .seccion-gris { background-color: #f8fafc; padding: 75px 0; border-bottom: 1px solid #e2e8f0; }
+        
+        .seccion-titulo { text-align: center; font-size: 2.1rem; color: var(--primary-blue); margin-bottom: 10px; font-weight: 800; letter-spacing: -0.3px; }
+        .seccion-subtitulo { text-align: center; font-size: 0.98rem; color: #64748b; max-width: 750px; margin: 0 auto 30px auto; }
+
+        /* =========================================================
+           5. ¿QUÉ ES KNOTION?
+           ========================================================= */
+        .knotion-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 40px; 
+            align-items: center; 
+        }
+
+        .knotion-col-left h2 { 
+            font-size: 2.2rem; 
+            color: var(--primary-blue); 
+            font-weight: 800; 
+            margin-bottom: 18px; 
+        }
+
+        .knotion-col-left p { 
+            font-size: 0.98rem; 
+            color: #475569; 
+            margin-bottom: 16px; 
+            line-height: 1.65; 
+        }
+
+        .innovacion-consciente-box {
+            margin-top: 25px;
+            padding: 20px 24px;
+            background-color: #F1F5F9;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 8px;
+        }
+
+        .innovacion-consciente-box h3 {
+            font-size: 1.15rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .innovacion-consciente-box h3 i { color: var(--accent-gold); }
+
+        .innovacion-consciente-box p {
+            font-size: 0.92rem;
+            color: #475569;
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        .knotion-col-right { position: relative; }
+
+        .knotion-img-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(30, 58, 138, 0.12);
+            border: 1px solid #e2e8f0;
+            height: 100%;
+            min-height: 380px;
+        }
+
+        .knotion-img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .knotion-img-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(23, 27, 54, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .knotion-img-badge p { font-size: 0.88rem; line-height: 1.4; margin: 0; color: #E2E8F0; }
+        .knotion-img-badge strong { color: var(--accent-gold); }
+
+        /* =========================================================
+           6. ¿CÓMO APRENDE UN ALUMNO CAS?
+           ========================================================= */
+        .retos-info-clean {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            font-size: 1.02rem;
+            color: #1e3a8a;
+            line-height: 1.6;
+        }
+
+        .retos-info-clean i {
+            color: var(--accent-gold);
+            margin-right: 6px;
+        }
+
+        .fases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+        .fase-card {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px 24px;
+            position: relative; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            display: flex; flex-direction: column; align-items: flex-start;
+        }
+        .fase-card:hover { transform: translateY(-5px); border-color: var(--primary-blue); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+        
+        .step-img-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--accent-gold);
+            margin-bottom: 18px;
+            background-color: #f1f5f9;
+            flex-shrink: 0;
+        }
+
+        .step-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .fase-card h3 { font-size: 1.25rem; color: #0f172a; font-weight: 800; margin-bottom: 8px; }
+        .fase-card p { font-size: 0.88rem; color: #64748b; line-height: 1.55; }
+
+        .quizzes-clean-section {
+            margin-top: 55px;
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 22px;
+            max-width: 950px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quizzes-clean-icon {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .quizzes-clean-content h3 {
+            color: var(--primary-blue);
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .quizzes-clean-content p {
+            color: #475569;
+            font-size: 0.98rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .quizzes-clean-content p strong {
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           7. ¿CÓMO EVALUAMOS?
+           ========================================================= */
+        .evaluacion-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .eval-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px 24px; text-align: center; }
+        .eval-icon { font-size: 2.2rem; color: var(--primary-blue); margin-bottom: 14px; }
+        .eval-item h3 { font-size: 1.2rem; color: #0f172a; font-weight: 800; margin-bottom: 8px; }
+        .eval-item p { font-size: 0.9rem; color: #64748b; line-height: 1.5; }
+
+        /* =========================================================
+           8. USO DE IPAD E INTEGRACIÓN EQUILIBRADA (ANCHO COMPLETO)
+           ========================================================= */
+        .dia-card-full {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .dia-card-full h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            line-height: 1.3;
+        }
+        .dia-card-full h3 i { font-size: 1.6rem; color: var(--accent-gold); }
+
+        .dia-text-lead { font-size: 1.02rem; color: #334155; margin-bottom: 12px; line-height: 1.65; text-align: center; }
+        .dia-text-sub { font-size: 0.95rem; color: #64748b; margin-bottom: 28px; line-height: 1.6; text-align: center; max-width: 850px; margin-left: auto; margin-right: auto; }
+
+        .dia-list-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; list-style: none; }
+        .dia-list-grid li { 
+            background: #F8FAFC;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            font-size: 0.9rem; 
+            color: #334155; 
+            font-weight: 600; 
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .dia-list-grid li i { color: var(--accent-gold); font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+        /* =========================================================
+           9. GARANTÍAS DEL COLEGIO
+           ========================================================= */
+        .garantias-interactive-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 30px;
+            position: relative;
+            min-height: 520px;
+        }
+
+        .wheel-wrapper {
+            position: relative;
+            width: 460px;
+            height: 460px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel-ring {
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border: 2px dashed #CBD5E1;
+            border-radius: 50%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .center-logo-box {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .center-logo-box img { max-width: 85%; max-height: 85%; object-fit: contain; transition: opacity 0.5s ease; }
+        .center-logo-text {
+            position: absolute;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-transform: uppercase;
+        }
+
+        .center-logo-box.show-text img { opacity: 0; }
+        .center-logo-text { opacity: 0; }
+        .center-logo-box.show-text .center-logo-text { opacity: 1; }
+
+        .wheel-node {
+            position: absolute;
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #E2E8F0;
+            color: var(--primary-blue);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            padding: 4px;
+            text-align: center;
+        }
+
+        .node-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .wheel-node i { font-size: 1.1rem; margin-bottom: 2px; }
+        .wheel-node:nth-child(odd) { border-color: var(--accent-gold); }
+        .wheel-node:nth-child(odd) i { color: var(--primary-blue); }
+        .wheel-node:nth-child(even) { border-color: var(--light-blue); }
+        .wheel-node:nth-child(even) i { color: var(--accent-gold); }
+
+        .wheel-node span.node-label {
+            font-size: 0.58rem;
+            font-weight: 700;
+            line-height: 1.05;
+            color: #334155;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+
+        .wheel-node:hover, .wheel-node.active {
+            background: #ffffff;
+            border-color: var(--primary-blue);
+            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.15);
+            z-index: 15;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .garantia-detail-card {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 10px 0;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .garantia-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: #b45309;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .garantia-title-box { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .garantia-title-box i { font-size: 2rem; color: var(--primary-blue); }
+        .garantia-title-box h3 { font-size: 1.55rem; color: var(--primary-blue); line-height: 1.2; font-weight: 800; }
+        .garantia-desc { font-size: 1.05rem; line-height: 1.65; color: #475569; }
+
+        .btn-resume-rotate {
+            display: none;
+            margin-top: 25px;
+            background: var(--primary-blue);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+        .btn-resume-rotate:hover, .btn-resume-rotate:focus-visible { background: #1a3275; }
+
+        .garantias-mobile-list { display: none; flex-direction: column; gap: 16px; margin-top: 30px; }
+        .garantia-item-mobile {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .garantia-item-mobile h3 { font-size: 1.1rem; color: #0f172a; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .garantia-item-mobile h3 i { color: var(--primary-blue); }
+        .garantia-item-mobile p { font-size: 0.9rem; color: #475569; line-height: 1.5; }
+
+        /* =========================================================
+           10. SUBMENÚS DE NAVEGACIÓN INFERIOR
+           ========================================================= */
+        .cta-final { background-color: #f8fafc; color: #1e293b; padding: 75px 20px; text-align: center; border-top: 1px solid #e2e8f0; }
+        .cta-final h2 { font-size: 2.1rem; font-weight: 800; margin-bottom: 8px; color: var(--primary-blue); }
+        .cta-final p { font-size: 0.98rem; color: #64748b; margin-bottom: 45px; max-width: 650px; margin-left: auto; margin-right: auto; }
+
+        .submenus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+
+        .submenu-btn-card {
+            background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px 24px;
+            text-decoration: none; color: #1e293b; transition: all 0.3s ease; display: flex;
+            flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .submenu-btn-card i.main-icon { font-size: 2.3rem; color: var(--primary-blue); margin-bottom: 14px; transition: transform 0.3s ease; }
+        .submenu-btn-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; color: #0f172a; }
+        .submenu-btn-card span { font-size: 0.88rem; color: var(--primary-blue); display: flex; align-items: center; gap: 6px; font-weight: 700; }
+        .submenu-btn-card span i { color: var(--primary-blue); transition: transform 0.3s ease; }
+
+        .submenu-btn-card:hover, .submenu-btn-card:focus-visible {
+            background: #ffffff; border-color: var(--primary-blue); transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+        .submenu-btn-card:hover i.main-icon, .submenu-btn-card:focus-visible i.main-icon { transform: scale(1.15); }
+        .submenu-btn-card:hover span i, .submenu-btn-card:focus-visible span i { transform: translateX(4px); }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+        @media (max-width: 991px) {
+            .hero-content-box h1 { font-size: 2.3rem; }
+            .knotion-grid { grid-template-columns: 1fr; gap: 30px; }
+            .quizzes-clean-section { flex-direction: column; text-align: center; align-items: center; }
+            .hero-overlay { background: linear-gradient(180deg, var(--menu-bg) 0%, var(--menu-bg) 60%, rgba(23, 27, 54, 0.7) 100%); }
+            .dia-list-grid { grid-template-columns: 1fr; }
+
+            .garantias-interactive-container { display: none !important; }
+            .garantias-mobile-list { display: flex !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER DINÁMICO REUTILIZABLE -->
+    <mi-header pagina-activa="metodologia"></mi-header>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/50250473131?text=Estoy%20interesado,%20m%C3%A1s%20informaci%C3%B3n%20al%20n%C3%BAmero%20del%20colegio%20americano%20superior" 
+       class="whatsapp-float" 
+       id="whatsapp-btn"
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Escríbenos por WhatsApp"
+       aria-label="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+    </a>
+
+    <main>
+        <!-- HERO BANNER METODOLOGÍA -->
+        <section class="hero-banner">
+            <div class="hero-bg-carousel">
+                <img src="Imagenes Metodologia/pantalla.jpg" class="hero-bg-slide active" alt="Estudiante trabajando con iPad en clase">
+                <img src="Imagenes Metodologia/knotrion.jpg" class="hero-bg-slide" alt="Estudiantes realizando trabajo colaborativo">
+                <img src="Imagenes Metodologia/prepri.jpg" class="hero-bg-slide" alt="Vista del aula de clases en Colegio Americano Superior">
+            </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-container">
+                <div class="hero-content-box">
+                    <h1>Nuestra metodología</h1>
+                    <p>En el Colegio Americano Superior transformamos la educación tradicional en una experiencia viva, interactiva y basada en retos que conectan los conocimientos académicos con la vida real.</p>
+                    <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20su%20metodolog%C3%ADa%20y%20admisiones" target="_blank" rel="noopener noreferrer" class="btn-banner">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i> Consultar admisiones
+                    </a>
+                </div>
+            </div>
+
+            <div class="carousel-dots-banner">
+                <button type="button" class="dot-banner active" aria-label="Ir a la diapositiva 1"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 2"></button>
+                <button type="button" class="dot-banner" aria-label="Ir a la diapositiva 3"></button>
+            </div>
+        </section>
+
+        <!-- 1. ¿QUÉ ES KNOTION? -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <div class="knotion-grid">
+                    <!-- Columna Izquierda: ¿Qué es Knotion? + Innovación Consciente -->
+                    <div class="knotion-col-left">
+                        <h2>¿Qué es Knotion?</h2>
+                        <p><strong>Knotion</strong> es nuestro ecosistema educativo digital de vanguardia que redefine la forma en que los alumnos interactúan con el conocimiento.</p>
+                        <p>A través de contenidos inmersivos en iPad, Knotion integra las áreas académicas con los Objetivos de Desarrollo Sostenible (ODS) de la ONU, permitiendo a los estudiantes investigar, crear y resolver problemáticas del mundo actual.</p>
+                        
+                        <!-- Bloque de Innovación Consciente -->
+                        <div class="innovacion-consciente-box">
+                            <h3><i class="fas fa-lightbulb" aria-hidden="true"></i> Innovación consciente</h3>
+                            <p>Knotion no es solo digitalizar libros; es un modelo pedagógico avanzado diseñado para desarrollar el pensamiento crítico, la conciencia global y la autonomía intelectual en cada estudiante desde temprana edad.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna Derecha: Imagen del Niño usando el iPad -->
+                    <div class="knotion-col-right">
+                        <div class="knotion-img-card">
+                            <img src="Imagenes Metodologia/ccn1.jpg" alt="Estudiante del Colegio Americano Superior interactuando con su iPad en la plataforma Knotion">
+                            <div class="knotion-img-badge">
+                                <p><strong>Aprendizaje digital e interactivo:</strong> Los estudiantes aprenden haciendo, investigando y resolviendo retos con tecnología Knotion.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ¿CÓMO APRENDE UN ALUMNO CAS? -->
+        <section class="seccion-gris">
+            <div class="container">
+                <h2 class="seccion-titulo">¿Cómo aprende un alumno CAS?</h2>
+                <p class="seccion-subtitulo">El ciclo escolar se organiza mediante la resolución de retos prácticos e interactivos.</p>
+
+                <p class="retos-info-clean">
+                    <i class="fas fa-bullseye" aria-hidden="true"></i> El año escolar consta de <strong>8 retos</strong> (2 retos por unidad académica). Cada reto se compone de <strong>20 sesiones de clases</strong> divididas en 4 fases estructuradas:
+                </p>
+
+                <div class="fases-grid">
+                    <article class="fase-card">
+                        <div class="step-img-container">
+                            <img src="Imagenes Metodologia/Identifico.jpg" alt="Identifico - Estudiante analizando problema">
+                        </div>
+                        <h3>Identifico</h3>
+                        <p>El estudiante se conecta y se sensibiliza ante un problema o tema de interés global y del entorno.</p>
+                    </article>
+
+                    <article class="fase-card">
+                        <div class="step-img-container">
+                            <img src="Imagenes Metodologia/Mapeo.jpg" alt="Mapeo - Investigación y estudio">
+                        </div>
+                        <h3>Mapeo</h3>
+                        <p>El estudiante investiga, sondea y analiza su entorno personal, social o emocional para comprender la problemática.</p>
+                    </article>
+
+                    <article class="fase-card">
+                        <div class="step-img-container">
+                            <img src="Imagenes Metodologia/Propongo.jpg" alt="Propongo - Trabajo en equipo e ideas">
+                        </div>
+                        <h3>Propongo</h3>
+                        <p>El estudiante diseña y plantea alternativas y soluciones creativas para resolver el reto utilizando los recursos disponibles.</p>
+                    </article>
+
+                    <article class="fase-card">
+                        <div class="step-img-container">
+                            <img src="Imagenes Metodologia/Actúo.jpg" alt="Actúo - Presentación y acción">
+                        </div>
+                        <h3>Actúo</h3>
+                        <p>Se ejecuta el plan de acción de manera práctica para generar un impacto real y positivo.</p>
+                    </article>
+                </div>
+
+                <div class="quizzes-clean-section">
+                    <i class="fas fa-graduation-cap quizzes-clean-icon" aria-hidden="true"></i>
+                    <div class="quizzes-clean-content">
+                        <h3>Verificación y tutorías gratuitas de nivelación</h3>
+                        <p>Todos los viernes realizamos <strong>quizzes</strong> para verificar que los contenidos queden perfectamente fijados. Si se detectan brechas de aprendizaje, asignamos <strong>tutorías gratuitas</strong> para nivelar al estudiante y asegurar una educación realmente efectiva.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ¿CÓMO EVALUAMOS? -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <h2 class="seccion-titulo">¿Cómo evaluamos?</h2>
+                <p class="seccion-subtitulo">Aseguramos un seguimiento constante y transparente mediante una evaluación formativa y sumativa equilibrada.</p>
+
+                <div class="evaluacion-grid">
+                    <article class="eval-item">
+                        <div class="eval-icon"><i class="fas fa-file-signature" aria-hidden="true"></i></div>
+                        <h3>6 quizzes por unidad</h3>
+                        <p>Pruebas cortas diseñadas para medir la comprensión semanal del estudiante y detectar a tiempo si requiere reforzamiento.</p>
+                    </article>
+
+                    <article class="eval-item">
+                        <div class="eval-icon"><i class="fas fa-tasks" aria-hidden="true"></i></div>
+                        <h3>2 parciales</h3>
+                        <p>Evaluaciones intermedias que consolidan los aprendizajes clave desarrollados en los retos de cada bloque.</p>
+                    </article>
+
+                    <article class="eval-item">
+                        <div class="eval-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
+                        <h3>1 evaluación final</h3>
+                        <p>Prueba integradora al cierre de la unidad para certificar las competencias alcanzadas de forma integral.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. USO DE IPAD E INTEGRACIÓN EQUILIBRADA -->
+        <section class="seccion-gris">
+            <div class="container">
+                <article class="dia-card-full">
+                    <h3><i class="fas fa-tablet-alt" aria-hidden="true"></i> Uso del iPad e integración equilibrada</h3>
+                    <p class="dia-text-lead">El iPad es el dispositivo mediante el cual accedemos a nuestro ecosistema <strong>Knotion</strong>, facilitando aprendizajes inmersivos, interactivos y por experiencias vivenciales.</p>
+                    <p class="dia-text-sub"><strong>Educación balanceada:</strong> No dejamos la escritura y el papel de lado. Combinamos armónicamente la tecnología móvil para investigación y diseño con el trabajo tradicional en cuadernos para fortalecer la caligrafía y motricidad.</p>
+                    <ul class="dia-list-grid">
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Uso ético y guiado de la tecnología en el aula.</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Reducción significativa de la carga de libros impresos.</li>
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i> Desarrollo paralelo de competencias digitales y lectoescritura.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- 5. GARANTÍAS DEL COLEGIO AMERICANO SUPERIOR -->
+        <section class="seccion-blanca">
+            <div class="container">
+                <h2 class="seccion-titulo">Las garantías del Colegio Americano Superior</h2>
+                <p class="seccion-subtitulo">Haz clic en cualquiera de las garantías para pausar y leer en detalle cada pilar de nuestra excelencia educativa.</p>
+
+                <!-- ANILLO INTERACTIVO DE 9 GARANTÍAS -->
+                <div class="garantias-interactive-container" id="interactiveContainer">
+                    <div class="wheel-wrapper">
+                        <div class="wheel-ring" id="wheelRing">
+                            <button type="button" class="wheel-node active" data-index="0" aria-label="Garantía: Sistema americano">
+                                <span class="node-content">
+                                    <i class="fas fa-file-signature" aria-hidden="true"></i>
+                                    <span class="node-label">Sistema americano</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="1" aria-label="Garantía: Motivación">
+                                <span class="node-content">
+                                    <i class="fas fa-rocket" aria-hidden="true"></i>
+                                    <span class="node-label">Motivación</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="2" aria-label="Garantía: Convivencia">
+                                <span class="node-content">
+                                    <i class="fas fa-heart" aria-hidden="true"></i>
+                                    <span class="node-label">Convivencia</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="3" aria-label="Garantía: Matemática">
+                                <span class="node-content">
+                                    <i class="fas fa-calculator" aria-hidden="true"></i>
+                                    <span class="node-label">Matemática</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="4" aria-label="Garantía: Alto nivel">
+                                <span class="node-content">
+                                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                                    <span class="node-label">Alto nivel</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="5" aria-label="Garantía: Tutorías">
+                                <span class="node-content">
+                                    <i class="fas fa-user-graduate" aria-hidden="true"></i>
+                                    <span class="node-label">Tutorías</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="6" aria-label="Garantía: Docentes">
+                                <span class="node-content">
+                                    <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                                    <span class="node-label">Docentes</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="7" aria-label="Garantía: 180 días">
+                                <span class="node-content">
+                                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                                    <span class="node-label">180 días</span>
+                                </span>
+                            </button>
+                            <button type="button" class="wheel-node" data-index="8" aria-label="Garantía: Plataforma">
+                                <span class="node-content">
+                                    <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                                    <span class="node-label">Plataforma</span>
+                                </span>
+                            </button>
+                        </div>
+
+                        <!-- LOGO CENTRAL -->
+                        <div class="center-logo-box" id="centerBox">
+                            <img src="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico" alt="Logo Colegio">
+                            <span class="center-logo-text">GARANTÍAS CAS</span>
+                        </div>
+                    </div>
+
+                    <!-- DETALLE DE GARANTÍA INTEGRADO -->
+                    <div class="garantia-detail-card" id="garantiaCard">
+                        <span class="garantia-badge" id="garantiaBadge">Garantía 1 de 9</span>
+                        <div class="garantia-title-box">
+                            <i class="fas fa-file-signature" id="garantiaIcon" aria-hidden="true"></i>
+                            <h3 id="garantiaTitle">Novedoso sistema de evaluación americano</h3>
+                        </div>
+                        <p class="garantia-desc" id="garantiaDesc">
+                            Evaluamos continuamente el desarrollo de habilidades mediante quizzes semanales, parciales y proyectos aplicados, enfocándonos en el logro real de competencias y no en la simple memorización.
+                        </p>
+                        <button type="button" class="btn-resume-rotate" id="resumeBtn">
+                            <i class="fas fa-play" aria-hidden="true"></i> Reanudar rotación automática
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LISTADO MÓVIL DE LAS 9 GARANTÍAS -->
+                <div class="garantias-mobile-list">
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-file-signature" aria-hidden="true"></i> Novedoso sistema de evaluación americano</h3>
+                        <p>Evaluamos continuamente el desarrollo de habilidades mediante quizzes semanales, parciales y proyectos aplicados, enfocándonos en el logro real de competencias y no en la simple memorización.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-rocket" aria-hidden="true"></i> Motivación académica</h3>
+                        <p>Impulsamos la curiosidad natural del estudiante vinculando el aprendizaje con retos inmersivos de la vida real, generando interés genuino y pasión por descubrir nuevos conocimientos.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-heart" aria-hidden="true"></i> Clima de convivencia escolar</h3>
+                        <p>Promovemos un ambiente seguro, inclusivo y fundamentado en el respeto mutuo, donde cada alumno se siente valorado, respaldado e inspirado para expresarse con libertad.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-calculator" aria-hidden="true"></i> Matemática de alto nivel</h3>
+                        <p>Implementamos un programa estructurado que desarrolla el pensamiento lógico, analítico y razonamiento numérico avanzado desde los primeros años de formación.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-graduation-cap" aria-hidden="true"></i> Alto nivel académico</h3>
+                        <p>Estándares educativos internacionales alineados con competencias del siglo XXI, preparando a nuestros graduados para destacar con éxito en el ámbito universitario local e internacional.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-user-graduate" aria-hidden="true"></i> Sistema de tutoría gratuita</h3>
+                        <p>Brindamos soporte y refuerzo educativo sin costo adicional para nivelar a los alumnos que requieran afianzar conceptos clave detectados en las verificaciones semanales.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Profesores tecnificados y capacitados</h3>
+                        <p>Equipo docente altamente cualificado, en constante actualización tecnológica y pedagógica para guiar con maestría el aprendizaje digital e inmersivo.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-calendar-check" aria-hidden="true"></i> 180 días de clases efectivos</h3>
+                        <p>Garantizamos el cumplimiento riguroso del calendario escolar con jornadas académicas de alto valor pedagógico sin interrupciones.</p>
+                    </article>
+                    <article class="garantia-item-mobile">
+                        <h3><i class="fas fa-mobile-alt" aria-hidden="true"></i> Plataforma de padres</h3>
+                        <p>Acceso permanente a herramientas digitales donde los padres pueden consultar calificaciones, tareas, avisos y dar seguimiento cercano al progreso de sus hijos en tiempo real.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAVEGACIÓN A OTROS SUBMENÚS -->
+        <section class="cta-final">
+            <div class="container">
+                <h2>Explora más de nosotros</h2>
+                <p>Descubre a detalle cómo transformamos la educación a través de nuestras alianzas estratégicas y la vida estudiantil.</p>
+                
+                <div class="submenus-grid">
+                    <a href="Nosotros.html" class="submenu-btn-card">
+                        <i class="fas fa-university main-icon" aria-hidden="true"></i>
+                        <h3>Nosotros</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Alianzas.html" class="submenu-btn-card">
+                        <i class="fas fa-handshake main-icon" aria-hidden="true"></i>
+                        <h3>Alianzas</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+
+                    <a href="Actividades.html" class="submenu-btn-card">
+                        <i class="fas fa-calendar-alt main-icon" aria-hidden="true"></i>
+                        <h3>Actividades</h3>
+                        <span>Conocer más <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER DINÁMICO REUTILIZABLE -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DEL SCRIPT DE COMPONENTES GLOBALES -->
+    <script src="Componentes.js"></script>
+
+    <!-- INICIALIZACIÓN DE SCRIPTS INTERACTIVOS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Carousel Hero Banner ---
+            let currentBannerSlide = 0;
+            const bannerSlides = document.querySelectorAll('.hero-bg-slide');
+            const bannerDots = document.querySelectorAll('.dot-banner');
+
+            function setBannerSlide(index) {
+                if (bannerSlides.length === 0) return;
+                bannerSlides[currentBannerSlide].classList.remove('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.remove('active');
+                currentBannerSlide = index;
+                bannerSlides[currentBannerSlide].classList.add('active');
+                if (bannerDots[currentBannerSlide]) bannerDots[currentBannerSlide].classList.add('active');
+            }
+
+            bannerDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => setBannerSlide(index));
+            });
+
+            function nextBannerSlide() {
+                if (bannerSlides.length === 0) return;
+                let index = (currentBannerSlide + 1) % bannerSlides.length;
+                setBannerSlide(index);
+            }
+
+            setInterval(nextBannerSlide, 4500);
+
+            // --- Alternancia del Logo Central cada 2 Segundos ---
+            const centerBox = document.getElementById('centerBox');
+            if (centerBox) {
+                setInterval(() => {
+                    centerBox.classList.toggle('show-text');
+                }, 2000);
+            }
+
+            // --- Rueda Interactiva de Garantías ---
+            const garantiasData = [
+                {
+                    icon: "fa-file-signature",
+                    title: "Novedoso sistema de evaluación americano",
+                    desc: "Evaluamos continuamente el desarrollo de habilidades mediante quizzes semanales, parciales y proyectos aplicados, enfocándonos en el logro real de competencias y no en la simple memorización."
+                },
+                {
+                    icon: "fa-rocket",
+                    title: "Motivación académica",
+                    desc: "Impulsamos la curiosidad natural del estudiante vinculando el aprendizaje con retos inmersivos de la vida real, generando interés genuino y pasión por descubrir nuevos conocimientos."
+                },
+                {
+                    icon: "fa-heart",
+                    title: "Clima de convivencia escolar",
+                    desc: "Promovemos un ambiente seguro, inclusivo y fundamentado en el respeto mutuo, donde cada alumno se siente valorado, respaldado e inspirado para expresarse con libertad."
+                },
+                {
+                    icon: "fa-calculator",
+                    title: "Matemática de alto nivel",
+                    desc: "Implementamos un programa estructurado que desarrolla el pensamiento lógico, analítico y razonamiento numérico avanzado desde los primeros años de formación."
+                },
+                {
+                    icon: "fa-graduation-cap",
+                    title: "Alto nivel académico",
+                    desc: "Estándares educativos internacionales alineados con competencias del siglo XXI, preparando a nuestros graduados para destacar con éxito en el ámbito universitario local e internacional."
+                },
+                {
+                    icon: "fa-user-graduate",
+                    title: "Sistema de tutoría gratuita",
+                    desc: "Brindamos soporte y refuerzo educativo sin costo adicional para nivelar a los alumnos que requieran afianzar conceptos clave detectados en las verificaciones semanales."
+                },
+                {
+                    icon: "fa-chalkboard-teacher",
+                    title: "Profesores tecnificados y capacitados",
+                    desc: "Equipo docente altamente cualificado, en constante actualización tecnológica y pedagógica para guiar con maestría el aprendizaje digital e inmersivo."
+                },
+                {
+                    icon: "fa-calendar-check",
+                    title: "180 días de clases efectivos",
+                    desc: "Garantizamos el cumplimiento riguroso del calendario escolar con jornadas académicas de alto valor pedagógico sin interrupciones."
+                },
+                {
+                    icon: "fa-mobile-alt",
+                    title: "Plataforma de padres",
+                    desc: "Acceso permanente a herramientas digitales donde los padres pueden consultar calificaciones, tareas, avisos y dar seguimiento cercano al progreso de sus hijos en tiempo real."
+                }
+            ];
+
+            const nodes = document.querySelectorAll('.wheel-node');
+            const ring = document.getElementById('wheelRing');
+            const card = document.getElementById('garantiaCard');
+            const badge = document.getElementById('garantiaBadge');
+            const icon = document.getElementById('garantiaIcon');
+            const title = document.getElementById('garantiaTitle');
+            const desc = document.getElementById('garantiaDesc');
+            const resumeBtn = document.getElementById('resumeBtn');
+
+            if (!ring || nodes.length === 0) return;
+
+            let currentIndex = 0;
+            let autoRotateInterval = null;
+            let isUserPaused = false;
+            const totalNodes = nodes.length;
+            const angleStep = 360 / totalNodes;
+
+            nodes.forEach((node, idx) => {
+                const angle = idx * angleStep - 90;
+                const rad = angle * (Math.PI / 180);
+                
+                const radius = 190; 
+                const x = radius * Math.cos(rad);
+                const y = radius * Math.sin(rad);
+
+                node.style.left = `calc(50% + ${x}px)`;
+                node.style.top = `calc(50% + ${y}px)`;
+
+                node.addEventListener('click', () => {
+                    selectGarantia(idx);
+                    isUserPaused = true;
+                    stopAutoRotate();
+                    if(resumeBtn) resumeBtn.style.display = 'inline-flex';
+                });
+            });
+
+            function selectGarantia(index) {
+                currentIndex = index;
+                const targetAngle = -currentIndex * angleStep;
+                ring.style.transform = `rotate(${targetAngle}deg)`;
+
+                nodes.forEach((node, i) => {
+                    const content = node.querySelector('.node-content');
+                    if (content) {
+                        content.style.transform = `rotate(${-targetAngle}deg)`;
+                    }
+
+                    if (i === index) {
+                        node.classList.add('active');
+                    } else {
+                        node.classList.remove('active');
+                    }
+                });
+
+                if (card) {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+
+                    setTimeout(() => {
+                        const data = garantiasData[index];
+                        if (badge) badge.textContent = `Garantía ${index + 1} de ${totalNodes}`;
+                        if (icon) icon.className = `fas ${data.icon}`;
+                        if (title) title.textContent = data.title;
+                        if (desc) desc.textContent = data.desc;
+
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 150);
+                }
+            }
+
+            function startAutoRotate() {
+                if (!autoRotateInterval && !isUserPaused) {
+                    autoRotateInterval = setInterval(() => {
+                        let nextIndex = (currentIndex + 1) % totalNodes;
+                        selectGarantia(nextIndex);
+                    }, 2500);
+                }
+            }
+
+            function stopAutoRotate() {
+                if (autoRotateInterval) {
+                    clearInterval(autoRotateInterval);
+                    autoRotateInterval = null;
+                }
+            }
+
+            if (resumeBtn) {
+                resumeBtn.addEventListener('click', () => {
+                    isUserPaused = false;
+                    resumeBtn.style.display = 'none';
+                    startAutoRotate();
+                });
+            }
+
+            selectGarantia(0);
+            startAutoRotate();
+        });
+    </script>
+</body>
+</html>

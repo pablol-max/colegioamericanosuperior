@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Colegio Americano Superior</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/pablol-max/mi-sitiocas/refs/heads/main/1000186930%20(1).ico">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        /* =========================================================
+           1. VARIABLES GLOBALES
+           ========================================================= */
+        :root {
+            --bg-dark: #252440;        
+            --bg-light: #FFFFFF;       
+            --bg-alt: #F8FAFC;         
+            --text-dark: #111827;      
+            --text-muted: #4B5563;     
+            --accent-gold: #F5B411;    
+            --border-light: #E5E7EB;   
+            --primary-blue: #1E3A8A;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+        /* =========================================================
+           2. BOTÓN FLOTANTE ÚNICO DE WHATSAPP
+           ========================================================= */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #20ba5a;
+            color: #FFF;
+        }
+
+        /* =========================================================
+           3. ESTILOS DEL ENCABEZADO Y NAVEGACIÓN
+           ========================================================= */
+        header { 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; z-index: 1000; 
+            background: rgba(23, 27, 54, 0.90); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 10px 2%; max-width: 1480px; margin: 0 auto; position: relative; 
+        } 
+        
+        .brand-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; z-index: 1001; }
+        .brand-logo .brand-icon { width: 46px; height: 46px; object-fit: contain; border-radius: 6px; }
+        .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .brand-text .line-1, .brand-text .line-2, .brand-text .line-3 {
+            font-size: 0.72rem; font-weight: 800; color: #FFFFFF; letter-spacing: 0.3px; text-transform: capitalize;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 0; align-items: center; }
+        .nav-links > li { display: flex; align-items: center; height: 100%; }
+        
+        .nav-links > li:not(:last-child):not(.mobile-portal-item):not(.mobile-social-menu)::after {
+            content: "";
+            display: inline-block;
+            width: 1px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: 0 10px;
+        }
+
+        .nav-links a { text-decoration: none; color: #E2E1F0; font-size: 0.8rem; font-weight: 600; transition: color 0.3s; white-space: nowrap; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-gold); }
+
+        .dropdown { position: relative; display: flex; align-items: center; }
+        .dropdown-toggle { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; line-height: 1; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 0; background: rgba(25, 24, 45, 0.95);
+            backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; padding: 8px 0; min-width: 160px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); opacity: 0; visibility: hidden;
+            transform: translateY(10px); transition: all 0.3s ease; list-style: none; z-index: 1002;
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li { display: block; }
+        .dropdown-menu li a { display: block; padding: 8px 14px; font-size: 0.8rem; color: #E2E1F0; }
+        .dropdown-menu li a:hover { background: rgba(245, 180, 17, 0.15); color: var(--accent-gold); }
+
+        .header-actions-desktop { display: flex; align-items: center; gap: 10px; }
+        .desktop-social-links { display: flex; align-items: center; gap: 10px; border-right: 1px solid rgba(255, 255, 255, 0.2); padding-right: 10px; }
+        .desktop-social-links a { color: #E2E1F0; font-size: 0.9rem; transition: color 0.3s ease, transform 0.2s ease; text-decoration: none; }
+        .desktop-social-links a:hover { color: var(--accent-gold); transform: translateY(-2px); }
+
+        .btn-portal {
+            background: transparent !important; color: #FFFFFF !important; border: 1.5px solid #F5B411;
+            padding: 6px 14px; border-radius: 20px; font-weight: 700 !important; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s ease; font-size: 0.78rem; white-space: nowrap; 
+        }
+        .btn-portal:hover { background: #FFFFFF !important; color: var(--bg-dark) !important; border-color: #FFFFFF; transform: translateY(-2px); }
+
+        .mobile-portal-item, .mobile-social-menu { display: none !important; }
+        .menu-toggle { display: none; background: none; border: none; color: #FFF; font-size: 1.5rem; cursor: pointer; z-index: 1001; margin-left: auto; }
+
+        /* =========================================================
+           4. SECCIÓN 1: BANNER Y CARRUSEL
+           ========================================================= */
+        .hero-full-banner {
+            width: 100vw; position: relative; left: 50%; right: 50%;
+            margin-left: -50vw; margin-right: -50vw; margin-top: 0;
+            height: 70vh; min-height: 450px; max-height: 620px; overflow: hidden;
+        }
+
+        .carousel-container { width: 100%; height: 100%; position: relative; }
+        .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; z-index: 1; }
+        .carousel-slide.active { opacity: 1; z-index: 2; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+
+        .carousel-dots { position: absolute; bottom: 150px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 15; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.6); cursor: pointer; transition: all 0.3s ease; }
+        .dot.active { background: var(--accent-gold); width: 28px; border-radius: 10px; box-shadow: 0 0 10px rgba(245, 180, 17, 0.8); }
+        
+        .hero-full-banner::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 260px; 
+            background: linear-gradient(to bottom, rgba(24, 22, 58, 0) 0%, rgba(37, 36, 64, 0.15) 30%, rgba(37, 36, 64, 0.65) 70%, var(--bg-dark) 100%);
+            pointer-events: none; z-index: 5;
+        }
+
+        .hero-intro { 
+            padding: 0 5% 30px; max-width: 900px; margin: -40px auto 0; 
+            text-align: center; position: relative; z-index: 10;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .hero-intro h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.25; margin-bottom: 14px; color: #FFFFFF; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
+        .hero-intro h1 span { color: var(--accent-gold); display: block; }
+        .hero-intro p { font-size: 1.05rem; color: #E2E1F0; max-width: 780px; margin-bottom: 20px; line-height: 1.6; }
+
+        .scroll-down-arrow {
+            margin-top: 5px; display: inline-flex; align-items: center; justify-content: center;
+            color: #FFFFFF; font-size: 2rem; text-decoration: none; background: transparent;
+            border: none; transition: transform 0.3s ease, color 0.3s ease; animation: bounce 2s infinite;
+        }
+        .scroll-down-arrow:hover { color: var(--accent-gold); transform: translateY(5px); }
+
+        .scroll-down-arrow.dark-arrow { color: var(--primary-blue); margin-top: 20px; font-size: 1.8rem; }
+        .scroll-down-arrow.dark-arrow:hover { color: var(--accent-gold); }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(8px); }
+            60% { transform: translateY(4px); }
+        }
+
+        .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* =========================================================
+           5. SECCIÓN 2: BIENVENIDA Y PILARES
+           ========================================================= */
+        .section-welcome { 
+            background-color: #FFFFFF; color: var(--text-dark); padding: 40px 5% 30px; 
+            width: 100vw; position: relative; left: 50%; right: 50%;
+            margin-left: -50vw; margin-right: -50vw; border-bottom: 1px solid var(--border-light);
+            scroll-margin-top: 75px; display: flex; flex-direction: column; align-items: center;
+            justify-content: space-between; min-height: calc(100vh - 75px);
+        }
+
+        .welcome-content { text-align: center; max-width: 850px; margin: 0 auto 30px; }
+        .welcome-content h2 { font-size: 2.1rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 15px; }
+        .welcome-content p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+
+        .btn-admissions {
+            background-color: var(--accent-gold); color: #feffff; padding: 11px 30px;
+            border-radius: 30px; font-weight: 800; font-size: 0.92rem; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(245, 180, 17, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-admissions:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(245, 180, 17, 0.6); background-color: #e5a503; }
+
+        .grid-pilares { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1320px; margin: 0 auto; text-align: center; width: 100%; }
+        .pilar-item { padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        .pilar-icon { font-size: 2.5rem; color: #4B5563; margin-bottom: 10px; }
+        .pilar-item h3 { font-size: 1.15rem; font-weight: 800; color: #111827; margin-bottom: 6px; }
+        .pilar-item p { font-size: 0.85rem; color: #6B7280; line-height: 1.4; }
+
+        /* =========================================================
+           6. SECCIÓN 3: NIVELES EDUCATIVOS
+           ========================================================= */
+        .section-levels { 
+            background-color: var(--bg-alt); color: var(--text-dark); padding: 60px 5%; 
+            width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; border-bottom: 1px solid var(--border-light);
+            scroll-margin-top: 75px;
+        }
+
+        .grid-levels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1280px; margin: 0 auto; }
+        .level-card { background: #FFFFFF; border: 1px solid var(--border-light); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .level-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); }
+        .level-banner { width: 100%; height: 160px; position: relative; overflow: hidden; }
+        .level-banner img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .level-card:hover .level-banner img { transform: scale(1.05); }
+
+        .level-body { padding: 20px 18px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .level-body h3 { font-size: 1.25rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 10px; }
+        .level-body p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 18px; }
+
+        .btn-level { width: 100%; text-align: center; background: #F3F4F6; color: var(--primary-blue); border: 1px solid #D1D5DB; padding: 9px 0; border-radius: 10px; font-weight: 700; font-size: 0.85rem; text-decoration: none; transition: all 0.3s ease; margin-top: auto; }
+        .btn-level:hover { background: var(--primary-blue); color: #FFFFFF; border-color: var(--primary-blue); }
+
+        /* =========================================================
+           6.B. SECCIÓN DESTACADA: HOMESCHOOLING EXPLICACIÓN
+           ========================================================= */
+        .homeschooling-feature {
+            max-width: 1280px;
+            margin: 50px auto 0;
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .hs-image-col {
+            flex: 1 1 450px;
+            position: relative;
+            min-height: 350px;
+        }
+
+        .hs-image-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .hs-content-col {
+            flex: 1 1 500px;
+            padding: 40px;
+        }
+
+        .hs-badge {
+            display: inline-block;
+            background-color: rgba(245, 180, 17, 0.15);
+            color: #D97706;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hs-content-col h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .hs-content-col p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .hs-features-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .hs-features-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .hs-features-list li i {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+        }
+
+        .btn-hs-primary {
+            background-color: var(--primary-blue);
+            color: #FFFFFF;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-hs-primary:hover {
+            background-color: #162a66;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+        }
+
+        /* =========================================================
+           7. ESTILOS DEL PIE DE PÁGINA (FOOTER)
+           ========================================================= */
+        footer { 
+            background: #18172B; 
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 50px 5% 30px; 
+            color: #B3B1D1; 
+            font-size: 0.88rem; 
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            color: #FFFFFF;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+
+        .footer-col p {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .footer-col p i {
+            color: var(--accent-gold);
+            margin-top: 4px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #B3B1D1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-gold);
+        }
+
+        .btn-footer-wa {
+            background-color: #25D366;
+            color: #FFFFFF !important;
+            padding: 9px 16px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 6px;
+            font-size: 0.82rem;
+        }
+
+        .btn-footer-wa:hover {
+            background-color: #1eb956;
+            transform: translateY(-2px);
+        }
+
+        .map-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-map-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #FFFFFF !important;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gmaps { background-color: #4285F4; box-shadow: 0 3px 10px rgba(66, 133, 244, 0.3); }
+        .btn-gmaps:hover { background-color: #3367D6; transform: translateY(-2px); }
+
+        .btn-waze { background-color: #33CCFF; color: #000000 !important; box-shadow: 0 3px 10px rgba(51, 204, 255, 0.3); }
+        .btn-waze:hover { background-color: #1abeff; transform: translateY(-2px); }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            font-size: 0.8rem;
+            color: #7C7A9C;
+        }
+
+        body:has(.nav-links.active) .whatsapp-float { display: none !important; }
+
+        /* =========================================================
+           8. RESPONSIVE / ADAPTACIÓN MÓVIL Y IPAD
+           ========================================================= */
+        @media (max-width: 1180px) {
+            .nav-links > li:not(:last-child):not(.mobile-portal-item):not(.mobile-social-menu)::after { margin: 0 5px; }
+            .nav-links a { font-size: 0.76rem; }
+            .brand-text .line-1, .brand-text .line-2, .brand-text .line-3 { font-size: 0.68rem; }
+            .grid-pilares { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        }
+
+        @media (max-width: 1024px) {
+            .section-welcome { min-height: auto; }
+            .grid-pilares { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+            .grid-levels { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .footer-container { grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        }
+
+        @media (max-width: 991px) {
+            .menu-toggle { display: block; }
+            .header-actions-desktop { display: none !important; }
+            .nav-links > li:not(:last-child)::after { display: none !important; }
+
+            .mobile-portal-item {
+                display: block !important; width: 100%; margin-bottom: 10px;
+                padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            }
+            .mobile-portal-item .btn-portal { width: 100%; justify-content: center; }
+
+            .mobile-social-menu {
+                display: flex !important; gap: 16px; margin-top: auto; padding-top: 18px;
+                border-top: 1px solid rgba(255, 255, 255, 0.15); width: 100%; justify-content: center;
+            }
+
+            .mobile-social-menu a { color: #FFFFFF; font-size: 1.2rem; transition: color 0.3s; }
+            .mobile-social-menu a:hover { color: var(--accent-gold); }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 260px; max-width: 70vw; height: 100vh;
+                background: #1D1C33; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+                gap: 4px; padding: 75px 20px 30px; transition: right 0.3s ease; box-shadow: -8px 0 25px rgba(0,0,0,0.5);
+                border-left: 1px solid rgba(255,255,255,0.1); overflow-y: auto;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .nav-links li { width: 100%; margin: 0; padding: 0; }
+            .nav-links a, .dropdown-toggle {
+                font-size: 0.9rem; padding: 8px 12px; width: 100%; display: flex;
+                align-items: center; justify-content: space-between; box-sizing: border-box;
+            }
+
+            .dropdown { flex-direction: column; align-items: flex-start; width: 100%; }
+            .dropdown-menu {
+                position: static; opacity: 1; visibility: visible; transform: none;
+                background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: none; box-shadow: none;
+                padding: 0; display: none; width: 100%; margin-top: 4px;
+            }
+
+            .dropdown-menu li a { padding: 8px 12px; font-size: 0.85rem; }
+            .dropdown.active .dropdown-menu { display: block; }
+
+            .hero-full-banner { height: 55vh; min-height: 380px; }
+            .hero-intro { margin-top: -75px; }
+            .hero-intro h1 { font-size: 2.1rem; }
+            .carousel-dots { bottom: 130px; }
+            
+            .hs-image-col { min-height: 250px; }
+            .hs-content-col { padding: 25px; }
+            .grid-pilares { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .grid-pilares { grid-template-columns: 1fr; }
+            .grid-levels { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; }
+            .hero-full-banner { height: 50vh; min-height: 320px; }
+            .hero-intro { margin-top: -60px; }
+            .hero-intro h1 { font-size: 1.65rem; }
+            .hero-intro p { font-size: 0.9rem; }
+            .section-welcome, .section-levels { padding: 30px 4%; }
+            .welcome-content h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COMPONENTE HEADER PERSONALIZADO -->
+    <mi-header pagina-activa="inicio"></mi-header>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/50250473131" target="_blank" class="whatsapp-float" id="whatsapp-btn" title="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- SECCIÓN 1: HERO BANNER CON CARRUSEL -->
+    <div class="hero-full-banner">
+        <div class="carousel-container" id="carousel">
+            <div class="carousel-slide active">
+                <img src="Imagenes index/Alumnos.jpg" alt="Alumnos del colegio">
+            </div>
+            <div class="carousel-slide">
+                <img src="Imagenes Index/Smart.jpg" alt="Alumnos en el Smart">
+            </div>
+            <div class="carousel-slide">
+                <img src="Imagenes Index/COMPU.jpg" alt="Alumnos en el laboratorio de computación">
+            </div>
+            <div class="carousel-slide">
+                <img src="Imagenes Index/Bachillerato.jpg" alt="Instalaciones del Colegio Americano Superior">
+            </div>
+        </div>
+
+        <div class="carousel-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+
+    <!-- Introducción sobre el Banner -->
+    <section class="hero-intro">
+        <h1 class="reveal">Donde la innovación tecnológica <span>y la educación se unen.</span></h1>
+        
+        <p class="reveal">
+            El Colegio Americano Superior cuenta con más de 18 años de trayectoria dedicados a la excelencia académica, la innovación tecnológica y los valores integrales.
+        </p>
+
+        <a href="#bienvenida" class="scroll-down-arrow reveal" title="Bajar a la siguiente sección">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- SECCIÓN 2: BIENVENIDA Y PILARES INSTITUCIONALES -->
+    <section class="section-welcome" id="bienvenida">
+        <div class="welcome-content reveal">
+            <h2>¡Bienvenidos al Colegio Americano Superior!</h2>
+            <p>
+                Somos una comunidad educativa enfocada en formar líderes con visión de futuro. Ofrecemos una propuesta académica integral desde <strong>Preprimaria hasta Diversificado</strong>, combinando metodologías innovadoras y tecnología interactiva de última generación. Nuestro modelo fomenta valores sólidos que garantizan el éxito de los estudiantes, transformándolos en ciudadanos altamente competentes ante la sociedad.
+            </p>
+            <a href="https://wa.me/50250473131?text=Hola,%20quisiera%20recibir%20informaci%C3%B3n%20sobre%20el%20proceso%20de%20Admisiones" target="_blank" class="btn-admissions" id="btn-admisiones">
+                <i class="fas fa-user-plus"></i> Admisiones
+            </a>
+        </div>
+
+        <div class="grid-pilares reveal">
+            <div class="pilar-item">
+                <div class="pilar-icon"><i class="fas fa-tablet-alt"></i></div>
+                <h3>Innovador</h3>
+                <p>Un colegio líder en el uso de la tecnología</p>
+            </div>
+
+            <div class="pilar-item">
+                <div class="pilar-icon"><i class="fas fa-laptop"></i></div>
+                <h3>Virtualizado</h3>
+                <p>Educación a distancia con clases en línea y homeschooling</p>
+            </div>
+
+            <div class="pilar-item">
+                <div class="pilar-icon"><i class="far fa-heart"></i></div>
+                <h3>Familiar</h3>
+                <p>Creemos en el valor de la familia como punto central de la educación</p>
+            </div>
+
+            <div class="pilar-item">
+                <div class="pilar-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Cero tolerancia</h3>
+                <p>Ambiente seguro y libre de bullying para todos los estudiantes</p>
+            </div>
+
+            <div class="pilar-item">
+                <div class="pilar-icon"><i class="fas fa-globe"></i></div>
+                <h3>Internacional</h3>
+                <p>Promovemos el conocimiento del idioma inglés y cursos certificados internacionalmente en Bachillerato</p>
+            </div>
+        </div>
+
+        <a href="#niveles" class="scroll-down-arrow dark-arrow reveal" title="Bajar a Niveles Educativos">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- SECCIÓN 3: NIVELES EDUCATIVOS -->
+    <section class="section-levels" id="niveles">
+        <div class="section-container">
+            <div class="section-header reveal" style="text-align: center; margin-bottom: 35px;">
+                <h2 style="font-size: 2rem; font-weight: 800; color: #111827;">Nuestros niveles educativos</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Combinamos la excelencia del Colegio Americano Superior con la innovación de Knotion en una metodología activa. En todos nuestros niveles, los alumnos utilizan iPad como herramienta central para explorar contenidos y realizar actividades interactivas.</p>
+            </div>
+
+            <!-- TARJETAS DE NIVELES ORIGINALES (4 COLUMNAS) -->
+            <div class="grid-levels">
+                <div class="level-card reveal">
+                    <div class="level-banner">
+                        <img src="Imagenes Index/Camila2.jpg" alt="Preprimaria">
+                    </div>
+                    <div class="level-body">
+                        <div>
+                            <h3>Preprimaria</h3>
+                            <p>Despierta la curiosidad y la creatividad, integrando tecnología interactiva en iPad, inglés por grado y las primeras bases de la matemática a través del juego.</p>
+                        </div>
+                        <a href="Preprimaria.html" class="btn-level">Más información</a>
+                    </div>
+                </div>
+
+                <div class="level-card reveal">
+                    <div class="level-banner">
+                        <img src="Imagenes Index/Nicol.jpg" alt="Primaria">
+                    </div>
+                    <div class="level-body">
+                        <div>
+                            <h3>Primaria</h3>
+                            <p>Combinamos un fuerte enfoque en matemática, inglés por grado y aprendizaje interactivo en iPad, certificando a los estudiantes con TOEFL al terminar 6.º primaria.</p>
+                        </div>
+                        <a href="primaria.html" class="btn-level">Más información</a>
+                    </div>
+                </div>
+
+                <div class="level-card reveal">
+                    <div class="level-banner">
+                        <img src="Imagenes Index/Basico2.jpg" alt="Básico">
+                    </div>
+                    <div class="level-body">
+                        <div>
+                            <h3>Básico</h3>
+                            <p>Clases científicas avanzadas, investigación y ecosistema digital en iPad. Incluye inglés por niveles de dominio y certificación internacional TOEFL al finalizar 3.º básico.</p>
+                        </div>
+                        <a href="Basico.html" class="btn-level">Más información</a>
+                    </div>
+                </div>
+
+                <div class="level-card reveal">
+                    <div class="level-banner">
+                        <img src="Imagenes Index/Diver.jpg" alt="Diversificado">
+                    </div>
+                    <div class="level-body">
+                        <div>
+                            <h3>Diversificado</h3>
+                            <p>Preparación preuniversitaria con alto nivel en matemática y física, e inglés por niveles. Incluye alianza con KN-U High para certificaciones internacionales.</p>
+                        </div>
+                        <a href="Diversificado.html" class="btn-level">Más información</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN EXPLICATIVA DESTACADA DE HOMESCHOOLING -->
+            <div class="homeschooling-feature reveal">
+                <div class="hs-image-col">
+                    <img src="Imagenes Index/Home.jpg" alt="Estudiante en modalidad Homeschooling">
+                </div>
+                <div class="hs-content-col">
+                    <span class="hs-badge"><i class="fas fa-home"></i> Modalidad Homeschooling</span>
+                    <h3>¿Qué es nuestro modelo Homeschooling?</h3>
+                    <p>
+                        Nuestra propuesta de <strong>educación virtual en casa (Homeschooling)</strong> es un modelo de aprendizaje alternativo que permite a los estudiantes recibir clases en línea en vivo. De esta manera, aseguran la interacción con el docente en tiempo real y cuentan con el acompañamiento pedagógico de nuestro equipo de expertos.
+                    </p>
+                    <p>
+                        Esta modalidad está disponible para los niveles de <strong>Primaria, Básico y Diversificado</strong>, permitiendo a los estudiantes cumplir con los requerimientos académicos del currículo oficial con la flexibilidad que la familia necesita.
+                    </p>
+                    <ul class="hs-features-list">
+                        <li><i class="fas fa-check-circle"></i> Disponible para Primaria, Básico y Diversificado</li>
+                        <li><i class="fas fa-check-circle"></i> Clases en vivo con docentes trabajando en tiempo real</li>
+                        <li><i class="fas fa-check-circle"></i> Acompañamiento docente y tutorías en línea</li>
+                        <li><i class="fas fa-check-circle"></i> Participación activa entre docentes y estudiantes</li>
+                    </ul>
+                    <a href="https://wa.me/50250473131?text=Hola,%20quiero%20conocer%20m%C3%A1s%20el%20modelo%20Homeschooling" target="_blank" class="btn-hs-primary">
+                        Conoce más <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- COMPONENTE FOOTER PERSONALIZADO -->
+    <mi-footer></mi-footer>
+
+    <!-- CARGA DE COMPONENTES DE JAVASCRIPT -->
+    <script src="Componentes.js"></script>
+
+    <!-- LÓGICA DE INTERACCIÓN LOCAL DEL INDEX -->
+    <script>
+        function actualizarBotonAdmisiones() {
+            const fechaActual = new Date();
+            const anoActual = fechaActual.getFullYear();
+            const mesActual = fechaActual.getMonth() + 1;
+
+            let anoAdmisiones = (mesActual >= 6) ? anoActual + 1 : anoActual;
+
+            const btn = document.getElementById('btn-admisiones');
+            if (btn) {
+                btn.innerHTML = `<i class="fas fa-user-plus"></i> Admisiones ${anoAdmisiones}`;
+            }
+        }
+
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            if (index >= slides.length) slideIndex = 0;
+            if (index < 0) slideIndex = slides.length - 1;
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(index) {
+            slideIndex = index;
+            showSlide(slideIndex);
+            resetTimer();
+        }
+
+        function startTimer() {
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        function resetTimer() {
+            clearInterval(slideInterval);
+            startTimer();
+        }
+
+        startTimer();
+
+        function checkReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 40;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarBotonAdmisiones();
+            checkReveal();
+        });
+        window.addEventListener('scroll', checkReveal);
+        window.addEventListener('resize', checkReveal);
+        window.addEventListener('load', checkReveal);
+    </script>
+</body>
+</html>
